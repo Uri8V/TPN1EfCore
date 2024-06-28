@@ -10,7 +10,7 @@
 
                 Console.Write(message);
                 stringVar = Console.ReadLine();
-                if (stringVar == null)
+                if (string.IsNullOrEmpty(stringVar) || string.IsNullOrWhiteSpace(stringVar))
                 {
                     Console.WriteLine("Debe ingresar algo!!!");
                 }
@@ -66,6 +66,22 @@
             }
             return answer; //retorno el caracter ingresado y validado.
 
+        }
+        public static decimal ReadDecimal(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+                string? input = Console.ReadLine();
+                if (decimal.TryParse(input, out decimal result))
+                {
+                    return result;
+                }
+                else
+                {
+                    Console.WriteLine("Por favor, ingrese un número decimal válido.");
+                }
+            }
         }
     }
 }

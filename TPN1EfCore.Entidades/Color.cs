@@ -11,6 +11,7 @@ namespace TPN1EfCore.Entidades
     {
         public int ColourId { get; set; }
         public string ColorName { get; set; } = null!;
+        public bool Active { get; set; } = true;
         public ICollection<Shoe> Shoes { get; set; }=new List<Shoe>();
     }
 }

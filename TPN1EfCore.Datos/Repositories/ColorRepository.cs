@@ -33,7 +33,7 @@ namespace TPN1EfCore.Datos.Repositories
 
         public bool EstaRelacionado(Colour Colour)
         {
-           return _context.Shoes.Any(c=>c.ColorId == Colour.ColourId);
+           return _context.Shoes.Any(c=>c.ColourId == Colour.ColourId);
         }
 
         public bool Existe(Colour Colour)
@@ -50,17 +50,17 @@ namespace TPN1EfCore.Datos.Repositories
             return _context.Colors.Count();
         }
 
-        public Colour? GetColourPorId(int ColourId)
+        public Colour GetColourPorId(int ColourId)
         {
             return _context.Colors.FirstOrDefault(c=>c.ColourId==ColourId);
         }
 
-        public Colour? GetColourPorNombre(string ColourName)
+        public Colour GetColourPorNombre(string ColourName)
         {
             return _context.Colors.FirstOrDefault(c => c.ColorName == ColourName);
         }
 
-        public List<Colour>? GetColours()
+        public List<Colour> GetColours()
         {
             return _context.Colors.OrderBy(c=>c.ColorName).ToList();
         }

@@ -18,10 +18,12 @@ namespace TPN1EfCore.Entidades
         public Sport? Sports { get; set; }
         public int GenreId { get; set;}
         public Genre? Genres { get; set; }
-        public int ColorId { get; set; }
+        public int ColourId { get; set; }
         public Colour? Color { get; set; }
         public string Model { get; set; } = null!;
         public string Descripcion { get; set; } = null!;
         public decimal Price { get; set; }
+        public bool Active { get; set; } = true;
+        public ICollection<ShoeSizes> ShoeSize { get; set; } = new List<ShoeSizes>();
     }
 }

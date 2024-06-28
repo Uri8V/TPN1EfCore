@@ -31,6 +31,12 @@ namespace TPN1EfCore.IOC
             servicios.AddScoped<IShoeRepository, ShoeRepository> ();
             servicios.AddScoped<IShoeService, ShoeService> ();
 
+            servicios.AddScoped<ISizeRepository, SizeRepository> ();
+            servicios.AddScoped<ISizeService, SizeService> ();
+
+            servicios.AddScoped<IShoeSizeRepository,ShoeSizeRepository> ();
+            servicios.AddScoped<IShoeSizeService, ShoeSizeService> (); 
+
             servicios.AddScoped<IUnitOfWork, UnitOfWork>();
 
             servicios.AddDbContext<ShoesDbContext>(opciones =>

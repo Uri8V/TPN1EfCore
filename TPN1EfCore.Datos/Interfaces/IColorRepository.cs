@@ -15,8 +15,8 @@ namespace TPN1EfCore.Datos.Interfaces
         bool EstaRelacionado(Colour Colour);
         bool Existe(Colour Colour);
         int GetCantidad();
-        Colour? GetColourPorNombre(string ColourName);
-        List<Colour>? GetColours();
-        Colour? GetColourPorId(int ColourId);
+        Colour GetColourPorNombre(string ColourName);
+        List<Colour> GetColours();
+        Colour GetColourPorId(int ColourId);
     }
 }

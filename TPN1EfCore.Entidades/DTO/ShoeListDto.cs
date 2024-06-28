@@ -17,5 +17,7 @@ namespace TPN1EfCore.Entidades.DTO
         public string model { get; set; } = null!;
         public string descripcion { get; set; } = null!;
         public decimal price { get; set; }
+        public decimal size { get; set; }
+        public int Stock { get; set; }
     }
 }

@@ -20,6 +20,7 @@
     <ProjectReference Include="..\TPN1EfCore.Entidades\TPN1EfCore.Entidades.csproj" />
     <ProjectReference Include="..\TPN1EfCore.IOC\TPN1EfCore.IOC.csproj" />
     <ProjectReference Include="..\TPN1EfCore.Servicios\TPN1EfCore.Servicios.csproj" />
+    <ProjectReference Include="..\TPN1EfCore.Shared\TPN1EfCore.Shared.csproj" />
   </ItemGroup>
 
 </Project>

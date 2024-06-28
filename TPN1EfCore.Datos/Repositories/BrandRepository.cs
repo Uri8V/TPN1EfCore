@@ -46,9 +46,9 @@ namespace TPN1EfCore.Datos.Repositories
             return context.Brands.Any(b=>b.BrandName == brand.BrandName && b.BrandId!=brand.BrandId);
         }
 
-        public Brand? GetBrandPorId(int BrandId)
+        public Brand GetBrandPorId(int BrandId)
         {
-            return context.Brands.SingleOrDefault(b => b.BrandId == BrandId);
+            return context.Brands.FirstOrDefault(b => b.BrandId == BrandId);
         }
 
         public int GetCantidad()
@@ -56,12 +56,12 @@ namespace TPN1EfCore.Datos.Repositories
             return context.Brands.Count();
         }
 
-        public Brand? GetBrandPorNombre(string BrandName)
+        public Brand GetBrandPorNombre(string BrandName)
         {
             return context.Brands.FirstOrDefault(b => b.BrandName == BrandName);
         }
 
-        public List<Brand>? GetBrands()
+        public List<Brand> GetBrands()
         {
             return context.Brands.OrderBy(b => b.BrandName).AsNoTracking().ToList();
         }

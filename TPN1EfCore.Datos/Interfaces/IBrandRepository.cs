@@ -16,8 +16,8 @@ namespace TPN1EfCore.Datos.Interfaces
         bool EstaRelacionado(Brand brand);
         bool Existe(Brand brand);
         int GetCantidad();
-        Brand? GetBrandPorNombre(string BrandName);
-        List<Brand>? GetBrands();
-        Brand? GetBrandPorId(int BrandId);
+        Brand GetBrandPorNombre(string BrandName);
+        List<Brand> GetBrands();
+        Brand GetBrandPorId(int BrandId);
     }
 }
