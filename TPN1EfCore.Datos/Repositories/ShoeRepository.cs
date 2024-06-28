@@ -46,7 +46,6 @@ namespace TPN1EfCore.Datos.Repositories
             return _context.Shoes.Count();
         }
 
-        public List<Shoe> GetShoePorBrand(int brandId)
         {
             return _context.Shoes.Include(s => s.Brands)
                 .Include(s => s.Genres)

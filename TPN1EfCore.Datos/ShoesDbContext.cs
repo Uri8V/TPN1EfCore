@@ -138,8 +138,6 @@ namespace TPN1EfCore.Datos
                 entity.HasData(colorList);
             });
 
-
-
             //Acá modificamos las propiedades que deseamos
             modelBuilder.Entity<Shoe>(entity => 
             {

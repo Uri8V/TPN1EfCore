@@ -302,13 +302,11 @@ internal class Program
                     {
                         Console.WriteLine("Registro existente!!!");
                     }
-
                 }
                 else { Console.WriteLine("Servicio no disponible"); }
             }
             catch (Exception ex)
             {
-
                 Console.WriteLine(ex.Message); ;
             }
         }
@@ -325,7 +323,6 @@ internal class Program
             foreach (var item in servicio.GetColours())
             {
                 tabla.AddRow(item.ColourId, item.ColorName);
-
             }
             tabla.Options.EnableCount = false;
             tabla.Write();
@@ -354,13 +351,11 @@ internal class Program
                     {
                         servicio.Guardar(GenreaEditar);
                         Console.WriteLine("Registro editado!!!");
-
                     }
                     else
                     {
                         Console.WriteLine("Registro duplicado!!!");
                     }
-
                 }
                 else
                 {
@@ -374,7 +369,6 @@ internal class Program
         }
         catch (Exception ex)
         {
-
             Console.WriteLine(ex.Message); ;
         }
         Thread.Sleep(3000);
@@ -398,7 +392,6 @@ internal class Program
                     {
                         servicio.Borrar(GenreaBorrar);
                         Console.WriteLine("Registro borrado!!!");
-
                     }
                     else
                     {
