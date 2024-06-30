@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TPN1EfCore.Datos.Interfaces;
 using TPN1EfCore.Datos.Repositories;
+using TPN1EfCore.Entidades;
 using TPN1EfCore.Servicios.Interfaces;
 
 namespace TPN1EfCore.Servicios.Servicios

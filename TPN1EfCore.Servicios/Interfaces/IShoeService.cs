@@ -31,5 +31,8 @@ Sport? sportFiltro = null, Genre? genreFiltro = null, Colour? colourFiltro = nul
         IEnumerable<IGrouping<int, Shoe>> GetShoesAgrupadasPorGenre();
         IEnumerable<IGrouping<int, Shoe>> GetShoesAgrupadasPorColor();
         IEnumerable<IGrouping<int, ShoeSizes>> GetShoesAgrupadasPorSize();
+        List<Size>? GetSizesPorShoes(int shoeId);
+        bool ExisteRelacion(Shoe shoe, Size size);
+
     }
 }

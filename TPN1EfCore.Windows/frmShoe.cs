@@ -193,7 +193,7 @@ namespace TPN1EfCore.Windows
                 Shoe shoe = frm.GetShoe();
                 if (!_servicio.Existe(shoe))
                 {
-                    _servicio.Guardar(shoe);
+                    //  _servicio.Guardar(shoe);    Arreglar lo de los Talles y el Stock
                     RecargarGrillDeTodosLosShoes();
                     // Actualizar la lista después de agregar la planta
                 }
@@ -316,7 +316,7 @@ namespace TPN1EfCore.Windows
                 shoe = frm.GetShoe();
                 if (!_servicio.Existe(shoe))
                 {
-                    _servicio.Guardar(shoe);
+                   // _servicio.Guardar(shoe); Arreglar lo de los Talles y el Stock
                     ActualizarListaPaginada();
                 }
                 else

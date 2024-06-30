@@ -20,7 +20,6 @@ namespace TPN1EfCore.Servicios.Servicios
             _unitOfWork = unitOfWork;
         }
 
-
         public Size? GetSizePorId(int id, bool incluyeShoe = false)
         {
             return _sizeRepository.GetSizePorId(id, incluyeShoe);

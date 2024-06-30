@@ -59,6 +59,7 @@ namespace TPN1EfCore.Consola
                 Console.WriteLine("20. Editar Shoe");
                 Console.WriteLine("21. Lista Filtrada y Ordenada");
                 Console.WriteLine("22. Asignar Size a Shoe");
+                Console.WriteLine("23. Obtener los Size por Shoe");
                 Console.WriteLine("=======================");
                 Console.WriteLine("25. Listado de Size");
                 Console.WriteLine("26. Listado de Size con sus Shoes");
@@ -187,6 +188,9 @@ namespace TPN1EfCore.Consola
                     case "22":
                         AsignarSizeAShoe();
                         break;
+                    case "23":
+                        ObtenerSizesPorShoe();
+                        break;
                     case "25":
                         ListaSize();
                         break;
@@ -209,24 +213,53 @@ namespace TPN1EfCore.Consola
             }
         }
 
+        private static void ObtenerSizesPorShoe()
+        {
+            Console.Clear();
+            var shoeService = _serviceProvider?.GetService<IShoeService>();
+
+            var shoeList = shoeService.GetShoes();//Obtengo la lista de Shoes
+            MostrarListaShoes(shoeList);//La muestro
+            var shoeid = ValidarDatos.GetValidOptions("Seleccione una Shoe: ", shoeList.Select(s => s.shoeId.ToString()).ToList());//Me fijo si el ID que eligieron es valida
+            var ShoeSeleccionado = shoeService.GetShoes().FirstOrDefault(s => s.shoeId.ToString() == shoeid);//Me traigo el Shoe con el Id que ingresaron anteriormente
+            var lista=shoeService.GetSizesPorShoes(ShoeSeleccionado.shoeId);//Me traigo los Sizes que tiene relacionado ese Shoe
+            if (lista.Count>0)//Si esta relacionado con algún Size lo muestro
+            {
+                ConsoleTable table = new ConsoleTable("Id", "Size number");
+                foreach (var item in lista)
+                {
+                    table.AddRow(item.SizeId.ToString(), item.SizeNumber.ToString());
+                }
+                table.Options.EnableCount = false;
+                table.Write(); 
+            }
+            else
+            {
+                Console.WriteLine("Aún no hay Sizes relacionados con esta Shoe");
+            }
+            Console.WriteLine("APRETE ENTER PARA CONTINUAR....");
+            Console.ReadKey();
+        }
+
         private static void AgruparShoesPorSize()
         {
             Console.Clear();
             var shoeservice = _serviceProvider?.GetService<IShoeService>();
             var sizeservice = _serviceProvider?.GetService<ISizeService>();
 
-            var agrupacion = shoeservice?.GetShoesAgrupadasPorSize();
-            foreach (var sho in agrupacion)
+            var agrupacion/*Esta variable es un Inumerable<IGrouping<int, ShoeSizes>>*/ = shoeservice?.GetShoesAgrupadasPorSize();
+            foreach (var sho/*Esta variable es un IGruoping<int,ShoeSizes>*/ in agrupacion)//Muestro la agrupación de Shoes por Sizes
             {
-                Console.WriteLine($"Size {sizeservice?.GetSizePorId(sho.Key)?.SizeNumber}");
-                foreach (var item in sho)
+                Console.WriteLine($"Size {sizeservice?.GetSizePorId(sho.Key)?.SizeNumber}");//Muestro su Id (LLamo al Servicio de Sizes para porder ver el tamaño de ese Size obtenido a tráves de si ID)
+                foreach (var item/*Esta variable es un ShoeSizes*/ in sho)
                 {
                     Console.WriteLine($"Descripción:{shoeservice?.GetShoePorId(item.ShoeId)?.Descripcion} ,Precio: {shoeservice?.GetShoePorId(item.ShoeId)?.Price},Modelo: {shoeservice?.GetShoePorId(item.ShoeId)?.Model} ");
+                    //Muestro algunos datos de los Shoes relacionados a cada Size (Llamo al Servicio de Shoes para poder motrar sus datos)
                 }
                 Console.WriteLine("");
                 Console.WriteLine("");
             }
-            Console.WriteLine($"Cantidad: {agrupacion.Count()}");
+            Console.WriteLine($"Cantidad: {agrupacion.Count()}");//Acá cuento cuantas agrupaciones por Sizes hay
             Console.WriteLine("APRETE ENTER PARA CONTINUAR");
             Console.ReadLine();
         }
@@ -237,18 +270,19 @@ namespace TPN1EfCore.Consola
             var shoeservice = _serviceProvider?.GetService<IShoeService>();
             var colorservice = _serviceProvider?.GetService<IColorService>();
 
-            var agrupacion = shoeservice?.GetShoesAgrupadasPorColor();
-            foreach (var sho in agrupacion)
+            var agrupacion/*Esta variable es un Inumerable<IGrouping<int, Shoe>>*/ = shoeservice?.GetShoesAgrupadasPorColor();
+            foreach (var sho/*Esta variable es un IGruoping<int,Shoe>*/ in agrupacion)//Muestro la agrupación de Shoes por Color
             {
-                Console.WriteLine($"Color {colorservice?.GetColourPorId(sho.Key)?.ColorName}");
-                foreach (var item in sho)
+                Console.WriteLine($"Color {colorservice?.GetColourPorId(sho.Key)?.ColorName}");//Muestro su Id (LLamo al Servicio de Color para porder ver el nombre del Color obtenido a tráves de su ID)
+                foreach (var item/*Esta variable es un Shoe*/ in sho)
                 {
                     Console.WriteLine($"Descripción:{item.Descripcion} ,Precio: {item.Price},Modelo: {item.Model} ");
+                    //Muestro algunos datos de los Shoes relacionados a cada Color 
                 }
                 Console.WriteLine("");
                 Console.WriteLine("");
             }
-            Console.WriteLine($"Cantidad: {agrupacion.Count()}");
+            Console.WriteLine($"Cantidad: {agrupacion.Count()}");//Acá cuento cuantas agrupaciones por Color hay
             Console.WriteLine("APRETE ENTER PARA CONTINUAR");
             Console.ReadLine();
         }
@@ -259,25 +293,26 @@ namespace TPN1EfCore.Consola
             var shoeservice = _serviceProvider?.GetService<IShoeService>();
             var genreservice = _serviceProvider?.GetService<IGenreService>();
 
-            var agrupacion = shoeservice?.GetShoesAgrupadasPorGenre();
-            foreach (var sho in agrupacion)
+            var agrupacion/*Esta variable es un Inumerable<IGrouping<int, Shoe>>*/ = shoeservice?.GetShoesAgrupadasPorGenre();
+            foreach (var sho /*Esta variable es un IGruoping<int,Shoe>*/ in agrupacion)//Muestro la agrupación de Shoes por Color
             {
-                Console.WriteLine($"Genre {genreservice?.GetGenrePorId(sho.Key)?.GenreName}");
-                foreach (var item in sho)
+                Console.WriteLine($"Genre {genreservice?.GetGenrePorId(sho.Key)?.GenreName}");//Muestro su Id (LLamo al Servicio de Genre para porder ver el nombre del Genre obtenido a tráves de su ID)
+                foreach (var item/*Esta variable es un Shoe*/ in sho)
                 {
                     Console.WriteLine($"Descripción:{item.Descripcion} ,Precio: {item.Price},Modelo: {item.Model} ");
+                    //Muestro algunos datos de los Shoes relacionados a cada Genre
                 }
                 Console.WriteLine("");
                 Console.WriteLine("");
             }
-            Console.WriteLine($"Cantidad: {agrupacion.Count()}");
+            Console.WriteLine($"Cantidad: {agrupacion.Count()}");//Acá cuento cuantas agrupaciones por Genre hay
             Console.WriteLine("APRETE ENTER PARA CONTINUAR");
             Console.ReadLine();
         }
 
         private static void AgruparShoePorSport()
         {
-            Console.Clear();
+            Console.Clear();//Lo mismo pero por Sport, Mira arriba de este método
             var shoeservice = _serviceProvider?.GetService<IShoeService>();
             var sportservice=_serviceProvider?.GetService<ISportService>();
 
@@ -299,8 +334,7 @@ namespace TPN1EfCore.Consola
 
         private static void AgruparShoePorBrand()
         {
-            Console.Clear();
-            Console.Clear();
+            Console.Clear();//Lo mismo pero por Brand, mira arriba, en el método de Genre o Color
             var shoeservice = _serviceProvider?.GetService<IShoeService>();
             var brandservice=_serviceProvider?.GetService<IBrandService>();
 
@@ -326,7 +360,7 @@ namespace TPN1EfCore.Consola
             var shoeservice = _serviceProvider?.GetService<IShoeService>();
             var sizeservice = _serviceProvider?.GetService<ISizeService>();
 
-            if (shoeservice == null || sizeservice == null)
+            if (shoeservice == null || sizeservice == null) //Me fijo que los servicios no esten disponibles
             {
                 Console.WriteLine("Servicios no disponibles.");
                 return;
@@ -393,12 +427,16 @@ namespace TPN1EfCore.Consola
         private static void ListaSizeConShoes()
         {
             var servicioSize = _serviceProvider?.GetService<ISizeService>();
+            var servicioBrand = _serviceProvider?.GetService<IBrandService>();
+            var servicioSport = _serviceProvider?.GetService<ISportService>();
+            var servicioGenre = _serviceProvider?.GetService<IGenreService>();
+            var servicioColor = _serviceProvider?.GetService<IColorService>();
 
             Console.Clear();
-            ListaSize();
+            ListaSize();//Muestro la lista de Sizes y le pido al usuario que ingrese el Id del Size del cual quiere mostrar su lista de Shoes relacionados
             var Size = ValidarDatos.ReadInt("Ingrese el ID de Size: ");
             Size? size = servicioSize?.GetSizePorId(Size, true);
-            if (size == null)
+            if (size == null) // Si lo que ingreso no es válido lo mando de vuelta al menú, si es válido muestro la lista 
             {
                 Console.WriteLine("Debe ingresar el Id correcto");
                 Console.WriteLine("Aprete ENTER para continuar");
@@ -407,18 +445,19 @@ namespace TPN1EfCore.Consola
             else
             {
                 Console.WriteLine($"El Size es: {size?.SizeNumber}");
-                var tabla = new ConsoleTable("ID", "Brand", "Sport", "Genre", "Color", "Descripción", "Price");
+                var tabla = new ConsoleTable("ID", "Brand", "Sport", "Genre", "Color", "Descripción", "Price", "Stock");
                 if (size?.ShoeSize != null)
                 {
                     foreach (var item in size.ShoeSize)
                     {
                         tabla.AddRow(item.Shoe.ShoeId,
-                            item.Shoe.Brands?.BrandName,
-                            item.Shoe.Sports?.SportName,
-                            item.Shoe.Genres?.GenreName,
-                            item.Shoe.Color?.ColorName,
+                            servicioBrand?.GetBrandPorId(item.Shoe.BrandId)?.BrandName,
+                            servicioSport?.GetSportPorId(item.Shoe.SportId)?.SportName,
+                            servicioGenre?.GetGenrePorId(item.Shoe.GenreId)?.GenreName,
+                            servicioColor?.GetColourPorId(item.Shoe.ColourId)?.ColorName,
                             item.Shoe.Descripcion,
-                            item.Shoe.Price);
+                            item.Shoe.Price,
+                            item.QuantityInStock);
                     }
                     tabla.Options.EnableCount = false;
                     tabla.Write();
@@ -431,9 +470,9 @@ namespace TPN1EfCore.Consola
         private static void ListaSize()
         {
             Console.Clear();
-            var servicio = _serviceProvider?.GetService<ISizeService>();
+            var servicio = _serviceProvider?.GetService<ISizeService>();//LLa al servicio de Size
             var tabla = new ConsoleTable("ID", "Size");
-            if (servicio?.GetSizes() != null)
+            if (servicio?.GetSizes() != null)//Si la lista no es nula la muestro, sino vuelvo al menú
             {
                 foreach (var item in servicio.GetSizes())
                 {
@@ -449,52 +488,52 @@ namespace TPN1EfCore.Consola
 
         private static void ListaShoesPorColors()
         {
-            var servicioColor = _serviceProvider?.GetService<IColorService>();
+            var servicioColor = _serviceProvider?.GetService<IColorService>();//Llamo al servicio de Color
             Console.Clear();
-            ListaColors();
+            ListaColors();//Muestro la lista y le pido al usuario que ingrese un Id de Color
             var Color = ValidarDatos.ReadInt("Ingrese el ID de Color : ");
             Colour? colorFiltro = servicioColor?.GetColourPorId(Color);
-            var servicio = _serviceProvider?.GetService<IShoeService>();
-            MostrarListaShoes(servicio?.GetListaPorPropiedadDeseada(null, null, null, colorFiltro));
+            var servicio = _serviceProvider?.GetService<IShoeService>(); //Llamo al servicio de Shoe
+            MostrarListaShoes(servicio?.GetListaPorPropiedadDeseada(null, null, null, colorFiltro)); //Muestro la lista filtrada por ese Color
         }
 
         private static void ListaShoesPorGenres()
         {
-            var servicioGenre = _serviceProvider?.GetService<IGenreService>();
+            var servicioGenre = _serviceProvider?.GetService<IGenreService>();//Llamo al servicio de Genre
             Console.Clear();
-            ListaGenres();
+            ListaGenres();//Muestro la lista y le pido al usuario que ingrese un Id de Genre
             var genre = ValidarDatos.ReadInt("Ingrese el ID de Genre : ");
             Genre? genreFiltro = servicioGenre?.GetGenrePorId(genre);
-            var servicio = _serviceProvider?.GetService<IShoeService>();
-            MostrarListaShoes(servicio?.GetListaPorPropiedadDeseada(null, null, genreFiltro));
+            var servicio = _serviceProvider?.GetService<IShoeService>(); //Llamo al servicio de Shoe
+            MostrarListaShoes(servicio?.GetListaPorPropiedadDeseada(null, null, genreFiltro));//Muestro la lista filtrada por ese Genre
         }
 
         private static void ListaShoesPorSports()
         {
-            var servicioSport = _serviceProvider?.GetService<ISportService>();
+            var servicioSport = _serviceProvider?.GetService<ISportService>();//Llamo al servicio de Sport
             Console.Clear();
-            ListaSports();
+            ListaSports();//Muestro la lista y le pido al usuario que ingrese un Id de Sport
             var sport = ValidarDatos.ReadInt("Ingrese el ID del Sport : ");
             Sport? sportFiltro = servicioSport?.GetSportPorId(sport);
-            var servicio = _serviceProvider?.GetService<IShoeService>();
-            MostrarListaShoes(servicio?.GetListaPorPropiedadDeseada(null, sportFiltro));
+            var servicio = _serviceProvider?.GetService<IShoeService>();//Llamo al servicio de Shoe
+            MostrarListaShoes(servicio?.GetListaPorPropiedadDeseada(null, sportFiltro));//Muestro la lista filtrada por ese Genre
         }
 
         private static void ListaShoesPorBrans()
         {
-            var servicioBrand = _serviceProvider?.GetService<IBrandService>();
+            var servicioBrand = _serviceProvider?.GetService<IBrandService>();//Llamo al servicio de Brand
             Console.Clear();
-            ListaBrands();
+            ListaBrands();//Muestro la lista y le pido al usuario que ingrese un Id de Brand
             var brand = ValidarDatos.ReadInt("Ingrese el ID de Brand : ");
             Brand? brandFiltro = servicioBrand?.GetBrandPorId(brand);
-            var servicio = _serviceProvider?.GetService<IShoeService>();
-            MostrarListaShoes(servicio?.GetListaPorPropiedadDeseada(brandFiltro));
+            var servicio = _serviceProvider?.GetService<IShoeService>();//Llamo al servicio de Shoe
+            MostrarListaShoes(servicio?.GetListaPorPropiedadDeseada(brandFiltro));//Muestro la lista filtrada por esa Brand
 
         }
 
         private static void ListaFiltradaYOrdenada()
         {
-            var servicioBrand = _serviceProvider?.GetService<IBrandService>();
+            var servicioBrand = _serviceProvider?.GetService<IBrandService>(); //LLamo al servicio de cada entidad de Shoe 
             Brand? brandFiltro = null;
             var servicioSport = _serviceProvider?.GetService<ISportService>();
             Sport? sportFiltro = null;
@@ -502,7 +541,6 @@ namespace TPN1EfCore.Consola
             Genre? genreFiltro = null;
             var servicioColor = _serviceProvider?.GetService<IColorService>();
             Colour? colorFiltro = null;
-            Func<Shoe, bool>? filtro = null;
             List<ShoeListDto>? shoeList = null;
             decimal? preciomaximo = null;
             decimal? preciominimo = null;

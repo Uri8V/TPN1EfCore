@@ -42,6 +42,8 @@ namespace TPN1EfCore.Datos
                 entity.HasOne(ss => ss.Shoe).WithMany(s => s.ShoeSize).HasForeignKey(ss => ss.ShoeId); //Indico que un Shoe va a tener muchos ShoeSize con la clave foranea ShoeId
                 entity.HasOne(ss => ss.Size).WithMany(s => s.ShoeSize).HasForeignKey(ss => ss.SizeId);//Indico que un Size va a tener muchos ShoeSize con la clave foranea SizeId
                 entity.Property(ss => ss.QuantityInStock).IsRequired();// Indico que esta propiedad es requerida
+                entity.HasIndex(ss => new { ss.SizeId, ss.ShoeId }).IsUnique();//Indico que la combinacion entre estos ID's sea único
+                entity.HasIndex(ss=>ss.ShoeSizeId).IsUnique();//Indico que el Id sea único
             });
             var brandList = new List<Brand>()
             {

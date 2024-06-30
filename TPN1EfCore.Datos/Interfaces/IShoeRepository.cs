@@ -34,5 +34,7 @@ namespace TPN1EfCore.Datos.Interfaces
         IEnumerable<IGrouping<int, Shoe>> GetShoesAgrupadasPorGenre();
         IEnumerable<IGrouping<int, Shoe>> GetShoesAgrupadasPorColor();
         IEnumerable<IGrouping<int, ShoeSizes>> GetShoesAgrupadasPorSize();
+        List<Size>? GetSizesPorShoes(int shoeId);
+        bool ExisteRelacion(Shoe shoe, Size size);
     }
 }

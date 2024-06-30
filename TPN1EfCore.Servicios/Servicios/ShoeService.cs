@@ -134,6 +134,11 @@ namespace TPN1EfCore.Servicios.Servicios
            return _shoeRepository.Existe(Shoe);
         }
 
+        public bool ExisteRelacion(Shoe shoe, Size size)
+        {
+            return _shoeRepository.ExisteRelacion(shoe, size);
+        }
+
         public int GetCantidad(Func<Shoe, bool>? filtro)
         {
             return _shoeRepository.GetCantidad(filtro);
@@ -187,6 +192,11 @@ namespace TPN1EfCore.Servicios.Servicios
         public IEnumerable<IGrouping<int, Shoe>> GetShoesAgrupadasPorSport()
         {
             return _shoeRepository.GetShoesAgrupadasPorSport();
+        }
+
+        public List<Size>? GetSizesPorShoes(int shoeId)
+        {
+          return _shoeRepository.GetSizesPorShoes(shoeId);
         }
 
         public void Guardar(Shoe Shoe, int stock, List<Size>? sizes = null)

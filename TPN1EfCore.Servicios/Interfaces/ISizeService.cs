@@ -11,5 +11,6 @@ namespace TPN1EfCore.Servicios.Interfaces
     {
         List<Size> GetSizes();
         Size? GetSizePorId(int id, bool incluyeShoe = false);
+
     }
 }

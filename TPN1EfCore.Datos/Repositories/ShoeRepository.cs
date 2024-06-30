@@ -16,7 +16,8 @@ namespace TPN1EfCore.Datos.Repositories
     public class ShoeRepository:IShoeRepository
     {
         private readonly ShoesDbContext _context;
-        private readonly IShoeSizeRepository _shoeSizeRepository;
+        private readonly IShoeSizeRepository _shoeSizeRepository;//Lo necesito para obtener el Id para crear la nueva relacion
+                                                         // (No se me ocurrió otra forma)
         public ShoeRepository(ShoesDbContext context, IShoeSizeRepository shoeSizeRepository)
         {
             _context = context;
@@ -162,8 +163,8 @@ namespace TPN1EfCore.Datos.Repositories
                 .Include(s => s.Sports)
                 .Include(s => s.Color)
                 .Include(s => s.Genres)
-                .Include(s=>s.ShoeSize)
-                .Select(s=>new ShoeListDto {
+                .Include(s => s.ShoeSize)
+                .Select(s => new ShoeListDto {
                     shoeId = s.ShoeId,
                     brand = s.Brands != null ? s.Brands.BrandName : string.Empty,
                     color = s.Color != null ? s.Color.ColorName : string.Empty,
@@ -172,7 +173,6 @@ namespace TPN1EfCore.Datos.Repositories
                     descripcion = s.Descripcion,
                     model = s.Model,
                     price = s.Price,
-                    //size=s.ShoeSize.k Resolver esto
                 })
                 .OrderBy(s=>s.model).AsNoTracking().ToList();
         }
@@ -407,6 +407,24 @@ namespace TPN1EfCore.Datos.Repositories
         public IEnumerable<IGrouping<int, ShoeSizes>> GetShoesAgrupadasPorSize()
         {
            return _context.ShoeSizes.GroupBy(ss=>ss.SizeId).ToList();
+        }
+
+        public List<Size>? GetSizesPorShoes(int shoeId)
+        {
+            return _context.ShoeSizes.Include(_ => _.Size)
+                .Where(s=>s.ShoeId==shoeId)
+                .Select(s=>s.Size)
+                .ToList();
+        }
+
+        bool IShoeRepository.ExisteRelacion(Shoe shoe, Size size)
+        {
+            if (shoe is null || size is null) return false;
+            var existerelación = _context.Shoes.Include(ss => ss.ShoeSize)
+                .ThenInclude(ss => ss.Size)
+                .Any(ss => ss.ShoeId == shoe.ShoeId &&
+                ss.ShoeSize.Any(ss => ss.SizeId == size.SizeId));
+            return existerelación; //TERMINAR¡¡¡¡¡
         }
     }
 }
