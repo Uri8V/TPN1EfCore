@@ -97,6 +97,8 @@ namespace TPN1EfCore.Windows
             {
                 var r = dgvDatos.SelectedRows[0];
                 stock = 0;
+                stocklist.RemoveAt(stocklist.Count-1);
+                listaDeSizeARelacionar.Remove(_sizeService?.GetSizePorDecimal((decimal)r.Cells[0].Value));
                 r.Cells[2].Value = stock.ToString();
             }
         }
