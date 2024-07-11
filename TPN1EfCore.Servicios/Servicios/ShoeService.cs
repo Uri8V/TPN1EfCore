@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
@@ -140,7 +141,7 @@ namespace TPN1EfCore.Servicios.Servicios
             return _shoeRepository.ExisteRelacion(shoe, size);
         }
 
-        public int GetCantidad(Func<Shoe, bool>? filtro)
+        public int GetCantidad(Expression<Func<Shoe, bool>>? filtro)
         {
             return _shoeRepository.GetCantidad(filtro);
         }

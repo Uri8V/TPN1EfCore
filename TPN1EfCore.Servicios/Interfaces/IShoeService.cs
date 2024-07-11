@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TPN1EfCore.Entidades;
@@ -14,7 +15,7 @@ namespace TPN1EfCore.Servicios.Interfaces
         void Borrar(Shoe Shoe);
         void Guardar(Shoe Shoe, List<int> stock, List<Size>? sizes =null);
         bool Existe(Shoe Shoe);
-        int GetCantidad(Func<Shoe, bool>? filtro);
+        int GetCantidad(Expression<Func<Shoe, bool>>? filtro);
         List<ShoeListDto> GetShoes();
         Shoe? GetShoePorId(int ShoeId);
         public List<ShoeListDto> GetListaPaginadaOrdenadaFiltrada(int page,

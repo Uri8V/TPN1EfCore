@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -43,8 +44,9 @@ namespace TPN1EfCore.Windows
             CombosHelper.CargarComboColor(_serviceProvider, ref cbColor);
             CombosHelper.CargarComboSize(_serviceProvider, ref cbSize);
             CombosHelper.CargarComboSize(_serviceProvider, ref cbSizeMaximo);
+            filters = new List<Expression<Func<Shoe, bool>>>();
         }
-        private Func<Shoe, bool>? filtro=null;
+        List<Expression<Func<Shoe, bool>>>? filters = null;
         private Brand? brandFiltro=null;
         private Sport? sportFiltro=null;
         private Genre? genreFiltro=null;
@@ -64,47 +66,42 @@ namespace TPN1EfCore.Windows
                 if (cbBrand.SelectedIndex != 0)
                 {
                     brandFiltro = _serviceBrand?.GetBrandPorId(((Brand?)cbBrand.SelectedItem).BrandId);
-                    Func<Shoe, bool> brandfiltro = p => p.Brands == brandFiltro;
-                    filtro = filtro == null ? brandfiltro : filtro.And(brandfiltro);
+                    filters.Add( p => p.Brands == brandFiltro);
                 }
                 if (cbSport.SelectedIndex != 0)
                 {
                     sportFiltro = _serviceSport?.GetSportPorId(((Sport?)cbSport.SelectedItem).SportId);
-                    Func<Shoe, bool> sportfiltro = p => p.Sports == sportFiltro;
-                    filtro = filtro == null ? sportfiltro : filtro.And(sportfiltro);
+                    filters.Add( p => p.Sports == sportFiltro);
                 }
                 if (cbGenre.SelectedIndex != 0)
                 {
                     genreFiltro = _serviceGenre?.GetGenrePorId(((Genre?)cbGenre.SelectedItem).GenreId);
-                    Func<Shoe, bool> genrefiltro = p => p.Genres == genreFiltro;
-                    filtro = filtro == null ? genrefiltro : filtro.And(genrefiltro);
+                    filters.Add( p => p.Genres == genreFiltro);
                 }
                 if (cbColor.SelectedIndex != 0)
                 {
                     colorFiltro = _serviceColor?.GetColourPorId(((Colour?)cbColor.SelectedItem).ColourId);
-                    Func<Shoe, bool> colorfiltro = p => p.Color == colorFiltro;
-                    filtro = filtro == null ? colorfiltro : filtro.And(colorfiltro);
+                    filters.Add( p => p.Color == colorFiltro);
                 }
                 if (checkSi.Checked == true)
                 {
                     precioMaximo = decimal.Parse(txtMaximo.Text);
-                    Func<Shoe, bool> preciofiltromax = p => p.Price <= precioMaximo;
-                    filtro = filtro == null ? preciofiltromax : filtro.And(preciofiltromax);
+                    filters.Add( p => p.Price <= precioMaximo);
                     precioMinimo = decimal.Parse(txtMinimo.Text);
-                    Func<Shoe, bool> preciofiltroMin = p => p.Price >= precioMinimo;
-                    filtro.And(preciofiltroMin);
+                    filters.Add(p => p.Price >= precioMinimo);
                 }
-                if (cbSize.SelectedIndex!=0)
+                if (cbSize.SelectedIndex!=0 && chekSize.Checked==false)
                 {
                     Sizeseleccionado = _sizeService?.GetSizePorId(((Size?)cbSize.SelectedItem).SizeId);
-                    Func<Shoe, bool> sizefiltro = s => s.ShoeSize.Any(s => s.Size.SizeNumber>= Sizeseleccionado.SizeNumber);
-                    filtro=filtro==null ? sizefiltro : filtro.And(sizefiltro);
+                    filters.Add(ss=>ss.ShoeSize.Any(s=>s.SizeId==Sizeseleccionado.SizeId));
+                
                 }
                 if (chekSize.Checked == true)
                 {
+                    Sizeseleccionado = _sizeService?.GetSizePorId(((Size?)cbSize.SelectedItem).SizeId);
                     SizeMaximo = _sizeService.GetSizePorId(((Size?)cbSizeMaximo.SelectedItem).SizeId);
-                    Func<Shoe, bool> sizeMaximofiltro = s => s.ShoeSize.Any(s => s.Size.SizeNumber <= SizeMaximo.SizeNumber);
-                    filtro=filtro==null?sizeMaximofiltro:filtro.And(sizeMaximofiltro);
+                   filters.Add(s => s.ShoeSize.Any(s => s.Size.SizeNumber <= SizeMaximo.SizeNumber && s.Size.SizeNumber>=Sizeseleccionado.SizeNumber));
+               
                 }
 
                 DialogResult = DialogResult.OK;
@@ -178,9 +175,9 @@ namespace TPN1EfCore.Windows
             return valido;
         }
 
-        public Func<Shoe, bool>? GetFiltro()
+        public List<Expression<Func<Shoe, bool>>>? GetFiltro()
         {
-            return filtro;
+            return filters;
         }
 
         internal Brand? GetFiltroBrand()

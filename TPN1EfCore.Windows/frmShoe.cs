@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,18 +46,21 @@ namespace TPN1EfCore.Windows
         private Colour? colourFiltro = null;
         private Size? sizeSeleccionad = null;
         private Size? sizeMaximo = null;
-        private Func<Shoe, bool>? filtro = null;
+        private List<Expression<Func<Shoe, bool>>> filtro;
+        private Expression<Func<Shoe, bool>> filtroCombinado;
         private decimal? maximo=null;
         private decimal? minimo=null;
 
         private int pageCount;
-        private int pageSize = 16;
+        private int pageSize = 6;
         private int pageNum = 0;
         private int recordCount;
+        
 
 
         private void frmShoe_Load(object sender, EventArgs e)
         {
+            filtro = new List<Expression<Func<Shoe, bool>>>();
             //HACER EL FILTRO EN OTRO FORMULARIO PARA PODER SIMPLIFICARLO
             //NO QUIERE DECIR QUE ESTA MAL, SOLO QUE SERÍA MÁS FÁCIL 
             //CombosHelper.CargarComboFormBrand(_serviceProvider, ref toolStripComboBoxBrand);
@@ -69,12 +73,14 @@ namespace TPN1EfCore.Windows
         {
             try
             {
-                recordCount = _servicio.GetCantidad(filtro);
-                txtcantidad.Text = recordCount.ToString();
+                filtroCombinado = filtro.CombineFilters();
+                recordCount = _servicio.GetCantidad(filtroCombinado);
+     
                 pageCount = FormHelper.CalcularPaginas(recordCount, pageSize);
                 // Obtener la lista paginada ordenada y filtrada por defecto (sin orden ni filtro)
                 lista = _servicio.GetListaPaginadaOrdenadaFiltrada(pageNum, pageSize, orden, brandFiltro, sportFiltro, genreFiltro, colourFiltro, maximo, minimo, sizeSeleccionad, sizeMaximo);
                 txtCantidadRegistros.Text = pageCount.ToString();
+                txtcantidad.Text = recordCount.ToString();
                 CombosHelper.CargarCombosPaginas(pageCount, ref cboPaginas);
 
 
@@ -297,6 +303,7 @@ namespace TPN1EfCore.Windows
             sizeSeleccionad = null;
             sizeMaximo = null;
             RecargarGrillDeTodosLosShoes();
+            ActivarButtons();
             toolStripSplitFiltro.BackColor = SystemColors.Control;
 
         }
@@ -374,7 +381,29 @@ namespace TPN1EfCore.Windows
             }
             sizeSeleccionad = frm.GetSizeSeleccionado();
             sizeMaximo = frm.GetSizeMaximo();
+            DesactivarButtons();
             RecargarGrillDeTodosLosShoes();
+        }
+
+        private void DesactivarButtons()
+        {
+            toolStripButtonAgregar.Enabled = false;
+            toolStripButtonBorrar.Enabled = false;
+            toolStripButtonEditar.Enabled = false;
+            toolStripButtonSalir.Enabled = false;
+            toolStripButtonAsignarShoe.Enabled = false;
+            toolStripSplitFiltro.Enabled = false;
+            toolStripDropDownOrden.Enabled = false;
+        }
+        private void ActivarButtons()
+        {
+            toolStripButtonAgregar.Enabled = true;
+            toolStripButtonBorrar.Enabled = true;
+            toolStripButtonEditar.Enabled = true;
+            toolStripButtonSalir.Enabled = true;
+            toolStripButtonAsignarShoe.Enabled = true;
+            toolStripSplitFiltro.Enabled = true;
+            toolStripDropDownOrden.Enabled = true;
         }
 
         private void dgvDatos_CellContentClick(object sender, DataGridViewCellEventArgs e)

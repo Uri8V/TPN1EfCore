@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Numerics;
 using System.Reflection.Metadata;
 using System.Text;
@@ -139,12 +140,12 @@ namespace TPN1EfCore.Datos.Repositories
             return _context.Shoes.Any(s => s.SportId == Shoe.SportId && s.BrandId == Shoe.BrandId && s.GenreId == Shoe.GenreId && s.ColourId == Shoe.ColourId && s.ShoeId != Shoe.ShoeId);
         }
 
-        public int GetCantidad(Func<Shoe, bool>? filtro)
+        public int GetCantidad(Expression<Func<Shoe, bool>>? filtro)
         {
 
             if (filtro != null)
             {
-                return _context.Shoes.Where(filtro).Count();
+                return _context.Shoes.AsQueryable().Where(filtro).Count();
             }
             else
             {
