@@ -160,7 +160,9 @@ namespace TPN1EfCore.Windows
                 }
                 else
                 {
-                    if (_sizeService?.GetSizePorId(((Size?)cbSize.SelectedValue).SizeId)?.SizeNumber >= _sizeService?.GetSizePorId(((Size)cbSizeMaximo.SelectedValue).SizeId)?.SizeNumber)
+                    Size size = (Size?)cbSize.SelectedItem;
+                    Size m = (Size)cbSizeMaximo.SelectedItem;
+                    if (_sizeService?.GetSizePorId(size.SizeId)?.SizeNumber >= _sizeService?.GetSizePorId(m.SizeId)?.SizeNumber)
                     {
                         errorProvider1.SetError(cbSize, "Debe ser menor del Size Maximo");
                         errorProvider1.SetError(cbSizeMaximo, "Debe ser mayor del Size Minimo");

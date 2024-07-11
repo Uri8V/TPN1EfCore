@@ -249,14 +249,14 @@ namespace TPN1EfCore.Datos.Repositories
             {
                 query = query.Where(s => s.Price <= maximo).Where(s => s.Price >= minimo);
             }
-            //if (sizeseleccionado != null)
-            //{
-            //    query = query.Any(s => s.ShoeSize.Where(s=>s.Size.SizeNumber==sizeseleccionado.SizeNumber));
-            //}
-            //if (sizeseleccionado!=null && sizeMaximo!=null)
-            //{
-            //    query = query.Where(s => s.ShoeSize.Any(s => s.Size.SizeNumber >= sizeseleccionado.SizeNumber)).Where(s => s.ShoeSize.Any(s => s.Size.SizeNumber <= sizeMaximo.SizeNumber));
-            //}
+            if (sizeseleccionado != null && sizeMaximo==null)
+            {
+                query = query.Where(s =>_context.ShoeSizes.Any(ss=>ss.SizeId==sizeseleccionado.SizeId && ss.ShoeId==s.ShoeId ));
+            }
+            if (sizeseleccionado != null && sizeMaximo != null)
+            {
+                query = query.Where(s => _context.ShoeSizes.Any(ss => ss.ShoeId == s.ShoeId  && ss.SizeId <= sizeMaximo.SizeId && ss.SizeId >= sizeseleccionado.SizeId));
+            }
 
             // Paginar los resultados
             List<Shoe> listaPaginada = query

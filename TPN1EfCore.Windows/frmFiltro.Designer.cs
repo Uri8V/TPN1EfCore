@@ -232,7 +232,6 @@
             chekSize.TabIndex = 34;
             chekSize.Text = "Si";
             chekSize.UseVisualStyleBackColor = true;
-            chekSize.Visible = false;
             chekSize.CheckedChanged += chekSize_CheckedChanged;
             // 
             // label8
@@ -243,7 +242,6 @@
             label8.Size = new Size(173, 15);
             label8.TabIndex = 33;
             label8.Text = "Desea filtrar por rango de Sizes?";
-            label8.Visible = false;
             // 
             // label9
             // 
@@ -253,7 +251,6 @@
             label9.Size = new Size(140, 15);
             label9.TabIndex = 29;
             label9.Text = "Seleccionar Size Maximo:";
-            label9.Visible = false;
             // 
             // label10
             // 
@@ -263,7 +260,6 @@
             label10.Size = new Size(110, 15);
             label10.TabIndex = 30;
             label10.Text = "Seleccionar un Size:";
-            label10.Visible = false;
             // 
             // cbSize
             // 
@@ -272,7 +268,6 @@
             cbSize.Name = "cbSize";
             cbSize.Size = new Size(121, 23);
             cbSize.TabIndex = 35;
-            cbSize.Visible = false;
             // 
             // cbSizeMaximo
             // 
@@ -282,7 +277,6 @@
             cbSizeMaximo.Name = "cbSizeMaximo";
             cbSizeMaximo.Size = new Size(121, 23);
             cbSizeMaximo.TabIndex = 36;
-            cbSizeMaximo.Visible = false;
             // 
             // frmFiltro
             // 
