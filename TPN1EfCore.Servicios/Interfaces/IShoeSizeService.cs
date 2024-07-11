@@ -11,5 +11,7 @@ namespace TPN1EfCore.Servicios.Interfaces
     {
         public int GetId();
 
+
+
     }
 }

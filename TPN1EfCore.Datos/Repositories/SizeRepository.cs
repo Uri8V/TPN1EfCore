@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TPN1EfCore.Datos.Interfaces;
 using TPN1EfCore.Entidades;
+using TPN1EfCore.Entidades.DTO;
 
 namespace TPN1EfCore.Datos.Repositories
 {
@@ -20,6 +21,11 @@ namespace TPN1EfCore.Datos.Repositories
         public void AgregarSizeShoe(ShoeSizes nuevarelacion)
         {
             context.Set<ShoeSizes>().Add(nuevarelacion); 
+        }
+
+        public Size? GetSizePorDecimal(decimal sizenumber)
+        {
+            return context.Sizes.FirstOrDefault(s=>s.SizeNumber == sizenumber);
         }
 
         public Size? GetSizePorId(int id, bool incluyeShoe = false)
@@ -37,6 +43,27 @@ namespace TPN1EfCore.Datos.Repositories
         public List<Size> GetSizes()
         {
             return context.Sizes.ToList();
+        }
+
+        public List<ShoeListDto> GetShoePoSize(Size size)
+        {
+            return context.Shoes //Le indico que me traiga una lista de tipo SHOELISTDTO, la cual va a incluir los datos de las tablas
+              .Include(b => b.Brands)//simples y me va a traer todos los Shoes los cuales no tengan relacionado algún Size
+              .Include(s => s.Sports)
+              .Include(c => c.Color)
+              .Include(g => g.Genres)
+              .Where(sz => sz.ShoeSize.Any(s=>s.Size.SizeId==size.SizeId))
+              .Select(sh => new ShoeListDto
+              {
+                  shoeId = sh.ShoeId,
+                  brand = sh.Brands.BrandName,
+                  sport = sh.Sports.SportName,
+                  color = sh.Color.ColorName,
+                  genre = sh.Genres.GenreName,
+                  descripcion = sh.Descripcion,
+                  price = sh.Price,
+                  model = sh.Model
+              }).ToList();
         }
     }
 }

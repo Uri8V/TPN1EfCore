@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Reflection.Metadata;
@@ -10,14 +11,15 @@ using TPN1EfCore.Datos.Interfaces;
 using TPN1EfCore.Entidades;
 using TPN1EfCore.Entidades.DTO;
 using TPN1EfCore.Entidades.Enums;
+using Size = TPN1EfCore.Entidades.Size;
 
 namespace TPN1EfCore.Datos.Repositories
 {
-    public class ShoeRepository:IShoeRepository
+    public class ShoeRepository : IShoeRepository
     {
         private readonly ShoesDbContext _context;
         private readonly IShoeSizeRepository _shoeSizeRepository;//Lo necesito para obtener el Id para crear la nueva relacion
-                                                         // (No se me ocurrió otra forma)
+                                                                 // (No se me ocurrió otra forma)
         public ShoeRepository(ShoesDbContext context, IShoeSizeRepository shoeSizeRepository)
         {
             _context = context;
@@ -43,7 +45,7 @@ namespace TPN1EfCore.Datos.Repositories
 
             var sportExistente = _context
                 .Sports.FirstOrDefault(t => t.SportId == shoe.SportId);
-    
+
             // Si el Sport ya existe,
             // adjuntarlo al contexto en lugar de agregarlo nuevamente
 
@@ -124,31 +126,31 @@ namespace TPN1EfCore.Datos.Repositories
             }
 
             // Agregar la planta al contexto de la base de datos
-           
+
             _context.Shoes.Update(shoe);
         }
 
         public bool Existe(Shoe? Shoe)
         {
-            if (Shoe?.ShoeId==0)
+            if (Shoe?.ShoeId == 0)
             {
                 return _context.Shoes.Any(s => s.SportId == Shoe.SportId && s.BrandId == Shoe.BrandId && s.GenreId == Shoe.GenreId && s.ColourId == Shoe.ColourId);
             }
-            return _context.Shoes.Any(s => s.SportId == Shoe.SportId && s.BrandId == Shoe.BrandId && s.GenreId == Shoe.GenreId && s.ColourId == Shoe.ColourId && s.ShoeId!=Shoe.ShoeId);
+            return _context.Shoes.Any(s => s.SportId == Shoe.SportId && s.BrandId == Shoe.BrandId && s.GenreId == Shoe.GenreId && s.ColourId == Shoe.ColourId && s.ShoeId != Shoe.ShoeId);
         }
 
         public int GetCantidad(Func<Shoe, bool>? filtro)
         {
-         
-                if (filtro != null)
-                {
-                    return _context.Shoes.Where(filtro).Count();
-                }
-                else
-                {
-                    return _context.Shoes.Count();
-                } 
-            
+
+            if (filtro != null)
+            {
+                return _context.Shoes.Where(filtro).Count();
+            }
+            else
+            {
+                return _context.Shoes.Count();
+            }
+
         }
 
         public Shoe? GetShoePorId(int ShoeId)
@@ -163,8 +165,9 @@ namespace TPN1EfCore.Datos.Repositories
                 .Include(s => s.Sports)
                 .Include(s => s.Color)
                 .Include(s => s.Genres)
-                .Include(s => s.ShoeSize)
-                .Select(s => new ShoeListDto {
+                .Include(s => s.ShoeSize).ThenInclude(s => s.Size)
+                .Select(s => new ShoeListDto
+                {
                     shoeId = s.ShoeId,
                     brand = s.Brands != null ? s.Brands.BrandName : string.Empty,
                     color = s.Color != null ? s.Color.ColorName : string.Empty,
@@ -173,21 +176,27 @@ namespace TPN1EfCore.Datos.Repositories
                     descripcion = s.Descripcion,
                     model = s.Model,
                     price = s.Price,
+                    size = s.ShoeSize.Select(s => s.Size.SizeNumber).ToList(),
+                    Stock = s.ShoeSize.Select(s => s.QuantityInStock).ToList()
                 })
-                .OrderBy(s=>s.model).AsNoTracking().ToList();
+                .OrderBy(s => s.shoeId).AsNoTracking().ToList();
         }
+
+
 
         public List<ShoeListDto> GetListaPaginadaOrdenadaFiltrada(int page,
          int pageSize, Orden? orden = null, Brand? brandFiltro = null,
-         Sport? sportFiltro = null, Genre? genreFiltro=null, Colour? colourFiltro = null,
-         decimal? maximo=null, decimal? minimo=null)
+         Sport? sportFiltro = null, Genre? genreFiltro = null, Colour? colourFiltro = null,
+         decimal? maximo = null, decimal? minimo = null, Size? sizeseleccionado = null, Size? sizeMaximo = null)
         {
             IQueryable<Shoe> query = _context.Shoes
                 .Include(s => s.Brands)
                 .Include(s => s.Sports)
-                .Include(s=> s.Genres)
-                .Include(s=>s.Color)
+                .Include(s => s.Genres)
+                .Include(s => s.Color)
+                .Include(ss => ss.ShoeSize).ThenInclude(s => s.Size)
                 .AsNoTracking();
+
 
             // Aplicar filtro si se proporciona una Brand
             if (brandFiltro != null)
@@ -236,10 +245,18 @@ namespace TPN1EfCore.Datos.Repositories
                 }
             }
 
-            if (maximo!=null && minimo!=null)
+            if (maximo != null && minimo != null)
             {
-                query=query.Where(s=>s.Price<=maximo).Where(s=>s.Price>=minimo);
+                query = query.Where(s => s.Price <= maximo).Where(s => s.Price >= minimo);
             }
+            //if (sizeseleccionado != null)
+            //{
+            //    query = query.Any(s => s.ShoeSize.Where(s=>s.Size.SizeNumber==sizeseleccionado.SizeNumber));
+            //}
+            //if (sizeseleccionado!=null && sizeMaximo!=null)
+            //{
+            //    query = query.Where(s => s.ShoeSize.Any(s => s.Size.SizeNumber >= sizeseleccionado.SizeNumber)).Where(s => s.ShoeSize.Any(s => s.Size.SizeNumber <= sizeMaximo.SizeNumber));
+            //}
 
             // Paginar los resultados
             List<Shoe> listaPaginada = query
@@ -253,22 +270,26 @@ namespace TPN1EfCore.Datos.Repositories
                 .Select(s => new ShoeListDto
                 {
                     shoeId = s.ShoeId,
-                    brand=s.Brands.BrandName,
-                    sport=s.Sports.SportName,
-                    genre=s.Genres.GenreName,
-                    color=s.Color.ColorName,
-                    descripcion=s.Descripcion,
-                    price=s.Price,
-                    model=s.Model
+                    brand = s.Brands.BrandName,
+                    sport = s.Sports.SportName,
+                    genre = s.Genres.GenreName,
+                    color = s.Color.ColorName,
+                    descripcion = s.Descripcion,
+                    price = s.Price,
+                    model = s.Model,
+                    size = s.ShoeSize.Select(s => s.Size.SizeNumber).ToList(),
+                    Stock = s.ShoeSize.Select(s => s.QuantityInStock).ToList()
                 })
-                .ToList();
+                .OrderBy(s => s.price).ToList();
 
             return listaDto;
         }
 
+
+
         public List<ShoeListDto> GetListaPorPropiedadDeseada(Brand? brandFiltro = null, Sport? sportFiltro = null, Genre? genreFiltro = null, Colour? colourFiltro = null)
         {
-            IQueryable<Shoe> query=null;
+            IQueryable<Shoe> query = null;
             if (brandFiltro != null)
             {
                 query = _context.Entry(brandFiltro).Collection(s => s.Shoes).Query()
@@ -277,17 +298,17 @@ namespace TPN1EfCore.Datos.Repositories
             if (sportFiltro != null)
             {
                 query = _context.Entry(sportFiltro).Collection(s => s.Shoes).Query()
-                .Include(b=>b.Brands).Include(G => G.Genres).Include(c => c.Color);
+                .Include(b => b.Brands).Include(G => G.Genres).Include(c => c.Color);
             }
             if (genreFiltro != null)
             {
                 query = _context.Entry(genreFiltro).Collection(s => s.Shoes).Query()
-                .Include(b => b.Brands).Include(sp=>sp.Sports).Include(c => c.Color);
+                .Include(b => b.Brands).Include(sp => sp.Sports).Include(c => c.Color);
             }
             if (colourFiltro != null)
             {
                 query = _context.Entry(colourFiltro).Collection(s => s.Shoes).Query()
-                .Include(b => b.Brands).Include(G => G.Genres).Include(s=>s.Sports);
+                .Include(b => b.Brands).Include(G => G.Genres).Include(s => s.Sports);
             }
             List<ShoeListDto> listaDto = query
               .Select(s => new ShoeListDto
@@ -309,20 +330,20 @@ namespace TPN1EfCore.Datos.Repositories
         public List<ShoeListDto>? GetListaDeShoeSinSize()
         {
             return _context.Shoes //Le indico que me traiga una lista de tipo SHOELISTDTO, la cual va a incluir los datos de las tablas
-                .Include(b=>b.Brands)//simples y me va a traer todos los Shoes los cuales no tengan relacionado algún Size
-                .Include(s=>s.Sports)
-                .Include(c=>c.Color)
-                .Include(g=>g.Genres)
-                .Where(sz=>!sz.ShoeSize.Any())
-                .Select(sh=> new ShoeListDto
+                .Include(b => b.Brands)//simples y me va a traer todos los Shoes los cuales no tengan relacionado algún Size
+                .Include(s => s.Sports)
+                .Include(c => c.Color)
+                .Include(g => g.Genres)
+                .Where(sz => !sz.ShoeSize.Any())
+                .Select(sh => new ShoeListDto
                 {
-                    shoeId= sh.ShoeId,
-                    brand=sh.Brands.BrandName,
-                    sport=sh.Sports.SportName,
-                    color=sh.Color.ColorName,
-                    genre=sh.Genres.GenreName,
-                    descripcion=sh.Descripcion,
-                    price=sh.Price,
+                    shoeId = sh.ShoeId,
+                    brand = sh.Brands.BrandName,
+                    sport = sh.Sports.SportName,
+                    color = sh.Color.ColorName,
+                    genre = sh.Genres.GenreName,
+                    descripcion = sh.Descripcion,
+                    price = sh.Price,
                     model = sh.Model
                 }).ToList();
         }
@@ -333,10 +354,13 @@ namespace TPN1EfCore.Datos.Repositories
 
         }
 
-        public void AsignarSizeAlShoe(Shoe shoe, List<Size> sizes, int Stock)
+        public void AsignarSizeAlShoe(Shoe shoe, List<Size> sizes, List<int> stocks)
         {
-            foreach (var size in sizes)
+            var id = _shoeSizeRepository.GetId();
+            for (int i = 0; i < sizes.Count; i++)
             {
+                var size = sizes[i];
+                var stock=stocks[i];
                 var sizeExistente = _context.Sizes
                     .FirstOrDefault(p => p.SizeId == size.SizeId);
 
@@ -355,12 +379,13 @@ namespace TPN1EfCore.Datos.Repositories
                 {
                     _context.ShoeSizes.Add(new ShoeSizes
                     {
-                        ShoeSizeId = _shoeSizeRepository.GetId(),
+                        ShoeSizeId = id,
                         ShoeId = shoe.ShoeId,
                         SizeId = sizeExistente.SizeId,
-                        QuantityInStock = Stock
+                        QuantityInStock = stock
                     });
                 }
+                id ++;
             }
 
         }
@@ -401,19 +426,19 @@ namespace TPN1EfCore.Datos.Repositories
 
         public IEnumerable<IGrouping<int, Shoe>> GetShoesAgrupadasPorColor()
         {
-            return _context.Shoes.GroupBy(ss=>ss.ColourId).ToList();
+            return _context.Shoes.GroupBy(ss => ss.ColourId).ToList();
         }
 
         public IEnumerable<IGrouping<int, ShoeSizes>> GetShoesAgrupadasPorSize()
         {
-           return _context.ShoeSizes.GroupBy(ss=>ss.SizeId).ToList();
+            return _context.ShoeSizes.GroupBy(ss => ss.SizeId).ToList();
         }
 
         public List<Size>? GetSizesPorShoes(int shoeId)
         {
             return _context.ShoeSizes.Include(_ => _.Size)
-                .Where(s=>s.ShoeId==shoeId)
-                .Select(s=>s.Size)
+                .Where(s => s.ShoeId == shoeId)
+                .Select(s => s.Size)
                 .ToList();
         }
 
@@ -424,7 +449,7 @@ namespace TPN1EfCore.Datos.Repositories
                 .ThenInclude(ss => ss.Size)
                 .Any(ss => ss.ShoeId == shoe.ShoeId &&
                 ss.ShoeSize.Any(ss => ss.SizeId == size.SizeId));
-            return existerelación; //TERMINAR¡¡¡¡¡
+            return existerelación;
         }
     }
 }

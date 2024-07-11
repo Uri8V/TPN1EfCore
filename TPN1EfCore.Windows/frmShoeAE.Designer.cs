@@ -54,7 +54,12 @@
             lblSportNuevo = new Label();
             lblGenreNuevo = new Label();
             lblColorNuevo = new Label();
+            dgvDatos = new DataGridView();
+            colSize = new DataGridViewTextBoxColumn();
+            colAgregar = new DataGridViewButtonColumn();
+            label9 = new Label();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvDatos).BeginInit();
             SuspendLayout();
             // 
             // errorProvider1
@@ -166,7 +171,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(453, 110);
+            label7.Location = new Point(453, 102);
             label7.Name = "label7";
             label7.Size = new Size(125, 15);
             label7.TabIndex = 10;
@@ -174,7 +179,7 @@
             // 
             // txtPrecio
             // 
-            txtPrecio.Location = new Point(570, 12);
+            txtPrecio.Location = new Point(582, 12);
             txtPrecio.MaximumSize = new Size(100, 23);
             txtPrecio.MaxLength = 50;
             txtPrecio.MinimumSize = new Size(100, 23);
@@ -185,18 +190,22 @@
             // txtModelo
             // 
             txtModelo.Location = new Point(582, 64);
+            txtModelo.MaximumSize = new Size(100, 23);
             txtModelo.MaxLength = 100;
+            txtModelo.MinimumSize = new Size(100, 23);
             txtModelo.Name = "txtModelo";
-            txtModelo.Size = new Size(121, 23);
+            txtModelo.Size = new Size(100, 23);
             txtModelo.TabIndex = 12;
             // 
             // txtDescripcion
             // 
-            txtDescripcion.Location = new Point(584, 102);
+            txtDescripcion.Location = new Point(453, 120);
+            txtDescripcion.MaximumSize = new Size(229, 70);
             txtDescripcion.MaxLength = 250;
+            txtDescripcion.MinimumSize = new Size(229, 70);
             txtDescripcion.Multiline = true;
             txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Size = new Size(132, 70);
+            txtDescripcion.Size = new Size(229, 70);
             txtDescripcion.TabIndex = 13;
             // 
             // btnConfirmar
@@ -311,12 +320,54 @@
             lblColorNuevo.Text = "Nuevo Color Seleccionado:";
             lblColorNuevo.Visible = false;
             // 
+            // dgvDatos
+            // 
+            dgvDatos.AllowUserToAddRows = false;
+            dgvDatos.AllowUserToDeleteRows = false;
+            dgvDatos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvDatos.Columns.AddRange(new DataGridViewColumn[] { colSize, colAgregar });
+            dgvDatos.Location = new Point(698, 64);
+            dgvDatos.MaximumSize = new Size(244, 255);
+            dgvDatos.MinimumSize = new Size(244, 255);
+            dgvDatos.MultiSelect = false;
+            dgvDatos.Name = "dgvDatos";
+            dgvDatos.ReadOnly = true;
+            dgvDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvDatos.Size = new Size(244, 255);
+            dgvDatos.TabIndex = 17;
+            dgvDatos.CellContentClick += dgvDatos_CellContentClick;
+            // 
+            // colSize
+            // 
+            colSize.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colSize.HeaderText = "Size";
+            colSize.Name = "colSize";
+            colSize.ReadOnly = true;
+            // 
+            // colAgregar
+            // 
+            colAgregar.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colAgregar.HeaderText = "Seleccione";
+            colAgregar.Name = "colAgregar";
+            colAgregar.ReadOnly = true;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(698, 46);
+            label9.Name = "label9";
+            label9.Size = new Size(126, 15);
+            label9.TabIndex = 18;
+            label9.Text = "Seleccione el/los Sizes:";
+            // 
             // frmShoeAE
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(780, 308);
+            ClientSize = new Size(954, 331);
             ControlBox = false;
+            Controls.Add(label9);
+            Controls.Add(dgvDatos);
             Controls.Add(btnAgregarColor);
             Controls.Add(btnAgregarGenre);
             Controls.Add(btnAgregarSport);
@@ -341,13 +392,13 @@
             Controls.Add(lblSportNuevo);
             Controls.Add(lblBrandNueva);
             Controls.Add(label1);
-            MaximumSize = new Size(796, 347);
             MinimumSize = new Size(796, 347);
             Name = "frmShoeAE";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmShoeAE";
             Load += frmShoeAE_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvDatos).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -379,5 +430,9 @@
         private Label lblColorNuevo;
         private Label lblGenreNuevo;
         private Label lblSportNuevo;
+        private Label label9;
+        private DataGridView dgvDatos;
+        private DataGridViewTextBoxColumn colSize;
+        private DataGridViewButtonColumn colAgregar;
     }
 }

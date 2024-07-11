@@ -34,6 +34,7 @@
             btnGenre = new Button();
             btnColor = new Button();
             btnShoes = new Button();
+            btnTalles = new Button();
             SuspendLayout();
             // 
             // btnSalir
@@ -99,15 +100,26 @@
             // btnShoes
             // 
             btnShoes.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnShoes.Location = new Point(256, 127);
+            btnShoes.Location = new Point(172, 127);
             btnShoes.Name = "btnShoes";
-            btnShoes.Size = new Size(94, 76);
+            btnShoes.Size = new Size(88, 51);
             btnShoes.TabIndex = 0;
             btnShoes.Text = "SHOES";
-            btnShoes.TextAlign = ContentAlignment.BottomCenter;
             btnShoes.TextImageRelation = TextImageRelation.ImageAboveText;
             btnShoes.UseVisualStyleBackColor = true;
             btnShoes.Click += btnShoe_Click;
+            // 
+            // btnTalles
+            // 
+            btnTalles.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnTalles.Location = new Point(287, 127);
+            btnTalles.Name = "btnTalles";
+            btnTalles.Size = new Size(88, 51);
+            btnTalles.TabIndex = 0;
+            btnTalles.Text = "SIZES";
+            btnTalles.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnTalles.UseVisualStyleBackColor = true;
+            btnTalles.Click += btnTalles_Click;
             // 
             // FrmPrincipal
             // 
@@ -115,6 +127,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(495, 271);
             ControlBox = false;
+            Controls.Add(btnTalles);
             Controls.Add(btnShoes);
             Controls.Add(btnColor);
             Controls.Add(btnGenre);
@@ -136,5 +149,6 @@
         private Button btnGenre;
         private Button btnColor;
         private Button btnShoes;
+        private Button btnTalles;
     }
 }

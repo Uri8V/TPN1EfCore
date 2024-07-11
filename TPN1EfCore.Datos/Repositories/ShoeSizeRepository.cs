@@ -17,7 +17,9 @@ namespace TPN1EfCore.Datos.Repositories
         }
         public int GetId()
         {
-            return _context.ShoeSizes.ToList().Count()+1;
+           return _context.ShoeSizes.Max(i=>i.ShoeSizeId)+1;
+      
         }
+
     }
 }

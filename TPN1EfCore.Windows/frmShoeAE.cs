@@ -8,30 +8,41 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TPN1EfCore.Entidades;
+using TPN1EfCore.Servicios.Interfaces;
 using TPN1EfCore.Windows.Helpers;
+using Size = TPN1EfCore.Entidades.Size;
 
 namespace TPN1EfCore.Windows
 {
     public partial class frmShoeAE : Form
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
+        private readonly ISizeService? _sizeService;
         private Shoe? shoe;
         private Brand? brand;
         private Sport? sport;
         private Genre? genre;
         private Colour? colour;
-        public frmShoeAE(IServiceProvider serviceProvider)
+        private List<Size>? _lista;
+        private List<Size>? _listaParaCrearShoe;
+        private List<int> stock;
+        public frmShoeAE(IServiceProvider? serviceProvider, ISizeService? sizeService, List<Size>? lista)
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
+            _sizeService = sizeService;
+            _lista = lista;
         }
 
         private void frmShoeAE_Load(object sender, EventArgs e)
         {
+            _listaParaCrearShoe = new List<Size>();
+            stock = new List<int>();
             CombosHelper.CargarComboBrand(_serviceProvider, ref cbBrand);
             CombosHelper.CargarComboSport(_serviceProvider, ref cbSport);
             CombosHelper.CargarComboGenre(_serviceProvider, ref cbGenre);
             CombosHelper.CargarComboColor(_serviceProvider, ref cbColor);
+            MostrarDatosEnGrilla();
             if (shoe != null)
             {
                 cbBrand.SelectedValue = shoe.BrandId;
@@ -42,11 +53,19 @@ namespace TPN1EfCore.Windows
                 txtPrecio.Text = shoe.Price.ToString();
                 txtDescripcion.Text = shoe.Descripcion;
             }
+
         }
 
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        private void MostrarDatosEnGrilla()
         {
-
+            GridHelper.LimpiarGrilla(dgvDatos);
+            foreach (var item in _lista)
+            {
+                var r = GridHelper.ConstruirFila(dgvDatos);
+                GridHelper.SetearFila(r, item);
+                r.Cells[1].Value = "Agregar";
+                GridHelper.AgregarFila(r, dgvDatos);
+            }
         }
 
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
@@ -137,6 +156,11 @@ namespace TPN1EfCore.Windows
                 errorProvider1.SetError(txtDescripcion, "Debe ingresar una descripción para la Shoe");
                 valido = false;
             }
+            if (_listaParaCrearShoe?.Count == 0)
+            {
+                errorProvider1.SetError(dgvDatos, "Debe seleccionar un Size");
+                valido = false;
+            }
             return valido;
 
         }
@@ -203,19 +227,43 @@ namespace TPN1EfCore.Windows
 
         private void cbBrand_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbBrand.SelectedIndex!=0)
+            if (cbBrand.SelectedIndex != 0)
             {
                 brand = (Brand?)cbBrand.SelectedItem;
             }
             else
             {
-                brand=null;
+                brand = null;
             }
         }
 
         public void SetShoe(Shoe? _shoe)
         {
             shoe = _shoe;
+        }
+
+        private void dgvDatos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 1)
+            {
+                var r = dgvDatos.SelectedRows[0];
+                Size? size = _sizeService?.GetSizePorDecimal((decimal)r.Cells[0].Value);
+                _listaParaCrearShoe?.Add(size);
+                frmIngresarStock frm= new frmIngresarStock();
+                DialogResult dr= frm.ShowDialog(this);
+                stock.Add(frm.GetStock());
+                dgvDatos.Rows.Remove(r);
+            }
+        }
+
+        internal List<Size>? GetSizesSeleccionados()
+        {
+            return _listaParaCrearShoe;
+        }
+
+        internal List<int> GetStockSeleccionado()
+        {
+            return stock;
         }
     }
 }

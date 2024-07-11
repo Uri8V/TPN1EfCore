@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TPN1EfCore.Entidades;
 using TPN1EfCore.Servicios.Interfaces;
+using Size = TPN1EfCore.Entidades.Size;
 
 namespace TPN1EfCore.Windows.Helpers
 {
@@ -21,48 +22,48 @@ namespace TPN1EfCore.Windows.Helpers
             cbo.SelectedIndex = 0;
         }
 
-        public static void CargarComboBrand(IServiceProvider serviceProvider, ref ComboBox cbo)
+        public static void CargarComboBrand(IServiceProvider? serviceProvider, ref ComboBox cbo)
         {
-            var servicio = serviceProvider.GetService<IBrandService>();
+            var servicio = serviceProvider?.GetService<IBrandService>();
 
             var lista = servicio?.GetBrands();
             var defaultBrand = new Brand
             {
                 BrandName = "Seleccione la Brand"
             };
-            lista.Insert(0, defaultBrand);
+            lista?.Insert(0, defaultBrand);
             cbo.DataSource = lista;
             cbo.DisplayMember = "BrandName";
             cbo.ValueMember = "BrandId";
             cbo.SelectedIndex = 0;
         }
 
-        public static void CargarComboSport(IServiceProvider serviceProvider, ref ComboBox cbo)
+        public static void CargarComboSport(IServiceProvider? serviceProvider, ref ComboBox cbo)
         {
-            var servicio = serviceProvider.GetService<ISportService>();
+            var servicio = serviceProvider?.GetService<ISportService>();
 
             var lista = servicio?.GetSports();
             var defaultSport = new Sport
             {
                 SportName = "Seleccione el Sport"
             };
-            lista.Insert(0, defaultSport);
+            lista?.Insert(0, defaultSport);
             cbo.DataSource = lista;
             cbo.DisplayMember = "SportName";
             cbo.ValueMember = "SportId";
             cbo.SelectedIndex = 0;
         }
 
-        public static void CargarComboGenre(IServiceProvider serviceProvider, ref ComboBox cbo)
+        public static void CargarComboGenre(IServiceProvider? serviceProvider, ref ComboBox cbo)
         {
-            var servicio = serviceProvider.GetService<IGenreService>();
+            var servicio = serviceProvider?.GetService<IGenreService>();
 
             var lista = servicio?.GetGenres();
             var defaultGenre = new Genre
             {
                 GenreName = "Seleccione el Genre"
             };
-            lista.Insert(0, defaultGenre);
+            lista?.Insert(0, defaultGenre);
 
             cbo.DataSource = lista;
             cbo.DisplayMember = "GenreName";
@@ -70,9 +71,9 @@ namespace TPN1EfCore.Windows.Helpers
             cbo.SelectedIndex = 0;
         }
 
-        public static void CargarComboColor(IServiceProvider serviceProvider, ref ComboBox cbo)
+        public static void CargarComboColor(IServiceProvider? serviceProvider, ref ComboBox cbo)
         {
-            var servicio = serviceProvider.GetService<IColorService>();
+            var servicio = serviceProvider?.GetService<IColorService>();
 
             var lista = servicio?.GetColours();
             var defaultColor = new Colour
@@ -80,11 +81,28 @@ namespace TPN1EfCore.Windows.Helpers
                 ColorName = "Seleccione el Color"
 
             };
-            lista.Insert(0, defaultColor);
+            lista?.Insert(0, defaultColor);
 
             cbo.DataSource = lista;
             cbo.DisplayMember = "ColorName";
             cbo.ValueMember = "ColourId";
+            cbo.SelectedIndex = 0;
+        }
+        public static void CargarComboSize(IServiceProvider? serviceProvider, ref ComboBox cbo)
+        {
+            var servicio = serviceProvider?.GetService<ISizeService>();
+
+            var lista = servicio?.GetSizes();
+            var defaultSize = new Size
+            {
+                SizeNumber = 0 
+
+            };
+            lista?.Insert(0, defaultSize);
+
+            cbo.DataSource = lista;
+            cbo.DisplayMember = "SizeNumber";
+            cbo.ValueMember = "SizeId";
             cbo.SelectedIndex = 0;
         }
 

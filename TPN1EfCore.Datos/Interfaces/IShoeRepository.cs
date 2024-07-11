@@ -22,12 +22,12 @@ namespace TPN1EfCore.Datos.Interfaces
         public List<ShoeListDto> GetListaPaginadaOrdenadaFiltrada(int page,
       int pageSize, Orden? orden = null, Brand? brandFiltro = null,
       Sport? sportFiltro = null, Genre? genreFiltro = null, Colour? colourFiltro = null,
-            decimal? maximo = null, decimal? minimo = null);
+            decimal? maximo = null, decimal? minimo = null, Size ? sizeseleccionado = null, Size? sizeMaximo = null);
         public List<ShoeListDto> GetListaPorPropiedadDeseada(Brand? brandFiltro = null,
       Sport? sportFiltro = null, Genre? genreFiltro = null, Colour? colourFiltro = null);
         List<ShoeListDto>? GetListaDeShoeSinSize();
         void AsignarSizeAlShoe(ShoeSizes nuevaRelacion);
-        void AsignarSizeAlShoe(Shoe shoe, List<Size> sizes,int Stock);
+        void AsignarSizeAlShoe(Shoe shoe, List<Size> sizes,List<int> Stock);
         void EliminarRelaciones(Shoe shoe);
         IEnumerable<IGrouping<int, Shoe>> GetShoesAgrupadasPorBrand();
         IEnumerable<IGrouping<int, Shoe>> GetShoesAgrupadasPorSport();

@@ -58,7 +58,13 @@ namespace TPN1EfCore.Windows
 
         private void btnShoe_Click(object sender, EventArgs e)
         {
-            frmShoe frm = new frmShoe(_serviceProvider.GetService<IShoeService>(), _serviceProvider.GetService<IServiceProvider>());
+            frmShoe frm = new frmShoe(_serviceProvider?.GetService<IShoeService>(), _serviceProvider?.GetService<IServiceProvider>());
+            frm.ShowDialog();
+        }
+
+        private void btnTalles_Click(object sender, EventArgs e)
+        {
+            frmSize frm = new frmSize(_serviceProvider?.GetService<ISizeService>());
             frm.ShowDialog();
         }
     }

@@ -18,6 +18,7 @@ namespace TPN1EfCore.Servicios.Servicios
             shoeSizeRepo = _shoeSizeRepo;
         }
 
+
         public int GetId()
         {
             return shoeSizeRepo.GetId();

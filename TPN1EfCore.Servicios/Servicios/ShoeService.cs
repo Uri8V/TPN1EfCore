@@ -83,7 +83,7 @@ namespace TPN1EfCore.Servicios.Servicios
             }
         }
 
-        public void Editar(Shoe shoe, int? value=null)
+        public void Editar(Shoe shoe, int stock, int? value=null)
         {
                 try
                 {
@@ -107,7 +107,8 @@ namespace TPN1EfCore.Servicios.Servicios
                                 {
                                     ShoeSizeId=_shoeSizeRepository.GetId(),
                                     ShoeId=shoe.ShoeId,
-                                    SizeId = size.SizeId
+                                    SizeId = size.SizeId,
+                                    QuantityInStock=stock
                                 };
                                 _sizeRepository.AgregarSizeShoe(nuevaRelacion);
 
@@ -149,9 +150,9 @@ namespace TPN1EfCore.Servicios.Servicios
             return _shoeRepository.GetListaDeShoeSinSize();
         }
 
-        public List<ShoeListDto> GetListaPaginadaOrdenadaFiltrada(int page, int pageSize, Orden? orden = null, Brand? brandFiltro = null, Sport? sportFiltro = null, Genre? genreFiltro = null, Colour? colourFiltro = null, decimal? maximo = null, decimal? minimo = null)
+        public List<ShoeListDto> GetListaPaginadaOrdenadaFiltrada(int page, int pageSize, Orden? orden = null, Brand? brandFiltro = null, Sport? sportFiltro = null, Genre? genreFiltro = null, Colour? colourFiltro = null, decimal? maximo = null, decimal? minimo = null, Size? sizeseleccionado = null, Size? sizeMaximo = null)
         {
-            return _shoeRepository.GetListaPaginadaOrdenadaFiltrada(page, pageSize, orden, brandFiltro, sportFiltro, genreFiltro, colourFiltro,maximo,minimo);
+            return _shoeRepository.GetListaPaginadaOrdenadaFiltrada(page, pageSize, orden, brandFiltro, sportFiltro, genreFiltro, colourFiltro,maximo,minimo, sizeseleccionado,sizeMaximo);
         }
 
         public List<ShoeListDto> GetListaPorPropiedadDeseada(Brand? brandFiltro = null, Sport? sportFiltro = null, Genre? genreFiltro = null, Colour? colourFiltro = null)
@@ -199,7 +200,7 @@ namespace TPN1EfCore.Servicios.Servicios
           return _shoeRepository.GetSizesPorShoes(shoeId);
         }
 
-        public void Guardar(Shoe Shoe, int stock, List<Size>? sizes = null)
+        public void Guardar(Shoe Shoe, List<int> stock, List<Size>? sizes = null)
         {
             try
             {

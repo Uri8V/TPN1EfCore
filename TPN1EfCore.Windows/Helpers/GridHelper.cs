@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TPN1EfCore.Entidades;
 using TPN1EfCore.Entidades.DTO;
+using Size = TPN1EfCore.Entidades.Size;
 
 namespace TPN1EfCore.Windows.Helpers
 {
@@ -44,12 +45,9 @@ namespace TPN1EfCore.Windows.Helpers
                 case Colour colour:
                     r.Cells[0].Value = colour.ColorName;
                     break;
-                //case PlantaListDto planta:
-                //    r.Cells[0].Value = planta.Nombre;
-                //    r.Cells[1].Value = planta.Tipo;
-                //    r.Cells[2].Value = planta.Envase;
-                //    r.Cells[3].Value = planta.Precio.ToString("C");
-                //    break;
+                case Size size:
+                    r.Cells[0].Value = size.SizeNumber;
+                    break;
                 case ShoeListDto shoe:
                     r.Cells[0].Value = shoe.brand;
                     r.Cells[1].Value = shoe.sport;

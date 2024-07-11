@@ -9,6 +9,7 @@ using TPN1EfCore.Entidades.DTO;
 using TPN1EfCore.Entidades.Enums;
 using TPN1EfCore.IOC;
 using TPN1EfCore.Servicios.Interfaces;
+using TPN1EfCore.Servicios.Servicios;
 using TPN1EfCore.Shared;
 
 namespace TPN1EfCore.Consola
@@ -222,8 +223,8 @@ namespace TPN1EfCore.Consola
             MostrarListaShoes(shoeList);//La muestro
             var shoeid = ValidarDatos.GetValidOptions("Seleccione una Shoe: ", shoeList.Select(s => s.shoeId.ToString()).ToList());//Me fijo si el ID que eligieron es valida
             var ShoeSeleccionado = shoeService.GetShoes().FirstOrDefault(s => s.shoeId.ToString() == shoeid);//Me traigo el Shoe con el Id que ingresaron anteriormente
-            var lista=shoeService.GetSizesPorShoes(ShoeSeleccionado.shoeId);//Me traigo los Sizes que tiene relacionado ese Shoe
-            if (lista.Count>0)//Si esta relacionado con algún Size lo muestro
+            var lista = shoeService.GetSizesPorShoes(ShoeSeleccionado.shoeId);//Me traigo los Sizes que tiene relacionado ese Shoe
+            if (lista.Count > 0)//Si esta relacionado con algún Size lo muestro
             {
                 ConsoleTable table = new ConsoleTable("Id", "Size number");
                 foreach (var item in lista)
@@ -231,7 +232,7 @@ namespace TPN1EfCore.Consola
                     table.AddRow(item.SizeId.ToString(), item.SizeNumber.ToString());
                 }
                 table.Options.EnableCount = false;
-                table.Write(); 
+                table.Write();
             }
             else
             {
@@ -314,7 +315,7 @@ namespace TPN1EfCore.Consola
         {
             Console.Clear();//Lo mismo pero por Sport, Mira arriba de este método
             var shoeservice = _serviceProvider?.GetService<IShoeService>();
-            var sportservice=_serviceProvider?.GetService<ISportService>();
+            var sportservice = _serviceProvider?.GetService<ISportService>();
 
             var agrupacion = shoeservice?.GetShoesAgrupadasPorSport();
             foreach (var sho in agrupacion)
@@ -336,10 +337,10 @@ namespace TPN1EfCore.Consola
         {
             Console.Clear();//Lo mismo pero por Brand, mira arriba, en el método de Genre o Color
             var shoeservice = _serviceProvider?.GetService<IShoeService>();
-            var brandservice=_serviceProvider?.GetService<IBrandService>();
+            var brandservice = _serviceProvider?.GetService<IBrandService>();
 
             var agrupacion = shoeservice?.GetShoesAgrupadasPorBrand();
-            foreach ( var sho in agrupacion)
+            foreach (var sho in agrupacion)
             {
                 Console.WriteLine($"Brand {brandservice?.GetBrandPorId(sho.Key)?.BrandName}");
                 foreach (var item in sho)
@@ -399,17 +400,17 @@ namespace TPN1EfCore.Consola
                     // Solicitar al usuario seleccionar un proveedor existente o crear uno nuevo
                     var opcion = ValidarDatos.GetValidOptions("Seleccione un Size:",
                         sizeservice.GetSizes().Select(x => x.SizeId.ToString()).ToList());
-              
-                        // Obtener el Size seleccionado
-                        var sizeSeleccionado = sizeservice.GetSizes()
-                            .FirstOrDefault(x => x.SizeId.ToString() == opcion);
+
+                    // Obtener el Size seleccionado
+                    var sizeSeleccionado = sizeservice.GetSizes()
+                        .FirstOrDefault(x => x.SizeId.ToString() == opcion);
 
                     //Asigno el stock
                     var stock = ValidarDatos.ReadInt("Ingrese el stock: ");
-                        // Asignar el size existente al Shoe
-                        shoeservice.AsignarSizealShoe(shoeSinSize,
-                            sizeSeleccionado, stock);
-                    
+                    // Asignar el size existente al Shoe
+                    shoeservice.AsignarSizealShoe(shoeSinSize,
+                        sizeSeleccionado, stock);
+
                 }
                 else
                 {
@@ -483,7 +484,7 @@ namespace TPN1EfCore.Consola
             }
             Console.WriteLine("Aprete ENTER para continuar");
             Console.ReadLine();
-            
+
         }
 
         private static void ListaShoesPorColors()
@@ -717,14 +718,13 @@ namespace TPN1EfCore.Consola
             var servicioSport = _serviceProvider?.GetService<ISportService>();
             var servicioGenre = _serviceProvider?.GetService<IGenreService>();
             var servicioColor = _serviceProvider?.GetService<IColorService>();
-            var servicioSize= _serviceProvider?.GetService<ISizeService>();
+            var servicioSize = _serviceProvider?.GetService<ISizeService>();
             Brand? brand;
             Sport? sport;
             Genre? genre;
             Colour? colour;
-            Size? size;
-
             // Obtener el Shoe a editar
+            ListaShoes();
             var shoeId = ValidarDatos.ReadInt("Ingrese el ID de la Shoe a editar:");
             var shoe = servicioShoe?.GetShoePorId(shoeId);
 
@@ -792,10 +792,10 @@ namespace TPN1EfCore.Consola
             }
             shoe.Genres = genre;
             ListaSports();
-            shoe.SportId = ValidarDatos.ReadInt("Ingrese el nuevo Sport: ");
+            shoe.SportId = ValidarDatos.ReadInt("Ingrese el Id del Sport: ");
             if (shoe.SportId == 0)
             {
-                var sportName = ValidarDatos.ReadString("Ingrese el ID del Sport: ");
+                var sportName = ValidarDatos.ReadString("Ingrese el nuevo Sport: ");
                 sport = new Sport()
                 {
                     SportId = 0,
@@ -808,26 +808,36 @@ namespace TPN1EfCore.Consola
             }
             shoe.Sports = sport;
             //Listar Sizes existentes
-           var listaSizes = servicioSize?.GetSizes();
-            Console.WriteLine("Proveedores disponibles:");
-            foreach (var item in listaSizes)
+            Console.Clear();
+            var listaSizeDeShoe = new List<Size>();
+            listaSizeDeShoe= servicioShoe?.GetSizesPorShoes(shoeId);
+            var listaSizeFiltrada = new List<Size>(); 
+            listaSizeFiltrada = servicioSize?.GetSizes();
+            foreach (var item in listaSizeDeShoe)
+            {
+                listaSizeFiltrada?.Remove(item);
+            }
+            Console.WriteLine("Sizes disponibles:");
+            foreach (var item in listaSizeFiltrada)
             {
                 Console.WriteLine($"ID: {item.SizeId}, Size Number: {item.SizeNumber}");
             }
 
-           // Asignar un nuevo Size
+            // Asignar un nuevo Size
             var SizeId = ValidarDatos
                 .ReadInt("Ingrese el ID del nuevo Size (0 para omitir):");
+            
 
             try
             {
                 if (SizeId == 0)
                 {
-                    servicioShoe?.Editar(shoe, null);
+                    servicioShoe?.Editar(shoe,0, null);
                 }
                 else
                 {
-                    servicioShoe?.Editar(shoe, SizeId);
+                    int stock = ValidarDatos.ReadInt("Ingrese el stock: ");
+                    servicioShoe?.Editar(shoe,stock, SizeId);
                 }
 
                 Console.WriteLine("Shoe actualizado   exitosamente.");
@@ -856,7 +866,8 @@ namespace TPN1EfCore.Consola
             Sport? sport;
             Genre? genre;
             Colour? colour;
-            Size? size;
+            List<Size>? size= new List<Size>();
+            List<int>? stock= new List<int>();
             int cantidad = 0;
 
             Console.WriteLine("Agregar Shoe");
@@ -891,7 +902,7 @@ namespace TPN1EfCore.Consola
             ListaColors();
             var listaColor = servicioColor?.GetColours()?
                 .Select(x => x.ColourId.ToString()).ToList();
-            var colorId = ValidarDatos.GetValidOptions("Seleccione Color (N para nuevo):",
+            var colorId = ValidarDatos.GetValidOptions("Seleccione el ID del Color (N para nuevo):",
                 listaColor);
             //O creo un Nuevo Color para mi Shoe
             if (colorId == "N")
@@ -916,7 +927,7 @@ namespace TPN1EfCore.Consola
             ListaGenres();
             var listagenre = servicioGenre?.GetGenres()?
                 .Select(x => x.GenreId.ToString()).ToList();
-            var genreId = ValidarDatos.GetValidOptions("Seleccione Genre (N para nuevo):",
+            var genreId = ValidarDatos.GetValidOptions("Seleccione el ID del Genre (N para nuevo):",
                 listagenre);
             //O creo un Nuevo Genre para mi Shoe
             if (genreId == "N")
@@ -942,7 +953,7 @@ namespace TPN1EfCore.Consola
             ListaSports();
             var listaSport = servcioSport?.GetSports()?
                 .Select(x => x.SportId.ToString()).ToList();
-            var sportId = ValidarDatos.GetValidOptions("Seleccione Sport (N para nuevo):",
+            var sportId = ValidarDatos.GetValidOptions("Seleccione el ID del Sport (N para nuevo):",
                 listaSport);
             //O creo un Nuevo Sport para mi Shoe
             if (sportId == "N")
@@ -993,8 +1004,10 @@ namespace TPN1EfCore.Consola
                         if (respuesta == "n" || respuesta == "N")
                         {
                             var sizeId = ValidarDatos.ReadInt("Ingrese el ID: ");
-                            size = servicioSize?.GetSizePorId(sizeId);
-                            CreandoShoeConSize(servicioShoe, shoesizeser, size, shoe);
+                            size.Add(servicioSize?.GetSizePorId(sizeId));
+                            var stoc = ValidarDatos.ReadInt("Ingrese el stock del shoe: ");
+                            stock.Add(stoc);
+                            CreandoShoeConSize(servicioShoe, shoesizeser, size, shoe,stock);
                             break;
                         }
                         else
@@ -1017,8 +1030,10 @@ namespace TPN1EfCore.Consola
                                 for (int i = 0; i < cantidad; i++)
                                 {
                                     var id = ValidarDatos.ReadInt("Ingrese el ID del Size: ");
-                                    size = servicioSize?.GetSizePorId(id);
-                                    CreandoShoeConSize(servicioShoe, shoesizeser, size, shoe);
+                                    size.Add(servicioSize?.GetSizePorId(id));
+                                    var stoc = ValidarDatos.ReadInt("Ingrese el Stock de la Shoe: ");
+                                    stock.Add(stoc);
+                                   CreandoShoeConSize(servicioShoe, shoesizeser, size, shoe, stock);
                                 }
                                 Console.WriteLine("Shoe Completado");
                                 break;
@@ -1029,7 +1044,7 @@ namespace TPN1EfCore.Consola
                             }
                         }
 
-                    } while (true);             
+                    } while (true);
                 }
                 else
                 {
@@ -1043,36 +1058,45 @@ namespace TPN1EfCore.Consola
             Thread.Sleep(2000);
         }
 
-        private static void CreandoShoeConSize(IShoeService? servicioShoe, IShoeSizeService shoesizeser, Size size, Shoe shoe)
+        private static void CreandoShoeConSize(IShoeService? servicioShoe, IShoeSizeService shoesizeser, List<Size> size, Shoe shoe, List<int> stock)
         {
-            int cantidad;
-            Shoe? Shoeagregado = servicioShoe?.GetShoePorId(shoe.ShoeId);
-            cantidad = ValidarDatos.ReadInt("Ingrese el Stock de la Shoe: ");
-            int id = shoesizeser.GetId();
-
-            ShoeSizes shoeSizes = new ShoeSizes()
-            {
-                ShoeSizeId = id,
-                Size = size,
-                Shoe = shoe,
-                QuantityInStock = cantidad
-            };
-            shoe.ShoeSize.Add(shoeSizes);
-            servicioShoe?.Guardar(shoe, cantidad);
-            Console.WriteLine("Shoe agregada!!!");
+            servicioShoe?.Guardar(shoe, stock, size);
         }
 
         private static void ListaShoes()
         {
             var servicio = _serviceProvider?.GetService<IShoeService>();
-            var tabla = new ConsoleTable("ID", "Brand", "Sport", "Genre", "Color", "Model", "Descripción", "Precio","Size");
+            var tabla = new ConsoleTable("ID", "Brand", "Sport", "Genre", "Color", "Model", "Precio", "Size", "Stock");
             if (servicio?.GetShoes() != null)
             {
+                int stock = 0;
+                decimal size = 0;
                 foreach (var item in servicio.GetShoes())
                 {
+                    if (item.size.Count != 0)
+                    {
+                        for (int i = 0; i < item.size.Count; i++)
+                        {
+                             size = item.size[i];
+                             stock = item.Stock[i];
+
+                            tabla.AddRow(item.shoeId, item.brand, item.sport, item.genre, item.color, item.model,
+                                         item.price, size, stock);
+                        }
+                        continue;
+                    }
+
+                    else
+                    {
+                        stock = 0;
+                        size = 0;
+                    }
+
                     tabla.AddRow(item.shoeId, item.brand,
                         item.sport, item.genre, item.color, item.model,
-                        item.descripcion, item.price);
+                         item.price, size, stock);
+
+
                 }
                 tabla.Options.EnableCount = false;
                 tabla.Write();

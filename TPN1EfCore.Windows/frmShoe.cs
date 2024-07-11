@@ -17,6 +17,7 @@ using TPN1EfCore.Servicios.Interfaces;
 using TPN1EfCore.Servicios.Servicios;
 using TPN1EfCore.Windows.Helpers;
 using TPN1EfCore.Windows.Properties;
+using Size = TPN1EfCore.Entidades.Size;
 
 namespace TPN1EfCore.Windows
 {
@@ -36,17 +37,20 @@ namespace TPN1EfCore.Windows
         private readonly IServiceProvider _serviceProvider;
         private readonly IShoeService? _servicio;
         private List<ShoeListDto>? lista;
+        private List<Size>? listaSize;
         private Orden orden = Orden.AZ;
         private Brand? brandFiltro = null;
         private Sport? sportFiltro = null;
         private Genre? genreFiltro = null;
         private Colour? colourFiltro = null;
+        private Size? sizeSeleccionad = null;
+        private Size? sizeMaximo = null;
         private Func<Shoe, bool>? filtro = null;
-        private decimal? maximo;
-        private decimal? minimo;
+        private decimal? maximo=null;
+        private decimal? minimo=null;
 
         private int pageCount;
-        private int pageSize = 2;
+        private int pageSize = 16;
         private int pageNum = 0;
         private int recordCount;
 
@@ -61,7 +65,6 @@ namespace TPN1EfCore.Windows
             //CombosHelper.CargarComboFormColor(_serviceProvider, ref toolStripComboBoxColor);
             RecargarGrillDeTodosLosShoes();
         }
-
         private void RecargarGrillDeTodosLosShoes()
         {
             try
@@ -70,11 +73,11 @@ namespace TPN1EfCore.Windows
                 txtcantidad.Text = recordCount.ToString();
                 pageCount = FormHelper.CalcularPaginas(recordCount, pageSize);
                 // Obtener la lista paginada ordenada y filtrada por defecto (sin orden ni filtro)
-                lista = _servicio.GetListaPaginadaOrdenadaFiltrada(pageNum, pageSize, orden, brandFiltro, sportFiltro, genreFiltro, colourFiltro, maximo, minimo);
+                lista = _servicio.GetListaPaginadaOrdenadaFiltrada(pageNum, pageSize, orden, brandFiltro, sportFiltro, genreFiltro, colourFiltro, maximo, minimo, sizeSeleccionad, sizeMaximo);
                 txtCantidadRegistros.Text = pageCount.ToString();
                 CombosHelper.CargarCombosPaginas(pageCount, ref cboPaginas);
 
-               
+
                 MostrarDatosEnGrilla();
             }
             catch (Exception)
@@ -82,36 +85,30 @@ namespace TPN1EfCore.Windows
                 throw;
             }
         }
-
         private void tsbCerrar_Click(object sender, EventArgs e)
         {
             Close();
         }
-
         private void aZToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Ordenar de forma ascendente (A-Z)
             MostrarOrdenado(Orden.AZ);
         }
-
         private void zAToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Ordenar de forma descendente (Z-A)
             MostrarOrdenado(Orden.ZA);
         }
-
         private void menorPrecioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Ordenar por menor precio
             MostrarOrdenado(Orden.MenorPrecio);
         }
-
         private void mayorPrecioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Ordenar por mayor precio
             MostrarOrdenado(Orden.MayorPrecio);
         }
-
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
             // Ir a la siguiente página
@@ -120,7 +117,6 @@ namespace TPN1EfCore.Windows
             cboPaginas.SelectedIndex = pageNum;
             ActualizarListaPaginada();
         }
-
         private void btnAnterior_Click(object sender, EventArgs e)
         {
             // Ir a la página anterior
@@ -129,7 +125,6 @@ namespace TPN1EfCore.Windows
             cboPaginas.SelectedIndex = pageNum;
             ActualizarListaPaginada();
         }
-
         private void btnPrimero_Click(object sender, EventArgs e)
         {
             // Ir a la primera página
@@ -137,7 +132,6 @@ namespace TPN1EfCore.Windows
             cboPaginas.SelectedIndex = pageNum;
             ActualizarListaPaginada();
         }
-
         private void btnUltimo_Click(object sender, EventArgs e)
         {
             // Ir a la última página
@@ -145,27 +139,24 @@ namespace TPN1EfCore.Windows
             cboPaginas.SelectedIndex = pageNum;
             ActualizarListaPaginada();
         }
-
         private void cboPaginas_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Cambiar a la página seleccionada
             pageNum = cboPaginas.SelectedIndex;
             ActualizarListaPaginada();
         }
-
         private void ActualizarListaPaginada()
         {
             // Actualizar la lista paginada según la página actual y tamaño de página
             lista = _servicio?
                 .GetListaPaginadaOrdenadaFiltrada(pageNum, pageSize, orden,
-                brandFiltro, sportFiltro, genreFiltro, colourFiltro, maximo,minimo);
+                brandFiltro, sportFiltro, genreFiltro, colourFiltro, maximo, minimo, sizeSeleccionad, sizeMaximo);
             MostrarDatosEnGrilla();
         }
-
         private void MostrarOrdenado(Orden orden)
         {
             // Mostrar la lista ordenada según el criterio seleccionado
-            lista = _servicio?.GetListaPaginadaOrdenadaFiltrada(pageNum, pageSize, orden, brandFiltro, sportFiltro, genreFiltro, colourFiltro,maximo,minimo);
+            lista = _servicio?.GetListaPaginadaOrdenadaFiltrada(pageNum, pageSize, orden, brandFiltro, sportFiltro, genreFiltro, colourFiltro, maximo, minimo, sizeSeleccionad, sizeMaximo);
             MostrarDatosEnGrilla();
         }
         //TODO:Hacer método Genérico!!!
@@ -179,23 +170,30 @@ namespace TPN1EfCore.Windows
                 {
                     DataGridViewRow r = GridHelper.ConstruirFila(dgvDatos);
                     GridHelper.SetearFila(r, item);
+                    r.Cells[7].Value = "Detalle";
                     GridHelper.AgregarFila(r, dgvDatos);
                 }
             }
         }
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-            frmShoeAE frm = new frmShoeAE(_serviceProvider);
+            var SizeService = _serviceProvider.GetService<ISizeService>();
+            var ShoeSizeService = _serviceProvider.GetService<IShoeSizeService>();
+            listaSize = new List<Size>();
+            listaSize = SizeService?.GetSizes();
+            frmShoeAE frm = new frmShoeAE(_serviceProvider, SizeService, listaSize);
             DialogResult df = frm.ShowDialog(this);
             if (df == DialogResult.Cancel) { return; }
             try
             {
-                Shoe shoe = frm.GetShoe();
+                Shoe? shoe = frm.GetShoe();
+                listaSize = frm.GetSizesSeleccionados();
+                var stock = frm.GetStockSeleccionado();
                 if (!_servicio.Existe(shoe))
                 {
-                    //  _servicio.Guardar(shoe);    Arreglar lo de los Talles y el Stock
+                    _servicio.Guardar(shoe, stock, listaSize); // Guardar Shoe con Sizes y stock repetido
                     RecargarGrillDeTodosLosShoes();
-                    // Actualizar la lista después de agregar la planta
+                    // Actualizar la lista después de agregar la planta 
                 }
                 else
                 {
@@ -296,6 +294,8 @@ namespace TPN1EfCore.Windows
             filtro = null;
             maximo = null;
             minimo = null;
+            sizeSeleccionad = null;
+            sizeMaximo = null;
             RecargarGrillDeTodosLosShoes();
             toolStripSplitFiltro.BackColor = SystemColors.Control;
 
@@ -303,20 +303,36 @@ namespace TPN1EfCore.Windows
 
         private void tsbEditar_Click(object sender, EventArgs e)
         {
+            var SizeService = _serviceProvider.GetService<ISizeService>();
+            var listaSizeDeShoe = new List<Size>();
+            var listaSizeFiltrada = new List<Size>();
+            int stocked = 0;
             if (dgvDatos.SelectedRows.Count == 0) { return; }
             var r = dgvDatos.SelectedRows[0];
-            ShoeListDto shoeList = (ShoeListDto)r.Tag;
-            var shoe = _servicio.GetShoePorId(shoeList.shoeId);
-            frmShoeAE frm = new frmShoeAE(_serviceProvider)
+            ShoeListDto? shoeList = (ShoeListDto?)r.Tag;
+            var shoe = _servicio?.GetShoePorId(shoeList.shoeId);
+            listaSizeDeShoe = _servicio?.GetSizesPorShoes(shoe.ShoeId);
+            listaSizeFiltrada = SizeService?.GetSizes();
+            foreach (var item in listaSizeDeShoe)
+            {
+                listaSizeFiltrada?.Remove(item);
+            }
+            for (int i = 0; i < shoeList.Stock.Count; i++)
+            {
+                stocked = shoeList.Stock[i];
+            }
+            frmShoeAE frm = new frmShoeAE(_serviceProvider, SizeService, listaSizeFiltrada)
             { Text = "Editar shoe" };
             frm.SetShoe(shoe);
             DialogResult dr = frm.ShowDialog(this);
             try
             {
                 shoe = frm.GetShoe();
+                listaSize = frm.GetSizesSeleccionados();
+                var stock = frm.GetStockSeleccionado();
                 if (!_servicio.Existe(shoe))
                 {
-                   // _servicio.Guardar(shoe); Arreglar lo de los Talles y el Stock
+                    _servicio.Guardar(shoe, stock, listaSize);// Arreglar lo de los Talles y el Stock
                     ActualizarListaPaginada();
                 }
                 else
@@ -337,15 +353,68 @@ namespace TPN1EfCore.Windows
 
         private void toolStripSplitFiltro_Click(object sender, EventArgs e)
         {
-            frmFiltro frm = new frmFiltro(_serviceProvider);
-            frm.ShowDialog(this);
+            var sizeservice = _serviceProvider.GetService<ISizeService>();
+            frmFiltro frm = new frmFiltro(_serviceProvider, sizeservice);
+            DialogResult dr=frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel) { return; }
             filtro = frm.GetFiltro();
             brandFiltro = frm.GetFiltroBrand();
             sportFiltro = frm.GetFiltroSport();
             genreFiltro = frm.GetFiltroGenre();
             colourFiltro = frm.GetFiltroColor();
-            maximo = frm.GetMaximo();
-            minimo = frm.GetMinimo();
+            if (frm.GetMaximo()==0 && frm.GetMinimo()==0)
+            {
+                maximo = null;
+                minimo = null;
+            }
+            else
+            {
+                maximo=frm.GetMaximo();
+                minimo=frm.GetMinimo();
+            }
+            sizeSeleccionad = frm.GetSizeSeleccionado();
+            sizeMaximo = frm.GetSizeMaximo();
+            RecargarGrillDeTodosLosShoes();
+        }
+
+        private void dgvDatos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 7)
+            {
+                if (dgvDatos.SelectedRows.Count == 0) { return; }
+                var r = dgvDatos.SelectedRows[0];
+                ShoeListDto? shoeList = (ShoeListDto?)r.Tag;
+                frmSizesAndStock frm = new frmSizesAndStock(_servicio, shoeList);
+                DialogResult dr = frm.ShowDialog(this);
+            }
+        }
+
+        private void toolStripButtonAsignarShoe_Click(object sender, EventArgs e)
+        {
+            var SizeService = _serviceProvider.GetService<ISizeService>();
+            var listaSizeDeShoe = new List<Size>();
+            var listaSizeFiltrada = new List<Size>();
+            if (dgvDatos.SelectedRows.Count == 0) { return; }
+            var r = dgvDatos.SelectedRows[0];
+            ShoeListDto? shoeList = (ShoeListDto?)r.Tag;
+            listaSizeDeShoe = _servicio?.GetSizesPorShoes(shoeList.shoeId);
+            listaSizeFiltrada = SizeService?.GetSizes();
+            foreach (var item in listaSizeDeShoe)
+            {
+                listaSizeFiltrada?.Remove(item);
+            }
+            frmAsignarSizeAShoe frm= new frmAsignarSizeAShoe(SizeService, listaSizeFiltrada, shoeList);
+            DialogResult dr = frm.ShowDialog(this);
+            listaSize = frm.GetSizes();
+            var liststock = frm.GetStock();
+            Shoe? shoe = _servicio?.GetShoePorId(shoeList.shoeId);
+            for (int i = 0; i < listaSize.Count; i++)
+            {
+                var size = listaSize[i];
+                var stock = liststock[i];
+                _servicio?.AsignarSizealShoe(shoe, size, stock);
+            }
+            MessageBox.Show("Sizes relacionados exitosamente", "Mensaje", MessageBoxButtons.OK);
             RecargarGrillDeTodosLosShoes();
         }
         //Func<Shoe, bool>? brandfiltro = null;

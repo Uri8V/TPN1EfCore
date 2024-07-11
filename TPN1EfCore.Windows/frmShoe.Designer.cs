@@ -28,55 +28,257 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmShoe));
-            toolStrip1 = new ToolStrip();
+            txtcantidad = new TextBox();
+            label1 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            cboPaginas = new ComboBox();
+            txtCantidadRegistros = new TextBox();
+            btnPrimero = new Button();
+            btnAnterior = new Button();
+            btnSiguiente = new Button();
+            btnUltimo = new Button();
+            dgvDatos = new DataGridView();
+            colDetalles = new DataGridViewButtonColumn();
+            colDescripcion = new DataGridViewTextBoxColumn();
+            colPrecio = new DataGridViewTextBoxColumn();
+            colModelo = new DataGridViewTextBoxColumn();
+            colColor = new DataGridViewTextBoxColumn();
+            colGenre = new DataGridViewTextBoxColumn();
+            colSport = new DataGridViewTextBoxColumn();
+            colBrandName = new DataGridViewTextBoxColumn();
+            splitContainer1 = new SplitContainer();
             toolStripButtonSalir = new ToolStripButton();
             toolStripButtonAgregar = new ToolStripButton();
             toolStripButtonBorrar = new ToolStripButton();
             toolStripButtonEditar = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
+            toolStripSplitFiltro = new ToolStripButton();
             toolStripButtonRestaurar = new ToolStripButton();
             toolStripDropDownOrden = new ToolStripDropDownButton();
             aZToolStripMenuItem = new ToolStripMenuItem();
             zAToolStripMenuItem = new ToolStripMenuItem();
             menorPrecioToolStripMenuItem = new ToolStripMenuItem();
             mayorPrecioToolStripMenuItem = new ToolStripMenuItem();
-            splitContainer1 = new SplitContainer();
-            dgvDatos = new DataGridView();
-            colBrandName = new DataGridViewTextBoxColumn();
-            colSport = new DataGridViewTextBoxColumn();
-            colGenre = new DataGridViewTextBoxColumn();
-            colColor = new DataGridViewTextBoxColumn();
-            colModelo = new DataGridViewTextBoxColumn();
-            colPrecio = new DataGridViewTextBoxColumn();
-            colDescripcion = new DataGridViewTextBoxColumn();
-            btnUltimo = new Button();
-            btnSiguiente = new Button();
-            btnAnterior = new Button();
-            btnPrimero = new Button();
-            txtCantidadRegistros = new TextBox();
-            cboPaginas = new ComboBox();
-            label2 = new Label();
-            label3 = new Label();
-            label1 = new Label();
-            txtcantidad = new TextBox();
-            toolStripSplitFiltro = new ToolStripButton();
-            toolStrip1.SuspendLayout();
+            toolStripSeparator2 = new ToolStripSeparator();
+            toolStripButtonAsignarShoe = new ToolStripButton();
+            toolStrip1 = new ToolStrip();
+            ((System.ComponentModel.ISupportInitialize)dgvDatos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvDatos).BeginInit();
+            toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
-            // toolStrip1
+            // txtcantidad
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButtonSalir, toolStripButtonAgregar, toolStripButtonBorrar, toolStripButtonEditar, toolStripSeparator1, toolStripSplitFiltro, toolStripButtonRestaurar, toolStripDropDownOrden });
-            toolStrip1.Location = new Point(0, 0);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(800, 38);
-            toolStrip1.TabIndex = 1;
-            toolStrip1.Text = "toolStrip1";
+            txtcantidad.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            txtcantidad.Location = new Point(751, 32);
+            txtcantidad.Name = "txtcantidad";
+            txtcantidad.ReadOnly = true;
+            txtcantidad.Size = new Size(46, 23);
+            txtcantidad.TabIndex = 0;
+            txtcantidad.Text = "0";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(632, 35);
+            label1.Name = "label1";
+            label1.Size = new Size(108, 15);
+            label1.TabIndex = 1;
+            label1.Text = "Cantidad de Shoes:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(14, 35);
+            label3.Name = "label3";
+            label3.Size = new Size(33, 15);
+            label3.TabIndex = 5;
+            label3.Text = "Pág.:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(127, 35);
+            label2.Name = "label2";
+            label2.Size = new Size(23, 15);
+            label2.TabIndex = 4;
+            label2.Text = "de:";
+            // 
+            // cboPaginas
+            // 
+            cboPaginas.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboPaginas.FormattingEnabled = true;
+            cboPaginas.Location = new Point(53, 32);
+            cboPaginas.Name = "cboPaginas";
+            cboPaginas.Size = new Size(68, 23);
+            cboPaginas.TabIndex = 6;
+            cboPaginas.SelectedIndexChanged += cboPaginas_SelectedIndexChanged;
+            // 
+            // txtCantidadRegistros
+            // 
+            txtCantidadRegistros.Location = new Point(156, 32);
+            txtCantidadRegistros.Name = "txtCantidadRegistros";
+            txtCantidadRegistros.ReadOnly = true;
+            txtCantidadRegistros.Size = new Size(85, 23);
+            txtCantidadRegistros.TabIndex = 7;
+            // 
+            // btnPrimero
+            // 
+            btnPrimero.Location = new Point(257, 22);
+            btnPrimero.Name = "btnPrimero";
+            btnPrimero.Size = new Size(75, 41);
+            btnPrimero.TabIndex = 11;
+            btnPrimero.Text = "Primero";
+            btnPrimero.UseVisualStyleBackColor = true;
+            btnPrimero.Click += btnPrimero_Click;
+            // 
+            // btnAnterior
+            // 
+            btnAnterior.Location = new Point(349, 22);
+            btnAnterior.Name = "btnAnterior";
+            btnAnterior.Size = new Size(75, 41);
+            btnAnterior.TabIndex = 10;
+            btnAnterior.Text = "Anterior";
+            btnAnterior.UseVisualStyleBackColor = true;
+            btnAnterior.Click += btnAnterior_Click;
+            // 
+            // btnSiguiente
+            // 
+            btnSiguiente.Location = new Point(442, 22);
+            btnSiguiente.Name = "btnSiguiente";
+            btnSiguiente.Size = new Size(75, 41);
+            btnSiguiente.TabIndex = 9;
+            btnSiguiente.Text = "Siguiente";
+            btnSiguiente.UseVisualStyleBackColor = true;
+            btnSiguiente.Click += btnSiguiente_Click;
+            // 
+            // btnUltimo
+            // 
+            btnUltimo.Location = new Point(533, 25);
+            btnUltimo.Name = "btnUltimo";
+            btnUltimo.Size = new Size(75, 41);
+            btnUltimo.TabIndex = 8;
+            btnUltimo.Text = "Último";
+            btnUltimo.UseVisualStyleBackColor = true;
+            btnUltimo.Click += btnUltimo_Click;
+            // 
+            // dgvDatos
+            // 
+            dgvDatos.AccessibleRole = AccessibleRole.None;
+            dgvDatos.AllowUserToAddRows = false;
+            dgvDatos.AllowUserToDeleteRows = false;
+            dgvDatos.AllowUserToResizeColumns = false;
+            dgvDatos.AllowUserToResizeRows = false;
+            dgvDatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            dgvDatos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            dgvDatos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvDatos.Columns.AddRange(new DataGridViewColumn[] { colBrandName, colSport, colGenre, colColor, colModelo, colPrecio, colDescripcion, colDetalles });
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvDatos.DefaultCellStyle = dataGridViewCellStyle1;
+            dgvDatos.Dock = DockStyle.Fill;
+            dgvDatos.Location = new Point(0, 0);
+            dgvDatos.MultiSelect = false;
+            dgvDatos.Name = "dgvDatos";
+            dgvDatos.ReadOnly = true;
+            dgvDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvDatos.Size = new Size(963, 330);
+            dgvDatos.TabIndex = 0;
+            dgvDatos.CellContentClick += dgvDatos_CellContentClick;
+            // 
+            // colDetalles
+            // 
+            colDetalles.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colDetalles.HeaderText = "";
+            colDetalles.Name = "colDetalles";
+            colDetalles.ReadOnly = true;
+            // 
+            // colDescripcion
+            // 
+            colDescripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colDescripcion.HeaderText = "Descripción";
+            colDescripcion.Name = "colDescripcion";
+            colDescripcion.ReadOnly = true;
+            // 
+            // colPrecio
+            // 
+            colPrecio.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colPrecio.HeaderText = "Price";
+            colPrecio.Name = "colPrecio";
+            colPrecio.ReadOnly = true;
+            // 
+            // colModelo
+            // 
+            colModelo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colModelo.HeaderText = "Modelo";
+            colModelo.Name = "colModelo";
+            colModelo.ReadOnly = true;
+            // 
+            // colColor
+            // 
+            colColor.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colColor.HeaderText = "Color";
+            colColor.Name = "colColor";
+            colColor.ReadOnly = true;
+            // 
+            // colGenre
+            // 
+            colGenre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colGenre.HeaderText = "Genre";
+            colGenre.Name = "colGenre";
+            colGenre.ReadOnly = true;
+            // 
+            // colSport
+            // 
+            colSport.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colSport.HeaderText = "Sport";
+            colSport.Name = "colSport";
+            colSport.ReadOnly = true;
+            // 
+            // colBrandName
+            // 
+            colBrandName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colBrandName.HeaderText = "Brand";
+            colBrandName.Name = "colBrandName";
+            colBrandName.ReadOnly = true;
+            // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.Location = new Point(0, 38);
+            splitContainer1.Name = "splitContainer1";
+            splitContainer1.Orientation = Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(dgvDatos);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(btnUltimo);
+            splitContainer1.Panel2.Controls.Add(btnSiguiente);
+            splitContainer1.Panel2.Controls.Add(btnAnterior);
+            splitContainer1.Panel2.Controls.Add(btnPrimero);
+            splitContainer1.Panel2.Controls.Add(txtCantidadRegistros);
+            splitContainer1.Panel2.Controls.Add(cboPaginas);
+            splitContainer1.Panel2.Controls.Add(label2);
+            splitContainer1.Panel2.Controls.Add(label3);
+            splitContainer1.Panel2.Controls.Add(label1);
+            splitContainer1.Panel2.Controls.Add(txtcantidad);
+            splitContainer1.Size = new Size(963, 412);
+            splitContainer1.SplitterDistance = 330;
+            splitContainer1.TabIndex = 3;
             // 
             // toolStripButtonSalir
             // 
@@ -128,6 +330,17 @@
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new Size(6, 38);
             // 
+            // toolStripSplitFiltro
+            // 
+            toolStripSplitFiltro.Image = (Image)resources.GetObject("toolStripSplitFiltro.Image");
+            toolStripSplitFiltro.ImageScaling = ToolStripItemImageScaling.None;
+            toolStripSplitFiltro.ImageTransparentColor = Color.Magenta;
+            toolStripSplitFiltro.Name = "toolStripSplitFiltro";
+            toolStripSplitFiltro.Size = new Size(38, 35);
+            toolStripSplitFiltro.Text = "Filtro";
+            toolStripSplitFiltro.TextImageRelation = TextImageRelation.ImageAboveText;
+            toolStripSplitFiltro.Click += toolStripSplitFiltro_Click;
+            // 
             // toolStripButtonRestaurar
             // 
             toolStripButtonRestaurar.Image = (Image)resources.GetObject("toolStripButtonRestaurar.Image");
@@ -153,262 +366,94 @@
             // aZToolStripMenuItem
             // 
             aZToolStripMenuItem.Name = "aZToolStripMenuItem";
-            aZToolStripMenuItem.Size = new Size(145, 22);
+            aZToolStripMenuItem.Size = new Size(180, 22);
             aZToolStripMenuItem.Text = "AZ";
             aZToolStripMenuItem.Click += aZToolStripMenuItem_Click;
             // 
             // zAToolStripMenuItem
             // 
             zAToolStripMenuItem.Name = "zAToolStripMenuItem";
-            zAToolStripMenuItem.Size = new Size(145, 22);
+            zAToolStripMenuItem.Size = new Size(180, 22);
             zAToolStripMenuItem.Text = "ZA";
             zAToolStripMenuItem.Click += zAToolStripMenuItem_Click;
             // 
             // menorPrecioToolStripMenuItem
             // 
             menorPrecioToolStripMenuItem.Name = "menorPrecioToolStripMenuItem";
-            menorPrecioToolStripMenuItem.Size = new Size(145, 22);
+            menorPrecioToolStripMenuItem.Size = new Size(180, 22);
             menorPrecioToolStripMenuItem.Text = "Menor Precio";
             menorPrecioToolStripMenuItem.Click += menorPrecioToolStripMenuItem_Click;
             // 
             // mayorPrecioToolStripMenuItem
             // 
             mayorPrecioToolStripMenuItem.Name = "mayorPrecioToolStripMenuItem";
-            mayorPrecioToolStripMenuItem.Size = new Size(145, 22);
+            mayorPrecioToolStripMenuItem.Size = new Size(180, 22);
             mayorPrecioToolStripMenuItem.Text = "Mayor Precio";
             mayorPrecioToolStripMenuItem.Click += mayorPrecioToolStripMenuItem_Click;
             // 
-            // splitContainer1
+            // toolStripSeparator2
             // 
-            splitContainer1.Dock = DockStyle.Fill;
-            splitContainer1.Location = new Point(0, 38);
-            splitContainer1.Name = "splitContainer1";
-            splitContainer1.Orientation = Orientation.Horizontal;
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(6, 38);
             // 
-            // splitContainer1.Panel1
+            // toolStripButtonAsignarShoe
             // 
-            splitContainer1.Panel1.Controls.Add(dgvDatos);
+            toolStripButtonAsignarShoe.Image = (Image)resources.GetObject("toolStripButtonAsignarShoe.Image");
+            toolStripButtonAsignarShoe.ImageScaling = ToolStripItemImageScaling.None;
+            toolStripButtonAsignarShoe.ImageTransparentColor = Color.Magenta;
+            toolStripButtonAsignarShoe.Name = "toolStripButtonAsignarShoe";
+            toolStripButtonAsignarShoe.Size = new Size(115, 35);
+            toolStripButtonAsignarShoe.Text = "Asignar Size al Shoe";
+            toolStripButtonAsignarShoe.TextImageRelation = TextImageRelation.ImageAboveText;
+            toolStripButtonAsignarShoe.Click += toolStripButtonAsignarShoe_Click;
             // 
-            // splitContainer1.Panel2
+            // toolStrip1
             // 
-            splitContainer1.Panel2.Controls.Add(btnUltimo);
-            splitContainer1.Panel2.Controls.Add(btnSiguiente);
-            splitContainer1.Panel2.Controls.Add(btnAnterior);
-            splitContainer1.Panel2.Controls.Add(btnPrimero);
-            splitContainer1.Panel2.Controls.Add(txtCantidadRegistros);
-            splitContainer1.Panel2.Controls.Add(cboPaginas);
-            splitContainer1.Panel2.Controls.Add(label2);
-            splitContainer1.Panel2.Controls.Add(label3);
-            splitContainer1.Panel2.Controls.Add(label1);
-            splitContainer1.Panel2.Controls.Add(txtcantidad);
-            splitContainer1.Size = new Size(800, 412);
-            splitContainer1.SplitterDistance = 317;
-            splitContainer1.TabIndex = 3;
-            // 
-            // dgvDatos
-            // 
-            dgvDatos.AllowUserToAddRows = false;
-            dgvDatos.AllowUserToDeleteRows = false;
-            dgvDatos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDatos.Columns.AddRange(new DataGridViewColumn[] { colBrandName, colSport, colGenre, colColor, colModelo, colPrecio, colDescripcion });
-            dgvDatos.Dock = DockStyle.Fill;
-            dgvDatos.Location = new Point(0, 0);
-            dgvDatos.MultiSelect = false;
-            dgvDatos.Name = "dgvDatos";
-            dgvDatos.ReadOnly = true;
-            dgvDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvDatos.Size = new Size(800, 317);
-            dgvDatos.TabIndex = 0;
-            dgvDatos.CellContentClick += dgvDatosShoe_CellContentClick;
-            // 
-            // colBrandName
-            // 
-            colBrandName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colBrandName.HeaderText = "Brand";
-            colBrandName.Name = "colBrandName";
-            colBrandName.ReadOnly = true;
-            // 
-            // colSport
-            // 
-            colSport.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colSport.HeaderText = "Sport";
-            colSport.Name = "colSport";
-            colSport.ReadOnly = true;
-            // 
-            // colGenre
-            // 
-            colGenre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colGenre.HeaderText = "Genre";
-            colGenre.Name = "colGenre";
-            colGenre.ReadOnly = true;
-            // 
-            // colColor
-            // 
-            colColor.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colColor.HeaderText = "Color";
-            colColor.Name = "colColor";
-            colColor.ReadOnly = true;
-            // 
-            // colModelo
-            // 
-            colModelo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colModelo.HeaderText = "Modelo";
-            colModelo.Name = "colModelo";
-            colModelo.ReadOnly = true;
-            // 
-            // colPrecio
-            // 
-            colPrecio.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colPrecio.HeaderText = "Price";
-            colPrecio.Name = "colPrecio";
-            colPrecio.ReadOnly = true;
-            // 
-            // colDescripcion
-            // 
-            colDescripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colDescripcion.HeaderText = "Descripción";
-            colDescripcion.Name = "colDescripcion";
-            colDescripcion.ReadOnly = true;
-            // 
-            // btnUltimo
-            // 
-            btnUltimo.Location = new Point(533, 25);
-            btnUltimo.Name = "btnUltimo";
-            btnUltimo.Size = new Size(75, 41);
-            btnUltimo.TabIndex = 8;
-            btnUltimo.Text = "Último";
-            btnUltimo.UseVisualStyleBackColor = true;
-            btnUltimo.Click += btnUltimo_Click;
-            // 
-            // btnSiguiente
-            // 
-            btnSiguiente.Location = new Point(442, 22);
-            btnSiguiente.Name = "btnSiguiente";
-            btnSiguiente.Size = new Size(75, 41);
-            btnSiguiente.TabIndex = 9;
-            btnSiguiente.Text = "Siguiente";
-            btnSiguiente.UseVisualStyleBackColor = true;
-            btnSiguiente.Click += btnSiguiente_Click;
-            // 
-            // btnAnterior
-            // 
-            btnAnterior.Location = new Point(349, 22);
-            btnAnterior.Name = "btnAnterior";
-            btnAnterior.Size = new Size(75, 41);
-            btnAnterior.TabIndex = 10;
-            btnAnterior.Text = "Anterior";
-            btnAnterior.UseVisualStyleBackColor = true;
-            btnAnterior.Click += btnAnterior_Click;
-            // 
-            // btnPrimero
-            // 
-            btnPrimero.Location = new Point(257, 22);
-            btnPrimero.Name = "btnPrimero";
-            btnPrimero.Size = new Size(75, 41);
-            btnPrimero.TabIndex = 11;
-            btnPrimero.Text = "Primero";
-            btnPrimero.UseVisualStyleBackColor = true;
-            btnPrimero.Click += btnPrimero_Click;
-            // 
-            // txtCantidadRegistros
-            // 
-            txtCantidadRegistros.Location = new Point(156, 32);
-            txtCantidadRegistros.Name = "txtCantidadRegistros";
-            txtCantidadRegistros.ReadOnly = true;
-            txtCantidadRegistros.Size = new Size(85, 23);
-            txtCantidadRegistros.TabIndex = 7;
-            // 
-            // cboPaginas
-            // 
-            cboPaginas.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboPaginas.FormattingEnabled = true;
-            cboPaginas.Location = new Point(53, 32);
-            cboPaginas.Name = "cboPaginas";
-            cboPaginas.Size = new Size(68, 23);
-            cboPaginas.TabIndex = 6;
-            cboPaginas.SelectedIndexChanged += cboPaginas_SelectedIndexChanged;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(127, 35);
-            label2.Name = "label2";
-            label2.Size = new Size(23, 15);
-            label2.TabIndex = 4;
-            label2.Text = "de:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(14, 35);
-            label3.Name = "label3";
-            label3.Size = new Size(33, 15);
-            label3.TabIndex = 5;
-            label3.Text = "Pág.:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(632, 35);
-            label1.Name = "label1";
-            label1.Size = new Size(108, 15);
-            label1.TabIndex = 1;
-            label1.Text = "Cantidad de Shoes:";
-            // 
-            // txtcantidad
-            // 
-            txtcantidad.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            txtcantidad.Location = new Point(751, 32);
-            txtcantidad.Name = "txtcantidad";
-            txtcantidad.ReadOnly = true;
-            txtcantidad.Size = new Size(46, 23);
-            txtcantidad.TabIndex = 0;
-            txtcantidad.Text = "0";
-            // 
-            // toolStripSplitFiltro
-            // 
-            toolStripSplitFiltro.Image = (Image)resources.GetObject("toolStripSplitFiltro.Image");
-            toolStripSplitFiltro.ImageScaling = ToolStripItemImageScaling.None;
-            toolStripSplitFiltro.ImageTransparentColor = Color.Magenta;
-            toolStripSplitFiltro.Name = "toolStripSplitFiltro";
-            toolStripSplitFiltro.Size = new Size(38, 35);
-            toolStripSplitFiltro.Text = "Filtro";
-            toolStripSplitFiltro.TextImageRelation = TextImageRelation.ImageAboveText;
-            toolStripSplitFiltro.Click += toolStripSplitFiltro_Click;
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButtonSalir, toolStripButtonAgregar, toolStripButtonBorrar, toolStripButtonEditar, toolStripSeparator1, toolStripSplitFiltro, toolStripButtonRestaurar, toolStripDropDownOrden, toolStripSeparator2, toolStripButtonAsignarShoe });
+            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(963, 38);
+            toolStrip1.TabIndex = 1;
+            toolStrip1.Text = "toolStrip1";
             // 
             // frmShoe
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(963, 450);
             ControlBox = false;
             Controls.Add(splitContainer1);
             Controls.Add(toolStrip1);
+            MaximumSize = new Size(979, 489);
+            MinimumSize = new Size(979, 489);
             Name = "frmShoe";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmShoe";
             Load += frmShoe_Load;
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvDatos).EndInit();
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvDatos).EndInit();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private ToolStrip toolStrip1;
-        private ToolStripButton toolStripButtonSalir;
-        private ToolStripButton toolStripButtonAgregar;
-        private ToolStripButton toolStripButtonBorrar;
-        private ToolStripButton toolStripButtonEditar;
-        private ToolStripSeparator toolStripSeparator1;
-        private SplitContainer splitContainer1;
+        private TextBox txtcantidad;
+        private Label label1;
+        private Label label3;
+        private Label label2;
+        private ComboBox cboPaginas;
+        private TextBox txtCantidadRegistros;
+        private Button btnPrimero;
+        private Button btnAnterior;
+        private Button btnSiguiente;
+        private Button btnUltimo;
         private DataGridView dgvDatos;
         private DataGridViewTextBoxColumn colBrandName;
         private DataGridViewTextBoxColumn colSport;
@@ -417,22 +462,22 @@
         private DataGridViewTextBoxColumn colModelo;
         private DataGridViewTextBoxColumn colPrecio;
         private DataGridViewTextBoxColumn colDescripcion;
-        private Label label1;
-        private TextBox txtcantidad;
+        private DataGridViewButtonColumn colDetalles;
+        private SplitContainer splitContainer1;
+        private ToolStripButton toolStripButtonSalir;
+        private ToolStripButton toolStripButtonAgregar;
+        private ToolStripButton toolStripButtonBorrar;
+        private ToolStripButton toolStripButtonEditar;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripButton toolStripSplitFiltro;
         private ToolStripButton toolStripButtonRestaurar;
         private ToolStripDropDownButton toolStripDropDownOrden;
         private ToolStripMenuItem aZToolStripMenuItem;
         private ToolStripMenuItem zAToolStripMenuItem;
         private ToolStripMenuItem menorPrecioToolStripMenuItem;
         private ToolStripMenuItem mayorPrecioToolStripMenuItem;
-        private TextBox txtCantidadRegistros;
-        private ComboBox cboPaginas;
-        private Label label2;
-        private Label label3;
-        private Button btnUltimo;
-        private Button btnSiguiente;
-        private Button btnAnterior;
-        private Button btnPrimero;
-        private ToolStripButton toolStripSplitFiltro;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripButton toolStripButtonAsignarShoe;
+        private ToolStrip toolStrip1;
     }
 }

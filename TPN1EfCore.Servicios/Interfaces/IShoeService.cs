@@ -12,7 +12,7 @@ namespace TPN1EfCore.Servicios.Interfaces
     public interface IShoeService
     {
         void Borrar(Shoe Shoe);
-        void Guardar(Shoe Shoe, int stock, List<Size>? sizes =null);
+        void Guardar(Shoe Shoe, List<int> stock, List<Size>? sizes =null);
         bool Existe(Shoe Shoe);
         int GetCantidad(Func<Shoe, bool>? filtro);
         List<ShoeListDto> GetShoes();
@@ -20,12 +20,12 @@ namespace TPN1EfCore.Servicios.Interfaces
         public List<ShoeListDto> GetListaPaginadaOrdenadaFiltrada(int page,
       int pageSize, Orden? orden = null, Brand? brandFiltro = null,
       Sport? sportFiltro = null, Genre? genreFiltro = null, Colour? colourFiltro = null,
-      decimal? maximo = null, decimal? minimo = null);
+      decimal? maximo = null, decimal? minimo = null, Size? sizeseleccionado = null, Size? sizeMaximo = null);
         public List<ShoeListDto> GetListaPorPropiedadDeseada(Brand? brandFiltro = null,
 Sport? sportFiltro = null, Genre? genreFiltro = null, Colour? colourFiltro = null);
         List<ShoeListDto>? GetListaDeShoeSinSize();
         void AsignarSizealShoe(Shoe shoeSinSize, Size? sizeSeleccionado, int Stock );
-        void Editar(Shoe shoe, int? value=null);
+        void Editar(Shoe shoe, int stock, int? value = null);
         IEnumerable<IGrouping<int, Shoe>> GetShoesAgrupadasPorBrand();
         IEnumerable<IGrouping<int, Shoe>> GetShoesAgrupadasPorSport();
         IEnumerable<IGrouping<int, Shoe>> GetShoesAgrupadasPorGenre();
