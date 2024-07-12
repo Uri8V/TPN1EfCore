@@ -94,8 +94,8 @@ namespace TPN1EfCore.Windows
         {
             // Actualizar la lista paginada según la página actual y tamaño de página
             shoeListDtos = _shoeService
-                .GetListaPaginadaOrdenadaFiltrada(pageNum, pageSize, null,brandFiltro
-                , null,null,null);
+                .GetListaPaginadaOrdenadaFiltrada(pageNum, pageSize, null, brandFiltro
+                , null, null, null);
             MostrarDatosEnGRilla();
         }
 
@@ -103,9 +103,14 @@ namespace TPN1EfCore.Windows
         {
             pageCount = _pageCount;
             pageNum = _pageNum;
-            pageSize= _pageSize;
+            pageSize = _pageSize;
             recordCount = _recordCount;
-            brandFiltro= brand;
+            brandFiltro = brand;
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
         }
     }
 }

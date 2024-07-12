@@ -54,7 +54,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButtonSalir, toolStripButtonAgregar, toolStripButtonBorrar, toolStripButtonEditar, toolStripSeparator1, toolStripButtonConsulta });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(448, 38);
+            toolStrip1.Size = new Size(448, 67);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -65,40 +65,40 @@
             toolStripButtonSalir.ImageScaling = ToolStripItemImageScaling.None;
             toolStripButtonSalir.ImageTransparentColor = Color.Magenta;
             toolStripButtonSalir.Name = "toolStripButtonSalir";
-            toolStripButtonSalir.Size = new Size(41, 35);
+            toolStripButtonSalir.Size = new Size(49, 64);
             toolStripButtonSalir.Text = "SALIR";
             toolStripButtonSalir.TextImageRelation = TextImageRelation.ImageAboveText;
             toolStripButtonSalir.Click += toolStripButtonSalir_Click;
             // 
             // toolStripButtonAgregar
             // 
-            toolStripButtonAgregar.Image = (Image)resources.GetObject("toolStripButtonAgregar.Image");
+            toolStripButtonAgregar.Image = Properties.Resources.New_45px;
             toolStripButtonAgregar.ImageScaling = ToolStripItemImageScaling.None;
             toolStripButtonAgregar.ImageTransparentColor = Color.Magenta;
             toolStripButtonAgregar.Name = "toolStripButtonAgregar";
-            toolStripButtonAgregar.Size = new Size(53, 35);
+            toolStripButtonAgregar.Size = new Size(53, 64);
             toolStripButtonAgregar.Text = "Agregar";
             toolStripButtonAgregar.TextImageRelation = TextImageRelation.ImageAboveText;
             toolStripButtonAgregar.Click += toolStripButtonAgregar_Click;
             // 
             // toolStripButtonBorrar
             // 
-            toolStripButtonBorrar.Image = (Image)resources.GetObject("toolStripButtonBorrar.Image");
+            toolStripButtonBorrar.Image = Properties.Resources.delete_document_45px;
             toolStripButtonBorrar.ImageScaling = ToolStripItemImageScaling.None;
             toolStripButtonBorrar.ImageTransparentColor = Color.Magenta;
             toolStripButtonBorrar.Name = "toolStripButtonBorrar";
-            toolStripButtonBorrar.Size = new Size(43, 35);
+            toolStripButtonBorrar.Size = new Size(49, 64);
             toolStripButtonBorrar.Text = "Borrar";
             toolStripButtonBorrar.TextImageRelation = TextImageRelation.ImageAboveText;
             toolStripButtonBorrar.Click += toolStripButtonBorrar_Click;
             // 
             // toolStripButtonEditar
             // 
-            toolStripButtonEditar.Image = (Image)resources.GetObject("toolStripButtonEditar.Image");
+            toolStripButtonEditar.Image = Properties.Resources.edit_property_45px;
             toolStripButtonEditar.ImageScaling = ToolStripItemImageScaling.None;
             toolStripButtonEditar.ImageTransparentColor = Color.Magenta;
             toolStripButtonEditar.Name = "toolStripButtonEditar";
-            toolStripButtonEditar.Size = new Size(41, 35);
+            toolStripButtonEditar.Size = new Size(49, 64);
             toolStripButtonEditar.Text = "Editar";
             toolStripButtonEditar.TextImageRelation = TextImageRelation.ImageAboveText;
             toolStripButtonEditar.Click += toolStripButtonEditar_Click;
@@ -106,15 +106,15 @@
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(6, 38);
+            toolStripSeparator1.Size = new Size(6, 67);
             // 
             // toolStripButtonConsulta
             // 
-            toolStripButtonConsulta.Image = (Image)resources.GetObject("toolStripButtonConsulta.Image");
+            toolStripButtonConsulta.Image = Properties.Resources.Consultar_45px;
             toolStripButtonConsulta.ImageScaling = ToolStripItemImageScaling.None;
             toolStripButtonConsulta.ImageTransparentColor = Color.Magenta;
             toolStripButtonConsulta.Name = "toolStripButtonConsulta";
-            toolStripButtonConsulta.Size = new Size(58, 35);
+            toolStripButtonConsulta.Size = new Size(58, 64);
             toolStripButtonConsulta.Text = "Consulta";
             toolStripButtonConsulta.TextImageRelation = TextImageRelation.ImageAboveText;
             toolStripButtonConsulta.Click += toolStripButtonConsulta_Click;
@@ -122,7 +122,7 @@
             // splitContainer1
             // 
             splitContainer1.Dock = DockStyle.Fill;
-            splitContainer1.Location = new Point(0, 38);
+            splitContainer1.Location = new Point(0, 67);
             splitContainer1.Name = "splitContainer1";
             splitContainer1.Orientation = Orientation.Horizontal;
             // 
@@ -134,8 +134,8 @@
             // 
             splitContainer1.Panel2.Controls.Add(label1);
             splitContainer1.Panel2.Controls.Add(txtcantidad);
-            splitContainer1.Size = new Size(448, 289);
-            splitContainer1.SplitterDistance = 223;
+            splitContainer1.Size = new Size(448, 260);
+            splitContainer1.SplitterDistance = 200;
             splitContainer1.TabIndex = 1;
             // 
             // dgvDatosBrand
@@ -150,7 +150,7 @@
             dgvDatosBrand.Name = "dgvDatosBrand";
             dgvDatosBrand.ReadOnly = true;
             dgvDatosBrand.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvDatosBrand.Size = new Size(448, 223);
+            dgvDatosBrand.Size = new Size(448, 200);
             dgvDatosBrand.TabIndex = 0;
             // 
             // colBrandName
@@ -187,6 +187,8 @@
             ControlBox = false;
             Controls.Add(splitContainer1);
             Controls.Add(toolStrip1);
+            MaximumSize = new Size(464, 366);
+            MinimumSize = new Size(464, 366);
             Name = "frmBrand";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmBrand";

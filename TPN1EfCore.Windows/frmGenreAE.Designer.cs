@@ -39,7 +39,7 @@
             // 
             // txtGenre
             // 
-            txtGenre.Location = new Point(171, 41);
+            txtGenre.Location = new Point(154, 30);
             txtGenre.Name = "txtGenre";
             txtGenre.Size = new Size(141, 23);
             txtGenre.TabIndex = 6;
@@ -47,7 +47,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(36, 44);
+            label1.Location = new Point(19, 33);
             label1.Name = "label1";
             label1.Size = new Size(130, 15);
             label1.TabIndex = 5;
@@ -55,23 +55,31 @@
             // 
             // btnConfirmar
             // 
-            btnConfirmar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnConfirmar.Location = new Point(36, 105);
+            btnConfirmar.Anchor = AnchorStyles.None;
+            btnConfirmar.Image = Properties.Resources.ok_45px;
+            btnConfirmar.Location = new Point(19, 82);
+            btnConfirmar.MaximumSize = new Size(94, 79);
+            btnConfirmar.MinimumSize = new Size(94, 79);
             btnConfirmar.Name = "btnConfirmar";
-            btnConfirmar.Size = new Size(86, 41);
+            btnConfirmar.Size = new Size(94, 79);
             btnConfirmar.TabIndex = 3;
             btnConfirmar.Text = "CONFIRMAR";
+            btnConfirmar.TextImageRelation = TextImageRelation.ImageAboveText;
             btnConfirmar.UseVisualStyleBackColor = true;
             btnConfirmar.Click += btnConfirmar_Click;
             // 
             // brnSalir
             // 
-            brnSalir.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            brnSalir.Location = new Point(255, 105);
+            brnSalir.Anchor = AnchorStyles.None;
+            brnSalir.Image = Properties.Resources.cancel_45px;
+            brnSalir.Location = new Point(201, 82);
+            brnSalir.MaximumSize = new Size(94, 79);
+            brnSalir.MinimumSize = new Size(94, 79);
             brnSalir.Name = "brnSalir";
-            brnSalir.Size = new Size(69, 41);
+            brnSalir.Size = new Size(94, 79);
             brnSalir.TabIndex = 4;
             brnSalir.Text = "SALIR";
+            brnSalir.TextImageRelation = TextImageRelation.ImageAboveText;
             brnSalir.UseVisualStyleBackColor = true;
             brnSalir.Click += brnSalir_Click;
             // 
@@ -83,14 +91,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(363, 173);
+            ClientSize = new Size(319, 173);
             ControlBox = false;
             Controls.Add(txtGenre);
             Controls.Add(label1);
             Controls.Add(btnConfirmar);
             Controls.Add(brnSalir);
-            MaximumSize = new Size(379, 212);
-            MinimumSize = new Size(379, 212);
+            MaximumSize = new Size(335, 212);
+            MinimumSize = new Size(335, 212);
             Name = "frmGenreAE";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmGenreAE";

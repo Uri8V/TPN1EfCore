@@ -39,7 +39,7 @@
             // 
             // txtSport
             // 
-            txtSport.Location = new Point(160, 21);
+            txtSport.Location = new Point(154, 19);
             txtSport.Name = "txtSport";
             txtSport.Size = new Size(141, 23);
             txtSport.TabIndex = 6;
@@ -47,7 +47,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(25, 24);
+            label1.Location = new Point(19, 22);
             label1.Name = "label1";
             label1.Size = new Size(127, 15);
             label1.TabIndex = 5;
@@ -55,23 +55,31 @@
             // 
             // btnConfirmar
             // 
-            btnConfirmar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnConfirmar.Location = new Point(25, 69);
+            btnConfirmar.Anchor = AnchorStyles.None;
+            btnConfirmar.Image = Properties.Resources.ok_45px;
+            btnConfirmar.Location = new Point(19, 55);
+            btnConfirmar.MaximumSize = new Size(94, 79);
+            btnConfirmar.MinimumSize = new Size(94, 79);
             btnConfirmar.Name = "btnConfirmar";
-            btnConfirmar.Size = new Size(86, 41);
+            btnConfirmar.Size = new Size(94, 79);
             btnConfirmar.TabIndex = 3;
             btnConfirmar.Text = "CONFIRMAR";
+            btnConfirmar.TextImageRelation = TextImageRelation.ImageAboveText;
             btnConfirmar.UseVisualStyleBackColor = true;
             btnConfirmar.Click += btnConfirmar_Click;
             // 
             // brnSalir
             // 
-            brnSalir.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            brnSalir.Location = new Point(232, 69);
+            brnSalir.Anchor = AnchorStyles.None;
+            brnSalir.Image = Properties.Resources.cancel_45px;
+            brnSalir.Location = new Point(201, 55);
+            brnSalir.MaximumSize = new Size(94, 79);
+            brnSalir.MinimumSize = new Size(94, 79);
             brnSalir.Name = "brnSalir";
-            brnSalir.Size = new Size(69, 41);
+            brnSalir.Size = new Size(94, 79);
             brnSalir.TabIndex = 4;
             brnSalir.Text = "SALIR";
+            brnSalir.TextImageRelation = TextImageRelation.ImageAboveText;
             brnSalir.UseVisualStyleBackColor = true;
             brnSalir.Click += brnSalir_Click;
             // 
@@ -83,14 +91,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(349, 122);
+            ClientSize = new Size(307, 146);
             ControlBox = false;
             Controls.Add(txtSport);
             Controls.Add(label1);
             Controls.Add(btnConfirmar);
             Controls.Add(brnSalir);
-            MaximumSize = new Size(365, 161);
-            MinimumSize = new Size(365, 161);
+            MaximumSize = new Size(323, 185);
+            MinimumSize = new Size(323, 185);
             Name = "frmSportAE";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmSportAE";

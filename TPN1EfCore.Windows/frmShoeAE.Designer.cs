@@ -91,7 +91,7 @@
             // 
             cbColor.DropDownStyle = ComboBoxStyle.DropDownList;
             cbColor.FormattingEnabled = true;
-            cbColor.Location = new Point(145, 154);
+            cbColor.Location = new Point(145, 178);
             cbColor.MaximumSize = new Size(205, 0);
             cbColor.MinimumSize = new Size(205, 0);
             cbColor.Name = "cbColor";
@@ -102,7 +102,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(16, 157);
+            label2.Location = new Point(16, 181);
             label2.Name = "label2";
             label2.Size = new Size(115, 15);
             label2.TabIndex = 2;
@@ -112,7 +112,7 @@
             // 
             cbGenre.DropDownStyle = ComboBoxStyle.DropDownList;
             cbGenre.FormattingEnabled = true;
-            cbGenre.Location = new Point(145, 107);
+            cbGenre.Location = new Point(145, 120);
             cbGenre.MaximumSize = new Size(205, 0);
             cbGenre.MinimumSize = new Size(205, 0);
             cbGenre.Name = "cbGenre";
@@ -123,7 +123,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(16, 110);
+            label3.Location = new Point(16, 123);
             label3.Name = "label3";
             label3.Size = new Size(117, 15);
             label3.TabIndex = 4;
@@ -133,7 +133,7 @@
             // 
             cbSport.DropDownStyle = ComboBoxStyle.DropDownList;
             cbSport.FormattingEnabled = true;
-            cbSport.Location = new Point(145, 61);
+            cbSport.Location = new Point(145, 64);
             cbSport.MaximumSize = new Size(205, 0);
             cbSport.MinimumSize = new Size(205, 0);
             cbSport.Name = "cbSport";
@@ -144,7 +144,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(16, 64);
+            label4.Location = new Point(16, 67);
             label4.Name = "label4";
             label4.Size = new Size(114, 15);
             label4.TabIndex = 6;
@@ -210,69 +210,81 @@
             // 
             // btnConfirmar
             // 
+            btnConfirmar.Image = Properties.Resources.ok_45px;
             btnConfirmar.Location = new Point(127, 240);
-            btnConfirmar.MaximumSize = new Size(96, 54);
-            btnConfirmar.MinimumSize = new Size(96, 54);
+            btnConfirmar.MaximumSize = new Size(94, 79);
+            btnConfirmar.MinimumSize = new Size(94, 79);
             btnConfirmar.Name = "btnConfirmar";
-            btnConfirmar.Size = new Size(96, 54);
+            btnConfirmar.Size = new Size(94, 79);
             btnConfirmar.TabIndex = 14;
             btnConfirmar.Text = "CONFIRMAR";
+            btnConfirmar.TextImageRelation = TextImageRelation.ImageAboveText;
             btnConfirmar.UseVisualStyleBackColor = true;
             btnConfirmar.Click += btnConfirmar_Click;
             // 
             // btnCancelar
             // 
+            btnCancelar.Image = Properties.Resources.cancel_45px;
             btnCancelar.Location = new Point(520, 240);
-            btnCancelar.MaximumSize = new Size(96, 54);
-            btnCancelar.MinimumSize = new Size(96, 54);
+            btnCancelar.MaximumSize = new Size(94, 79);
+            btnCancelar.MinimumSize = new Size(94, 79);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(96, 54);
+            btnCancelar.Size = new Size(94, 79);
             btnCancelar.TabIndex = 14;
             btnCancelar.Text = "CANCELAR";
+            btnCancelar.TextImageRelation = TextImageRelation.ImageAboveText;
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
             // 
             // btnAgregarBrand
             // 
+            btnAgregarBrand.Image = Properties.Resources.ok_45px;
             btnAgregarBrand.Location = new Point(373, 3);
-            btnAgregarBrand.MaximumSize = new Size(96, 54);
+            btnAgregarBrand.MaximumSize = new Size(46, 50);
+            btnAgregarBrand.MinimumSize = new Size(46, 50);
             btnAgregarBrand.Name = "btnAgregarBrand";
-            btnAgregarBrand.Size = new Size(46, 39);
+            btnAgregarBrand.Size = new Size(46, 50);
             btnAgregarBrand.TabIndex = 14;
-            btnAgregarBrand.Text = "Agregar Brand";
+            btnAgregarBrand.TextImageRelation = TextImageRelation.ImageAboveText;
             btnAgregarBrand.UseVisualStyleBackColor = true;
             btnAgregarBrand.Click += btnAgregarBrand_Click;
             // 
             // btnAgregarSport
             // 
-            btnAgregarSport.Location = new Point(373, 52);
-            btnAgregarSport.MaximumSize = new Size(96, 54);
+            btnAgregarSport.Image = Properties.Resources.ok_45px;
+            btnAgregarSport.Location = new Point(373, 59);
+            btnAgregarSport.MaximumSize = new Size(46, 50);
+            btnAgregarSport.MinimumSize = new Size(46, 50);
             btnAgregarSport.Name = "btnAgregarSport";
-            btnAgregarSport.Size = new Size(46, 39);
+            btnAgregarSport.Size = new Size(46, 50);
             btnAgregarSport.TabIndex = 14;
-            btnAgregarSport.Text = "Agregar Sport";
+            btnAgregarSport.TextImageRelation = TextImageRelation.ImageAboveText;
             btnAgregarSport.UseVisualStyleBackColor = true;
             btnAgregarSport.Click += btnAgregarSport_Click;
             // 
             // btnAgregarGenre
             // 
-            btnAgregarGenre.Location = new Point(373, 98);
-            btnAgregarGenre.MaximumSize = new Size(96, 54);
+            btnAgregarGenre.Image = Properties.Resources.ok_45px;
+            btnAgregarGenre.Location = new Point(373, 123);
+            btnAgregarGenre.MaximumSize = new Size(46, 50);
+            btnAgregarGenre.MinimumSize = new Size(46, 50);
             btnAgregarGenre.Name = "btnAgregarGenre";
-            btnAgregarGenre.Size = new Size(46, 39);
+            btnAgregarGenre.Size = new Size(46, 50);
             btnAgregarGenre.TabIndex = 14;
-            btnAgregarGenre.Text = "Agregar Genre";
+            btnAgregarGenre.TextImageRelation = TextImageRelation.ImageAboveText;
             btnAgregarGenre.UseVisualStyleBackColor = true;
             btnAgregarGenre.Click += btnAgregarGenre_Click;
             // 
             // btnAgregarColor
             // 
-            btnAgregarColor.Location = new Point(373, 145);
-            btnAgregarColor.MaximumSize = new Size(96, 54);
+            btnAgregarColor.Image = Properties.Resources.ok_45px;
+            btnAgregarColor.Location = new Point(373, 181);
+            btnAgregarColor.MaximumSize = new Size(46, 50);
+            btnAgregarColor.MinimumSize = new Size(46, 50);
             btnAgregarColor.Name = "btnAgregarColor";
-            btnAgregarColor.Size = new Size(46, 39);
+            btnAgregarColor.Size = new Size(46, 50);
             btnAgregarColor.TabIndex = 14;
-            btnAgregarColor.Text = "Agregar Color";
+            btnAgregarColor.TextImageRelation = TextImageRelation.ImageAboveText;
             btnAgregarColor.UseVisualStyleBackColor = true;
             btnAgregarColor.Click += btnAgregarColor_Click;
             // 
@@ -291,7 +303,7 @@
             // 
             lblSportNuevo.AutoSize = true;
             lblSportNuevo.Enabled = false;
-            lblSportNuevo.Location = new Point(157, 87);
+            lblSportNuevo.Location = new Point(157, 90);
             lblSportNuevo.Name = "lblSportNuevo";
             lblSportNuevo.Size = new Size(148, 15);
             lblSportNuevo.TabIndex = 0;
@@ -302,7 +314,7 @@
             // 
             lblGenreNuevo.AutoSize = true;
             lblGenreNuevo.Enabled = false;
-            lblGenreNuevo.Location = new Point(157, 133);
+            lblGenreNuevo.Location = new Point(157, 146);
             lblGenreNuevo.Name = "lblGenreNuevo";
             lblGenreNuevo.Size = new Size(152, 15);
             lblGenreNuevo.TabIndex = 0;
@@ -313,7 +325,7 @@
             // 
             lblColorNuevo.AutoSize = true;
             lblColorNuevo.Enabled = false;
-            lblColorNuevo.Location = new Point(157, 180);
+            lblColorNuevo.Location = new Point(157, 204);
             lblColorNuevo.Name = "lblColorNuevo";
             lblColorNuevo.Size = new Size(150, 15);
             lblColorNuevo.TabIndex = 0;
@@ -392,7 +404,8 @@
             Controls.Add(lblSportNuevo);
             Controls.Add(lblBrandNueva);
             Controls.Add(label1);
-            MinimumSize = new Size(796, 347);
+            MaximumSize = new Size(970, 370);
+            MinimumSize = new Size(970, 370);
             Name = "frmShoeAE";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmShoeAE";

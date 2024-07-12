@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
             btnSalir = new Button();
             btnBrand = new Button();
             btnSport = new Button();
@@ -39,10 +40,13 @@
             // 
             // btnSalir
             // 
-            btnSalir.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnSalir.Location = new Point(429, 236);
+            btnSalir.Anchor = AnchorStyles.None;
+            btnSalir.Image = (Image)resources.GetObject("btnSalir.Image");
+            btnSalir.Location = new Point(275, 187);
+            btnSalir.MaximumSize = new Size(63, 56);
+            btnSalir.MinimumSize = new Size(63, 56);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(54, 23);
+            btnSalir.Size = new Size(63, 56);
             btnSalir.TabIndex = 0;
             btnSalir.Text = "SALIR";
             btnSalir.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -51,10 +55,13 @@
             // 
             // btnBrand
             // 
-            btnBrand.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnBrand.Location = new Point(48, 48);
+            btnBrand.Anchor = AnchorStyles.None;
+            btnBrand.Image = (Image)resources.GetObject("btnBrand.Image");
+            btnBrand.Location = new Point(11, 18);
+            btnBrand.MaximumSize = new Size(88, 73);
+            btnBrand.MinimumSize = new Size(88, 73);
             btnBrand.Name = "btnBrand";
-            btnBrand.Size = new Size(88, 51);
+            btnBrand.Size = new Size(88, 73);
             btnBrand.TabIndex = 0;
             btnBrand.Text = "BRANDS";
             btnBrand.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -63,10 +70,13 @@
             // 
             // btnSport
             // 
-            btnSport.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnSport.Location = new Point(172, 48);
+            btnSport.Anchor = AnchorStyles.None;
+            btnSport.Image = (Image)resources.GetObject("btnSport.Image");
+            btnSport.Location = new Point(135, 18);
+            btnSport.MaximumSize = new Size(88, 73);
+            btnSport.MinimumSize = new Size(88, 73);
             btnSport.Name = "btnSport";
-            btnSport.Size = new Size(88, 51);
+            btnSport.Size = new Size(88, 73);
             btnSport.TabIndex = 0;
             btnSport.Text = "SPORTS";
             btnSport.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -75,10 +85,13 @@
             // 
             // btnGenre
             // 
-            btnGenre.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnGenre.Location = new Point(287, 48);
+            btnGenre.Anchor = AnchorStyles.None;
+            btnGenre.Image = (Image)resources.GetObject("btnGenre.Image");
+            btnGenre.Location = new Point(250, 18);
+            btnGenre.MaximumSize = new Size(88, 73);
+            btnGenre.MinimumSize = new Size(88, 73);
             btnGenre.Name = "btnGenre";
-            btnGenre.Size = new Size(88, 51);
+            btnGenre.Size = new Size(88, 73);
             btnGenre.TabIndex = 0;
             btnGenre.Text = "GENRES";
             btnGenre.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -87,10 +100,13 @@
             // 
             // btnColor
             // 
-            btnColor.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnColor.Location = new Point(48, 127);
+            btnColor.Anchor = AnchorStyles.None;
+            btnColor.Image = (Image)resources.GetObject("btnColor.Image");
+            btnColor.Location = new Point(11, 97);
+            btnColor.MaximumSize = new Size(88, 73);
+            btnColor.MinimumSize = new Size(88, 73);
             btnColor.Name = "btnColor";
-            btnColor.Size = new Size(88, 51);
+            btnColor.Size = new Size(88, 73);
             btnColor.TabIndex = 0;
             btnColor.Text = "COLORS";
             btnColor.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -99,10 +115,13 @@
             // 
             // btnShoes
             // 
-            btnShoes.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnShoes.Location = new Point(172, 127);
+            btnShoes.Anchor = AnchorStyles.None;
+            btnShoes.Image = (Image)resources.GetObject("btnShoes.Image");
+            btnShoes.Location = new Point(135, 97);
+            btnShoes.MaximumSize = new Size(88, 73);
+            btnShoes.MinimumSize = new Size(88, 73);
             btnShoes.Name = "btnShoes";
-            btnShoes.Size = new Size(88, 51);
+            btnShoes.Size = new Size(88, 73);
             btnShoes.TabIndex = 0;
             btnShoes.Text = "SHOES";
             btnShoes.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -111,10 +130,13 @@
             // 
             // btnTalles
             // 
-            btnTalles.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnTalles.Location = new Point(287, 127);
+            btnTalles.Anchor = AnchorStyles.None;
+            btnTalles.Image = (Image)resources.GetObject("btnTalles.Image");
+            btnTalles.Location = new Point(250, 97);
+            btnTalles.MaximumSize = new Size(88, 73);
+            btnTalles.MinimumSize = new Size(88, 73);
             btnTalles.Name = "btnTalles";
-            btnTalles.Size = new Size(88, 51);
+            btnTalles.Size = new Size(88, 73);
             btnTalles.TabIndex = 0;
             btnTalles.Text = "SIZES";
             btnTalles.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -125,7 +147,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(495, 271);
+            ClientSize = new Size(350, 249);
             ControlBox = false;
             Controls.Add(btnTalles);
             Controls.Add(btnShoes);
@@ -134,6 +156,8 @@
             Controls.Add(btnSport);
             Controls.Add(btnBrand);
             Controls.Add(btnSalir);
+            MaximumSize = new Size(366, 288);
+            MinimumSize = new Size(366, 288);
             Name = "FrmPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmPrincipal";

@@ -61,9 +61,14 @@ namespace TPN1EfCore.Windows
                 if (dgvDatos.SelectedRows.Count == 0) { return; }
                 var r = dgvDatos.SelectedRows[0];
                 Size? size = (Size?)r.Tag;
-                frmShoePorSize frm= new frmShoePorSize(_sizeService1, size);
+                frmShoePorSize frm = new frmShoePorSize(_sizeService1, size);
                 DialogResult dr = frm.ShowDialog(this);
             }
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
         }
     }
 }

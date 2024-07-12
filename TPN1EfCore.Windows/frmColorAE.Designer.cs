@@ -59,23 +59,27 @@
             // 
             // btnConfirmar
             // 
-            btnConfirmar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnConfirmar.Location = new Point(9, 87);
+            btnConfirmar.Anchor = AnchorStyles.None;
+            btnConfirmar.Image = Properties.Resources.ok_45px;
+            btnConfirmar.Location = new Point(17, 71);
             btnConfirmar.Name = "btnConfirmar";
-            btnConfirmar.Size = new Size(86, 41);
+            btnConfirmar.Size = new Size(102, 81);
             btnConfirmar.TabIndex = 3;
             btnConfirmar.Text = "CONFIRMAR";
+            btnConfirmar.TextImageRelation = TextImageRelation.ImageAboveText;
             btnConfirmar.UseVisualStyleBackColor = true;
             btnConfirmar.Click += btnConfirmar_Click;
             // 
             // brnSalir
             // 
-            brnSalir.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            brnSalir.Location = new Point(223, 87);
+            brnSalir.Anchor = AnchorStyles.None;
+            brnSalir.Image = Properties.Resources.cancel_45px;
+            brnSalir.Location = new Point(191, 71);
             brnSalir.Name = "brnSalir";
-            brnSalir.Size = new Size(69, 41);
+            brnSalir.Size = new Size(102, 81);
             brnSalir.TabIndex = 4;
             brnSalir.Text = "SALIR";
+            brnSalir.TextImageRelation = TextImageRelation.ImageAboveText;
             brnSalir.UseVisualStyleBackColor = true;
             brnSalir.Click += brnSalir_Click;
             // 
@@ -83,14 +87,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(304, 140);
+            ClientSize = new Size(314, 164);
             ControlBox = false;
             Controls.Add(txtColour);
             Controls.Add(label1);
             Controls.Add(btnConfirmar);
             Controls.Add(brnSalir);
-            MaximumSize = new Size(320, 179);
-            MinimumSize = new Size(320, 179);
+            MaximumSize = new Size(330, 203);
+            MinimumSize = new Size(330, 203);
             Name = "frmColorAE";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmColorAE";

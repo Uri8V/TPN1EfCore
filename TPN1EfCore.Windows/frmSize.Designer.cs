@@ -54,9 +54,10 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(btnSalir);
-            splitContainer1.Size = new Size(800, 450);
-            splitContainer1.SplitterDistance = 373;
+            splitContainer1.Size = new Size(422, 450);
+            splitContainer1.SplitterDistance = 362;
             splitContainer1.TabIndex = 0;
+            splitContainer1.SplitterMoved += splitContainer1_SplitterMoved;
             // 
             // dgvDatos
             // 
@@ -70,7 +71,7 @@
             dgvDatos.Name = "dgvDatos";
             dgvDatos.ReadOnly = true;
             dgvDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvDatos.Size = new Size(800, 373);
+            dgvDatos.Size = new Size(422, 362);
             dgvDatos.TabIndex = 0;
             dgvDatos.CellContentClick += dgvDatos_CellContentClick;
             // 
@@ -90,11 +91,15 @@
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(712, 15);
+            btnSalir.Image = Properties.Resources.Logout_45px;
+            btnSalir.Location = new Point(325, 3);
+            btnSalir.MaximumSize = new Size(94, 79);
+            btnSalir.MinimumSize = new Size(94, 79);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(76, 46);
+            btnSalir.Size = new Size(94, 79);
             btnSalir.TabIndex = 0;
             btnSalir.Text = "SALIR";
+            btnSalir.TextImageRelation = TextImageRelation.ImageAboveText;
             btnSalir.UseVisualStyleBackColor = true;
             btnSalir.Click += btnSalir_Click;
             // 
@@ -102,12 +107,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(422, 450);
             ControlBox = false;
             Controls.Add(splitContainer1);
+            MaximumSize = new Size(438, 489);
+            MinimumSize = new Size(438, 489);
             Name = "frmSize";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "frmSize";
             Load += frmSize_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);

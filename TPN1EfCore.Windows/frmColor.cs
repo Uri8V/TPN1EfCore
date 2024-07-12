@@ -26,7 +26,7 @@ namespace TPN1EfCore.Windows
         private List<Colour> listaColors;
         private readonly IShoeService servicioShoe;
         private int pageCount;
-        private int pageSize = 1;
+        private int pageSize = 8;
         private int pageNum = 0;
         private int recordCount;
 

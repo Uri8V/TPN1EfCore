@@ -61,8 +61,9 @@
             // 
             splitContainer1.Panel2.Controls.Add(btnSalir);
             splitContainer1.Size = new Size(800, 450);
-            splitContainer1.SplitterDistance = 387;
+            splitContainer1.SplitterDistance = 360;
             splitContainer1.TabIndex = 0;
+            splitContainer1.SplitterMoved += splitContainer1_SplitterMoved;
             // 
             // dgvDatos
             // 
@@ -89,7 +90,7 @@
             dgvDatos.Name = "dgvDatos";
             dgvDatos.ReadOnly = true;
             dgvDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvDatos.Size = new Size(800, 387);
+            dgvDatos.Size = new Size(800, 360);
             dgvDatos.TabIndex = 1;
             // 
             // colBrandName
@@ -143,11 +144,15 @@
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(719, 3);
+            btnSalir.Image = Properties.Resources.Logout_45px;
+            btnSalir.Location = new Point(703, 4);
+            btnSalir.MaximumSize = new Size(94, 79);
+            btnSalir.MinimumSize = new Size(94, 79);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(78, 53);
+            btnSalir.Size = new Size(94, 79);
             btnSalir.TabIndex = 0;
             btnSalir.Text = "SALIR";
+            btnSalir.TextImageRelation = TextImageRelation.ImageAboveText;
             btnSalir.UseVisualStyleBackColor = true;
             btnSalir.Click += btnSalir_Click;
             // 
@@ -158,6 +163,8 @@
             ClientSize = new Size(800, 450);
             ControlBox = false;
             Controls.Add(splitContainer1);
+            MaximumSize = new Size(816, 489);
+            MinimumSize = new Size(816, 489);
             Name = "frmShoePorSize";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmShoePorSize";

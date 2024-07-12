@@ -22,7 +22,7 @@ namespace TPN1EfCore.Windows
         private List<Brand> listaBrands;
         private readonly IShoeService servicioShoe;
         private int pageCount;
-        private int pageSize = 1;
+        private int pageSize = 8;
         private int pageNum = 0;
         private int recordCount;
         public frmBrand(IBrandService brandService, IShoeService shoeService)

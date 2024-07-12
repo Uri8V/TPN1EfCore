@@ -40,22 +40,26 @@
             // brnSalir
             // 
             brnSalir.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            brnSalir.Location = new Point(227, 70);
+            brnSalir.Image = Properties.Resources.cancel_45px;
+            brnSalir.Location = new Point(211, 74);
             brnSalir.Name = "brnSalir";
-            brnSalir.Size = new Size(69, 41);
+            brnSalir.Size = new Size(86, 72);
             brnSalir.TabIndex = 0;
             brnSalir.Text = "SALIR";
+            brnSalir.TextImageRelation = TextImageRelation.ImageAboveText;
             brnSalir.UseVisualStyleBackColor = true;
             brnSalir.Click += brnSalir_Click;
             // 
             // btnConfirmar
             // 
             btnConfirmar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnConfirmar.Location = new Point(13, 70);
+            btnConfirmar.Image = Properties.Resources.ok_45px;
+            btnConfirmar.Location = new Point(21, 74);
             btnConfirmar.Name = "btnConfirmar";
-            btnConfirmar.Size = new Size(86, 41);
+            btnConfirmar.Size = new Size(86, 72);
             btnConfirmar.TabIndex = 0;
             btnConfirmar.Text = "CONFIRMAR";
+            btnConfirmar.TextImageRelation = TextImageRelation.ImageAboveText;
             btnConfirmar.UseVisualStyleBackColor = true;
             btnConfirmar.Click += brnConfirmar_Click;
             // 
@@ -83,12 +87,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(326, 123);
+            ClientSize = new Size(309, 149);
             ControlBox = false;
             Controls.Add(txtBrand);
             Controls.Add(label1);
             Controls.Add(btnConfirmar);
             Controls.Add(brnSalir);
+            MaximumSize = new Size(325, 188);
+            MinimumSize = new Size(325, 188);
             Name = "frmBrandAE";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmBrandAE";

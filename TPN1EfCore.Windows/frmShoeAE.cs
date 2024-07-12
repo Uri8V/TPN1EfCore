@@ -26,12 +26,14 @@ namespace TPN1EfCore.Windows
         private List<Size>? _lista;
         private List<Size>? _listaParaCrearShoe;
         private List<int> stock;
-        public frmShoeAE(IServiceProvider? serviceProvider, ISizeService? sizeService, List<Size>? lista)
+        private bool? editado;
+        public frmShoeAE(IServiceProvider? serviceProvider, ISizeService? sizeService, List<Size>? lista, bool editar)
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
             _sizeService = sizeService;
             _lista = lista;
+            editado = editar;
         }
 
         private void frmShoeAE_Load(object sender, EventArgs e)
@@ -156,10 +158,13 @@ namespace TPN1EfCore.Windows
                 errorProvider1.SetError(txtDescripcion, "Debe ingresar una descripción para la Shoe");
                 valido = false;
             }
-            if (_listaParaCrearShoe?.Count == 0)
+            if (editado==false)
             {
-                errorProvider1.SetError(dgvDatos, "Debe seleccionar un Size");
-                valido = false;
+                if (_listaParaCrearShoe?.Count == 0)
+                {
+                    errorProvider1.SetError(dgvDatos, "Debe seleccionar un Size");
+                    valido = false;
+                } 
             }
             return valido;
 

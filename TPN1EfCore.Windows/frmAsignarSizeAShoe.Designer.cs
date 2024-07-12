@@ -62,7 +62,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButtonSalir, toolStripButtonConfirmar, toolStripSeparator1, toolStripButtonCancelar });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(723, 38);
+            toolStrip1.Size = new Size(723, 67);
             toolStrip1.TabIndex = 4;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -73,7 +73,7 @@
             toolStripButtonSalir.ImageScaling = ToolStripItemImageScaling.None;
             toolStripButtonSalir.ImageTransparentColor = Color.Magenta;
             toolStripButtonSalir.Name = "toolStripButtonSalir";
-            toolStripButtonSalir.Size = new Size(41, 35);
+            toolStripButtonSalir.Size = new Size(49, 64);
             toolStripButtonSalir.Text = "SALIR";
             toolStripButtonSalir.TextImageRelation = TextImageRelation.ImageAboveText;
             toolStripButtonSalir.Click += toolStripButtonSalir_Click;
@@ -84,7 +84,7 @@
             toolStripButtonConfirmar.ImageScaling = ToolStripItemImageScaling.None;
             toolStripButtonConfirmar.ImageTransparentColor = Color.Magenta;
             toolStripButtonConfirmar.Name = "toolStripButtonConfirmar";
-            toolStripButtonConfirmar.Size = new Size(79, 35);
+            toolStripButtonConfirmar.Size = new Size(79, 64);
             toolStripButtonConfirmar.Text = "CONFIRMAR";
             toolStripButtonConfirmar.TextImageRelation = TextImageRelation.ImageAboveText;
             toolStripButtonConfirmar.Click += toolStripButtonConfirmar_Click;
@@ -92,14 +92,15 @@
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(6, 38);
+            toolStripSeparator1.Size = new Size(6, 67);
             // 
             // toolStripButtonCancelar
             // 
             toolStripButtonCancelar.Image = (Image)resources.GetObject("toolStripButtonCancelar.Image");
+            toolStripButtonCancelar.ImageScaling = ToolStripItemImageScaling.None;
             toolStripButtonCancelar.ImageTransparentColor = Color.Magenta;
             toolStripButtonCancelar.Name = "toolStripButtonCancelar";
-            toolStripButtonCancelar.Size = new Size(71, 35);
+            toolStripButtonCancelar.Size = new Size(71, 64);
             toolStripButtonCancelar.Text = "CANCELAR";
             toolStripButtonCancelar.TextImageRelation = TextImageRelation.ImageAboveText;
             toolStripButtonCancelar.Click += toolStripButtonCancelar_Click;
@@ -107,7 +108,7 @@
             // splitContainer1
             // 
             splitContainer1.Dock = DockStyle.Fill;
-            splitContainer1.Location = new Point(0, 38);
+            splitContainer1.Location = new Point(0, 67);
             splitContainer1.Name = "splitContainer1";
             splitContainer1.Orientation = Orientation.Horizontal;
             // 
@@ -118,8 +119,8 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(dataGridView1);
-            splitContainer1.Size = new Size(723, 268);
-            splitContainer1.SplitterDistance = 202;
+            splitContainer1.Size = new Size(723, 239);
+            splitContainer1.SplitterDistance = 180;
             splitContainer1.TabIndex = 5;
             // 
             // dgvDatos
@@ -191,7 +192,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(723, 62);
+            dataGridView1.Size = new Size(723, 55);
             dataGridView1.TabIndex = 1;
             // 
             // colBrandName
@@ -251,6 +252,8 @@
             ControlBox = false;
             Controls.Add(splitContainer1);
             Controls.Add(toolStrip1);
+            MaximumSize = new Size(739, 345);
+            MinimumSize = new Size(739, 345);
             Name = "frmAsignarSizeAShoe";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmAsignarSizeAShoe";

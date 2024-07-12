@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSizesAndStock));
             toolStrip1 = new ToolStrip();
             toolStripButtonSalir = new ToolStripButton();
             dgvDatos = new DataGridView();
@@ -43,18 +42,18 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButtonSalir });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(482, 38);
+            toolStrip1.Size = new Size(482, 67);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
             // toolStripButtonSalir
             // 
             toolStripButtonSalir.Alignment = ToolStripItemAlignment.Right;
-            toolStripButtonSalir.Image = (Image)resources.GetObject("toolStripButtonSalir.Image");
+            toolStripButtonSalir.Image = Properties.Resources.Logout_45px;
             toolStripButtonSalir.ImageScaling = ToolStripItemImageScaling.None;
             toolStripButtonSalir.ImageTransparentColor = Color.Magenta;
             toolStripButtonSalir.Name = "toolStripButtonSalir";
-            toolStripButtonSalir.Size = new Size(41, 35);
+            toolStripButtonSalir.Size = new Size(49, 64);
             toolStripButtonSalir.Text = "SALIR";
             toolStripButtonSalir.TextImageRelation = TextImageRelation.ImageAboveText;
             toolStripButtonSalir.Click += toolStripButtonSalir_Click;
@@ -66,10 +65,10 @@
             dgvDatos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDatos.Columns.AddRange(new DataGridViewColumn[] { colSzie, colStock });
             dgvDatos.Dock = DockStyle.Fill;
-            dgvDatos.Location = new Point(0, 38);
+            dgvDatos.Location = new Point(0, 67);
             dgvDatos.Name = "dgvDatos";
             dgvDatos.ReadOnly = true;
-            dgvDatos.Size = new Size(482, 236);
+            dgvDatos.Size = new Size(482, 207);
             dgvDatos.TabIndex = 1;
             // 
             // colSzie
@@ -94,6 +93,8 @@
             ControlBox = false;
             Controls.Add(dgvDatos);
             Controls.Add(toolStrip1);
+            MaximumSize = new Size(498, 313);
+            MinimumSize = new Size(498, 313);
             Name = "frmSizesAndStock";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmSizesAndStock";

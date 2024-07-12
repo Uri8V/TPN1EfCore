@@ -19,7 +19,7 @@ namespace TPN1EfCore.Windows
     public partial class frmShoePorSize : Form
     {
         private readonly ISizeService sizeService;
-        private  List<ShoeListDto> shoeList;
+        private List<ShoeListDto> shoeList;
         private Size _size;
         public frmShoePorSize(ISizeService _sizeService, Size size)
         {
@@ -35,7 +35,7 @@ namespace TPN1EfCore.Windows
 
         private void frmShoePorSize_Load(object sender, EventArgs e)
         {
-            shoeList=new List<ShoeListDto>();
+            shoeList = new List<ShoeListDto>();
             shoeList = sizeService.GetShoePorSize(_size);
             RecargarGrilla();
         }
@@ -47,8 +47,13 @@ namespace TPN1EfCore.Windows
             {
                 var r = GridHelper.ConstruirFila(dgvDatos);
                 GridHelper.SetearFila(r, shoe);
-                GridHelper.AgregarFila(r,dgvDatos);
+                GridHelper.AgregarFila(r, dgvDatos);
             }
+
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
 
         }
     }

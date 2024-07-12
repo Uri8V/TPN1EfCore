@@ -140,12 +140,16 @@ namespace TPN1EfCore.Datos.Repositories
             return _context.Shoes.Any(s => s.SportId == Shoe.SportId && s.BrandId == Shoe.BrandId && s.GenreId == Shoe.GenreId && s.ColourId == Shoe.ColourId && s.ShoeId != Shoe.ShoeId);
         }
 
-        public int GetCantidad(Expression<Func<Shoe, bool>>? filtro)
+        public int GetCantidad(Expression<Func<Shoe, bool>>? filtro)//xpresión lambda de tipo Expression<Func<Shoe, bool>>?,
+                                                                    //que se utiliza como filtro para contar solo los registros que cumplan con cierta condición.
         {
 
             if (filtro != null)
             {
                 return _context.Shoes.AsQueryable().Where(filtro).Count();
+                //AsQueryable() convierte la tabla Shoes en una consulta IQueryable,
+                //lo cual es necesario para aplicar la expresión lambda.
+                //Where(filtro) aplica el filtro especificado por la expresión lambda filtro.
             }
             else
             {

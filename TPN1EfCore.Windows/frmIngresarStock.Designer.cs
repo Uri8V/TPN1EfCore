@@ -52,11 +52,13 @@
             // 
             // btnConfirmar
             // 
+            btnConfirmar.Image = Properties.Resources.ok_45px;
             btnConfirmar.Location = new Point(12, 69);
             btnConfirmar.Name = "btnConfirmar";
-            btnConfirmar.Size = new Size(75, 44);
+            btnConfirmar.Size = new Size(94, 79);
             btnConfirmar.TabIndex = 1;
             btnConfirmar.Text = "Confirmar";
+            btnConfirmar.TextImageRelation = TextImageRelation.ImageAboveText;
             btnConfirmar.UseVisualStyleBackColor = true;
             btnConfirmar.Click += btnConfirmar_Click;
             // 
@@ -71,11 +73,13 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(126, 69);
+            btnCancelar.Image = Properties.Resources.cancel_45px;
+            btnCancelar.Location = new Point(130, 69);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(75, 44);
+            btnCancelar.Size = new Size(94, 79);
             btnCancelar.TabIndex = 1;
             btnCancelar.Text = "Cancelar";
+            btnCancelar.TextImageRelation = TextImageRelation.ImageAboveText;
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
             // 
@@ -83,12 +87,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(209, 123);
+            ClientSize = new Size(236, 167);
             ControlBox = false;
             Controls.Add(label1);
             Controls.Add(btnCancelar);
             Controls.Add(btnConfirmar);
             Controls.Add(textBox1);
+            MaximumSize = new Size(252, 206);
+            MinimumSize = new Size(252, 206);
             Name = "frmIngresarStock";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmIngresarStock";

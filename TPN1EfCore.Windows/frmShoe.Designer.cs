@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmShoe));
             txtcantidad = new TextBox();
             label1 = new Label();
             label3 = new Label();
@@ -41,14 +40,14 @@
             btnSiguiente = new Button();
             btnUltimo = new Button();
             dgvDatos = new DataGridView();
-            colDetalles = new DataGridViewButtonColumn();
-            colDescripcion = new DataGridViewTextBoxColumn();
-            colPrecio = new DataGridViewTextBoxColumn();
-            colModelo = new DataGridViewTextBoxColumn();
-            colColor = new DataGridViewTextBoxColumn();
-            colGenre = new DataGridViewTextBoxColumn();
-            colSport = new DataGridViewTextBoxColumn();
             colBrandName = new DataGridViewTextBoxColumn();
+            colSport = new DataGridViewTextBoxColumn();
+            colGenre = new DataGridViewTextBoxColumn();
+            colColor = new DataGridViewTextBoxColumn();
+            colModelo = new DataGridViewTextBoxColumn();
+            colPrecio = new DataGridViewTextBoxColumn();
+            colDescripcion = new DataGridViewTextBoxColumn();
+            colDetalles = new DataGridViewButtonColumn();
             splitContainer1 = new SplitContainer();
             toolStripButtonSalir = new ToolStripButton();
             toolStripButtonAgregar = new ToolStripButton();
@@ -130,41 +129,49 @@
             // 
             // btnPrimero
             // 
-            btnPrimero.Location = new Point(257, 22);
+            btnPrimero.Image = Properties.Resources.First_45px;
+            btnPrimero.Location = new Point(257, 3);
             btnPrimero.Name = "btnPrimero";
-            btnPrimero.Size = new Size(75, 41);
+            btnPrimero.Size = new Size(75, 67);
             btnPrimero.TabIndex = 11;
             btnPrimero.Text = "Primero";
+            btnPrimero.TextImageRelation = TextImageRelation.ImageAboveText;
             btnPrimero.UseVisualStyleBackColor = true;
             btnPrimero.Click += btnPrimero_Click;
             // 
             // btnAnterior
             // 
-            btnAnterior.Location = new Point(349, 22);
+            btnAnterior.Image = Properties.Resources.return_45px;
+            btnAnterior.Location = new Point(349, 3);
             btnAnterior.Name = "btnAnterior";
-            btnAnterior.Size = new Size(75, 41);
+            btnAnterior.Size = new Size(75, 67);
             btnAnterior.TabIndex = 10;
             btnAnterior.Text = "Anterior";
+            btnAnterior.TextImageRelation = TextImageRelation.ImageAboveText;
             btnAnterior.UseVisualStyleBackColor = true;
             btnAnterior.Click += btnAnterior_Click;
             // 
             // btnSiguiente
             // 
-            btnSiguiente.Location = new Point(442, 22);
+            btnSiguiente.Image = Properties.Resources.next_page_45px;
+            btnSiguiente.Location = new Point(442, 3);
             btnSiguiente.Name = "btnSiguiente";
-            btnSiguiente.Size = new Size(75, 41);
+            btnSiguiente.Size = new Size(75, 67);
             btnSiguiente.TabIndex = 9;
             btnSiguiente.Text = "Siguiente";
+            btnSiguiente.TextImageRelation = TextImageRelation.ImageAboveText;
             btnSiguiente.UseVisualStyleBackColor = true;
             btnSiguiente.Click += btnSiguiente_Click;
             // 
             // btnUltimo
             // 
-            btnUltimo.Location = new Point(533, 25);
+            btnUltimo.Image = Properties.Resources.last_45px;
+            btnUltimo.Location = new Point(533, 3);
             btnUltimo.Name = "btnUltimo";
-            btnUltimo.Size = new Size(75, 41);
+            btnUltimo.Size = new Size(75, 67);
             btnUltimo.TabIndex = 8;
             btnUltimo.Text = "Último";
+            btnUltimo.TextImageRelation = TextImageRelation.ImageAboveText;
             btnUltimo.UseVisualStyleBackColor = true;
             btnUltimo.Click += btnUltimo_Click;
             // 
@@ -193,58 +200,9 @@
             dgvDatos.Name = "dgvDatos";
             dgvDatos.ReadOnly = true;
             dgvDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvDatos.Size = new Size(963, 330);
+            dgvDatos.Size = new Size(963, 306);
             dgvDatos.TabIndex = 0;
             dgvDatos.CellContentClick += dgvDatos_CellContentClick;
-            // 
-            // colDetalles
-            // 
-            colDetalles.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colDetalles.HeaderText = "";
-            colDetalles.Name = "colDetalles";
-            colDetalles.ReadOnly = true;
-            // 
-            // colDescripcion
-            // 
-            colDescripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colDescripcion.HeaderText = "Descripción";
-            colDescripcion.Name = "colDescripcion";
-            colDescripcion.ReadOnly = true;
-            // 
-            // colPrecio
-            // 
-            colPrecio.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colPrecio.HeaderText = "Price";
-            colPrecio.Name = "colPrecio";
-            colPrecio.ReadOnly = true;
-            // 
-            // colModelo
-            // 
-            colModelo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colModelo.HeaderText = "Modelo";
-            colModelo.Name = "colModelo";
-            colModelo.ReadOnly = true;
-            // 
-            // colColor
-            // 
-            colColor.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colColor.HeaderText = "Color";
-            colColor.Name = "colColor";
-            colColor.ReadOnly = true;
-            // 
-            // colGenre
-            // 
-            colGenre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colGenre.HeaderText = "Genre";
-            colGenre.Name = "colGenre";
-            colGenre.ReadOnly = true;
-            // 
-            // colSport
-            // 
-            colSport.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colSport.HeaderText = "Sport";
-            colSport.Name = "colSport";
-            colSport.ReadOnly = true;
             // 
             // colBrandName
             // 
@@ -253,10 +211,59 @@
             colBrandName.Name = "colBrandName";
             colBrandName.ReadOnly = true;
             // 
+            // colSport
+            // 
+            colSport.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colSport.HeaderText = "Sport";
+            colSport.Name = "colSport";
+            colSport.ReadOnly = true;
+            // 
+            // colGenre
+            // 
+            colGenre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colGenre.HeaderText = "Genre";
+            colGenre.Name = "colGenre";
+            colGenre.ReadOnly = true;
+            // 
+            // colColor
+            // 
+            colColor.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colColor.HeaderText = "Color";
+            colColor.Name = "colColor";
+            colColor.ReadOnly = true;
+            // 
+            // colModelo
+            // 
+            colModelo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colModelo.HeaderText = "Modelo";
+            colModelo.Name = "colModelo";
+            colModelo.ReadOnly = true;
+            // 
+            // colPrecio
+            // 
+            colPrecio.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colPrecio.HeaderText = "Price";
+            colPrecio.Name = "colPrecio";
+            colPrecio.ReadOnly = true;
+            // 
+            // colDescripcion
+            // 
+            colDescripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colDescripcion.HeaderText = "Descripción";
+            colDescripcion.Name = "colDescripcion";
+            colDescripcion.ReadOnly = true;
+            // 
+            // colDetalles
+            // 
+            colDetalles.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colDetalles.HeaderText = "";
+            colDetalles.Name = "colDetalles";
+            colDetalles.ReadOnly = true;
+            // 
             // splitContainer1
             // 
             splitContainer1.Dock = DockStyle.Fill;
-            splitContainer1.Location = new Point(0, 38);
+            splitContainer1.Location = new Point(0, 67);
             splitContainer1.Name = "splitContainer1";
             splitContainer1.Orientation = Orientation.Horizontal;
             // 
@@ -276,51 +283,51 @@
             splitContainer1.Panel2.Controls.Add(label3);
             splitContainer1.Panel2.Controls.Add(label1);
             splitContainer1.Panel2.Controls.Add(txtcantidad);
-            splitContainer1.Size = new Size(963, 412);
-            splitContainer1.SplitterDistance = 330;
+            splitContainer1.Size = new Size(963, 383);
+            splitContainer1.SplitterDistance = 306;
             splitContainer1.TabIndex = 3;
             // 
             // toolStripButtonSalir
             // 
             toolStripButtonSalir.Alignment = ToolStripItemAlignment.Right;
-            toolStripButtonSalir.Image = (Image)resources.GetObject("toolStripButtonSalir.Image");
+            toolStripButtonSalir.Image = Properties.Resources.Logout_45px;
             toolStripButtonSalir.ImageScaling = ToolStripItemImageScaling.None;
             toolStripButtonSalir.ImageTransparentColor = Color.Magenta;
             toolStripButtonSalir.Name = "toolStripButtonSalir";
-            toolStripButtonSalir.Size = new Size(41, 35);
+            toolStripButtonSalir.Size = new Size(49, 64);
             toolStripButtonSalir.Text = "SALIR";
             toolStripButtonSalir.TextImageRelation = TextImageRelation.ImageAboveText;
             toolStripButtonSalir.Click += tsbCerrar_Click;
             // 
             // toolStripButtonAgregar
             // 
-            toolStripButtonAgregar.Image = (Image)resources.GetObject("toolStripButtonAgregar.Image");
+            toolStripButtonAgregar.Image = Properties.Resources.New_45px;
             toolStripButtonAgregar.ImageScaling = ToolStripItemImageScaling.None;
             toolStripButtonAgregar.ImageTransparentColor = Color.Magenta;
             toolStripButtonAgregar.Name = "toolStripButtonAgregar";
-            toolStripButtonAgregar.Size = new Size(53, 35);
+            toolStripButtonAgregar.Size = new Size(53, 64);
             toolStripButtonAgregar.Text = "Agregar";
             toolStripButtonAgregar.TextImageRelation = TextImageRelation.ImageAboveText;
             toolStripButtonAgregar.Click += tsbNuevo_Click;
             // 
             // toolStripButtonBorrar
             // 
-            toolStripButtonBorrar.Image = (Image)resources.GetObject("toolStripButtonBorrar.Image");
+            toolStripButtonBorrar.Image = Properties.Resources.delete_document_45px;
             toolStripButtonBorrar.ImageScaling = ToolStripItemImageScaling.None;
             toolStripButtonBorrar.ImageTransparentColor = Color.Magenta;
             toolStripButtonBorrar.Name = "toolStripButtonBorrar";
-            toolStripButtonBorrar.Size = new Size(43, 35);
+            toolStripButtonBorrar.Size = new Size(49, 64);
             toolStripButtonBorrar.Text = "Borrar";
             toolStripButtonBorrar.TextImageRelation = TextImageRelation.ImageAboveText;
             toolStripButtonBorrar.Click += tsbBorrar_Click;
             // 
             // toolStripButtonEditar
             // 
-            toolStripButtonEditar.Image = (Image)resources.GetObject("toolStripButtonEditar.Image");
+            toolStripButtonEditar.Image = Properties.Resources.edit_property_45px;
             toolStripButtonEditar.ImageScaling = ToolStripItemImageScaling.None;
             toolStripButtonEditar.ImageTransparentColor = Color.Magenta;
             toolStripButtonEditar.Name = "toolStripButtonEditar";
-            toolStripButtonEditar.Size = new Size(41, 35);
+            toolStripButtonEditar.Size = new Size(49, 64);
             toolStripButtonEditar.Text = "Editar";
             toolStripButtonEditar.TextImageRelation = TextImageRelation.ImageAboveText;
             toolStripButtonEditar.Click += tsbEditar_Click;
@@ -328,26 +335,26 @@
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(6, 38);
+            toolStripSeparator1.Size = new Size(6, 67);
             // 
             // toolStripSplitFiltro
             // 
-            toolStripSplitFiltro.Image = (Image)resources.GetObject("toolStripSplitFiltro.Image");
+            toolStripSplitFiltro.Image = Properties.Resources.Size_45px;
             toolStripSplitFiltro.ImageScaling = ToolStripItemImageScaling.None;
             toolStripSplitFiltro.ImageTransparentColor = Color.Magenta;
             toolStripSplitFiltro.Name = "toolStripSplitFiltro";
-            toolStripSplitFiltro.Size = new Size(38, 35);
+            toolStripSplitFiltro.Size = new Size(49, 64);
             toolStripSplitFiltro.Text = "Filtro";
             toolStripSplitFiltro.TextImageRelation = TextImageRelation.ImageAboveText;
             toolStripSplitFiltro.Click += toolStripSplitFiltro_Click;
             // 
             // toolStripButtonRestaurar
             // 
-            toolStripButtonRestaurar.Image = (Image)resources.GetObject("toolStripButtonRestaurar.Image");
+            toolStripButtonRestaurar.Image = Properties.Resources.Restaurar_45px;
             toolStripButtonRestaurar.ImageScaling = ToolStripItemImageScaling.None;
             toolStripButtonRestaurar.ImageTransparentColor = Color.Magenta;
             toolStripButtonRestaurar.Name = "toolStripButtonRestaurar";
-            toolStripButtonRestaurar.Size = new Size(60, 35);
+            toolStripButtonRestaurar.Size = new Size(60, 64);
             toolStripButtonRestaurar.Text = "Restaurar";
             toolStripButtonRestaurar.TextImageRelation = TextImageRelation.ImageAboveText;
             toolStripButtonRestaurar.Click += tsbActualizar_Click;
@@ -355,54 +362,54 @@
             // toolStripDropDownOrden
             // 
             toolStripDropDownOrden.DropDownItems.AddRange(new ToolStripItem[] { aZToolStripMenuItem, zAToolStripMenuItem, menorPrecioToolStripMenuItem, mayorPrecioToolStripMenuItem });
-            toolStripDropDownOrden.Image = (Image)resources.GetObject("toolStripDropDownOrden.Image");
+            toolStripDropDownOrden.Image = Properties.Resources.Order_45px;
             toolStripDropDownOrden.ImageScaling = ToolStripItemImageScaling.None;
             toolStripDropDownOrden.ImageTransparentColor = Color.Magenta;
             toolStripDropDownOrden.Name = "toolStripDropDownOrden";
-            toolStripDropDownOrden.Size = new Size(53, 35);
+            toolStripDropDownOrden.Size = new Size(58, 64);
             toolStripDropDownOrden.Text = "Orden";
             toolStripDropDownOrden.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
             // aZToolStripMenuItem
             // 
             aZToolStripMenuItem.Name = "aZToolStripMenuItem";
-            aZToolStripMenuItem.Size = new Size(180, 22);
+            aZToolStripMenuItem.Size = new Size(145, 22);
             aZToolStripMenuItem.Text = "AZ";
             aZToolStripMenuItem.Click += aZToolStripMenuItem_Click;
             // 
             // zAToolStripMenuItem
             // 
             zAToolStripMenuItem.Name = "zAToolStripMenuItem";
-            zAToolStripMenuItem.Size = new Size(180, 22);
+            zAToolStripMenuItem.Size = new Size(145, 22);
             zAToolStripMenuItem.Text = "ZA";
             zAToolStripMenuItem.Click += zAToolStripMenuItem_Click;
             // 
             // menorPrecioToolStripMenuItem
             // 
             menorPrecioToolStripMenuItem.Name = "menorPrecioToolStripMenuItem";
-            menorPrecioToolStripMenuItem.Size = new Size(180, 22);
+            menorPrecioToolStripMenuItem.Size = new Size(145, 22);
             menorPrecioToolStripMenuItem.Text = "Menor Precio";
             menorPrecioToolStripMenuItem.Click += menorPrecioToolStripMenuItem_Click;
             // 
             // mayorPrecioToolStripMenuItem
             // 
             mayorPrecioToolStripMenuItem.Name = "mayorPrecioToolStripMenuItem";
-            mayorPrecioToolStripMenuItem.Size = new Size(180, 22);
+            mayorPrecioToolStripMenuItem.Size = new Size(145, 22);
             mayorPrecioToolStripMenuItem.Text = "Mayor Precio";
             mayorPrecioToolStripMenuItem.Click += mayorPrecioToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(6, 38);
+            toolStripSeparator2.Size = new Size(6, 67);
             // 
             // toolStripButtonAsignarShoe
             // 
-            toolStripButtonAsignarShoe.Image = (Image)resources.GetObject("toolStripButtonAsignarShoe.Image");
+            toolStripButtonAsignarShoe.Image = Properties.Resources.GiveSize_45px;
             toolStripButtonAsignarShoe.ImageScaling = ToolStripItemImageScaling.None;
             toolStripButtonAsignarShoe.ImageTransparentColor = Color.Magenta;
             toolStripButtonAsignarShoe.Name = "toolStripButtonAsignarShoe";
-            toolStripButtonAsignarShoe.Size = new Size(115, 35);
+            toolStripButtonAsignarShoe.Size = new Size(115, 64);
             toolStripButtonAsignarShoe.Text = "Asignar Size al Shoe";
             toolStripButtonAsignarShoe.TextImageRelation = TextImageRelation.ImageAboveText;
             toolStripButtonAsignarShoe.Click += toolStripButtonAsignarShoe_Click;
@@ -412,7 +419,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButtonSalir, toolStripButtonAgregar, toolStripButtonBorrar, toolStripButtonEditar, toolStripSeparator1, toolStripSplitFiltro, toolStripButtonRestaurar, toolStripDropDownOrden, toolStripSeparator2, toolStripButtonAsignarShoe });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(963, 38);
+            toolStrip1.Size = new Size(963, 67);
             toolStrip1.TabIndex = 1;
             toolStrip1.Text = "toolStrip1";
             // 

@@ -57,25 +57,27 @@
             // 
             // btnCancelar
             // 
+            btnCancelar.Image = Properties.Resources.cancel_45px;
             btnCancelar.Location = new Point(266, 221);
-            btnCancelar.MaximumSize = new Size(96, 54);
             btnCancelar.MinimumSize = new Size(96, 54);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(96, 54);
+            btnCancelar.Size = new Size(96, 77);
             btnCancelar.TabIndex = 23;
             btnCancelar.Text = "CANCELAR";
+            btnCancelar.TextImageRelation = TextImageRelation.ImageAboveText;
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
             // 
             // btnConfirmar
             // 
+            btnConfirmar.Image = Properties.Resources.ok_45px;
             btnConfirmar.Location = new Point(53, 221);
-            btnConfirmar.MaximumSize = new Size(96, 54);
             btnConfirmar.MinimumSize = new Size(96, 54);
             btnConfirmar.Name = "btnConfirmar";
-            btnConfirmar.Size = new Size(96, 54);
+            btnConfirmar.Size = new Size(98, 77);
             btnConfirmar.TabIndex = 24;
             btnConfirmar.Text = "CONFIRMAR";
+            btnConfirmar.TextImageRelation = TextImageRelation.ImageAboveText;
             btnConfirmar.UseVisualStyleBackColor = true;
             btnConfirmar.Click += btnConfirmar_Click;
             // 
@@ -226,7 +228,7 @@
             // chekSize
             // 
             chekSize.AutoSize = true;
-            chekSize.Location = new Point(581, 130);
+            chekSize.Location = new Point(584, 155);
             chekSize.Name = "chekSize";
             chekSize.Size = new Size(35, 19);
             chekSize.TabIndex = 34;
@@ -237,7 +239,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(402, 131);
+            label8.Location = new Point(405, 156);
             label8.Name = "label8";
             label8.Size = new Size(173, 15);
             label8.TabIndex = 33;
@@ -246,7 +248,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(399, 199);
+            label9.Location = new Point(402, 224);
             label9.Name = "label9";
             label9.Size = new Size(140, 15);
             label9.TabIndex = 29;
@@ -255,7 +257,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(401, 160);
+            label10.Location = new Point(404, 185);
             label10.Name = "label10";
             label10.Size = new Size(110, 15);
             label10.TabIndex = 30;
@@ -264,7 +266,7 @@
             // cbSize
             // 
             cbSize.FormattingEnabled = true;
-            cbSize.Location = new Point(517, 157);
+            cbSize.Location = new Point(520, 182);
             cbSize.Name = "cbSize";
             cbSize.Size = new Size(121, 23);
             cbSize.TabIndex = 35;
@@ -273,7 +275,7 @@
             // 
             cbSizeMaximo.Enabled = false;
             cbSizeMaximo.FormattingEnabled = true;
-            cbSizeMaximo.Location = new Point(545, 196);
+            cbSizeMaximo.Location = new Point(548, 221);
             cbSizeMaximo.Name = "cbSizeMaximo";
             cbSizeMaximo.Size = new Size(121, 23);
             cbSizeMaximo.TabIndex = 36;
@@ -282,7 +284,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(736, 310);
+            ClientSize = new Size(705, 310);
             ControlBox = false;
             Controls.Add(cbSizeMaximo);
             Controls.Add(cbSize);
@@ -306,7 +308,8 @@
             Controls.Add(label2);
             Controls.Add(cbBrand);
             Controls.Add(label1);
-            MinimumSize = new Size(413, 326);
+            MaximumSize = new Size(721, 349);
+            MinimumSize = new Size(721, 349);
             Name = "frmFiltro";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;

@@ -107,5 +107,10 @@ namespace TPN1EfCore.Windows
                 MostrarDatosEnGRilla();
             }
         }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
+        }
     }
 }

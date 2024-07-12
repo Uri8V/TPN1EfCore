@@ -69,8 +69,9 @@
             splitContainer1.Panel2.Controls.Add(btnPrimero);
             splitContainer1.Panel2.Controls.Add(btnSalir);
             splitContainer1.Size = new Size(800, 450);
-            splitContainer1.SplitterDistance = 369;
+            splitContainer1.SplitterDistance = 362;
             splitContainer1.TabIndex = 1;
+            splitContainer1.SplitterMoved += splitContainer1_SplitterMoved;
             // 
             // dgvConsulta
             // 
@@ -90,7 +91,7 @@
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvConsulta.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvConsulta.Size = new Size(800, 369);
+            dgvConsulta.Size = new Size(800, 362);
             dgvConsulta.TabIndex = 0;
             // 
             // colBrand
@@ -137,51 +138,71 @@
             // 
             // btnUltimo
             // 
-            btnUltimo.Location = new Point(403, 27);
+            btnUltimo.Image = Properties.Resources.last_45px;
+            btnUltimo.Location = new Point(454, 3);
+            btnUltimo.MaximumSize = new Size(94, 79);
+            btnUltimo.MinimumSize = new Size(94, 79);
             btnUltimo.Name = "btnUltimo";
-            btnUltimo.Size = new Size(75, 41);
-            btnUltimo.TabIndex = 0;
+            btnUltimo.Size = new Size(94, 79);
+            btnUltimo.TabIndex = 1;
             btnUltimo.Text = "Último";
+            btnUltimo.TextImageRelation = TextImageRelation.ImageAboveText;
             btnUltimo.UseVisualStyleBackColor = true;
             btnUltimo.Click += btnUltimo_Click;
             // 
             // btnSiguiente
             // 
-            btnSiguiente.Location = new Point(312, 24);
+            btnSiguiente.Image = Properties.Resources.next_page_45px;
+            btnSiguiente.Location = new Point(354, 3);
+            btnSiguiente.MaximumSize = new Size(94, 79);
+            btnSiguiente.MinimumSize = new Size(94, 79);
             btnSiguiente.Name = "btnSiguiente";
-            btnSiguiente.Size = new Size(75, 41);
-            btnSiguiente.TabIndex = 0;
+            btnSiguiente.Size = new Size(94, 79);
+            btnSiguiente.TabIndex = 2;
             btnSiguiente.Text = "Siguiente";
+            btnSiguiente.TextImageRelation = TextImageRelation.ImageAboveText;
             btnSiguiente.UseVisualStyleBackColor = true;
             btnSiguiente.Click += btnSiguiente_Click;
             // 
             // btnAnterior
             // 
-            btnAnterior.Location = new Point(219, 24);
+            btnAnterior.Image = Properties.Resources.return_45px;
+            btnAnterior.Location = new Point(254, 3);
+            btnAnterior.MaximumSize = new Size(94, 79);
+            btnAnterior.MinimumSize = new Size(94, 79);
             btnAnterior.Name = "btnAnterior";
-            btnAnterior.Size = new Size(75, 41);
-            btnAnterior.TabIndex = 0;
+            btnAnterior.Size = new Size(94, 79);
+            btnAnterior.TabIndex = 3;
             btnAnterior.Text = "Anterior";
+            btnAnterior.TextImageRelation = TextImageRelation.ImageAboveText;
             btnAnterior.UseVisualStyleBackColor = true;
             btnAnterior.Click += btnAnterior_Click;
             // 
             // btnPrimero
             // 
-            btnPrimero.Location = new Point(127, 24);
+            btnPrimero.Image = Properties.Resources.First_45px;
+            btnPrimero.Location = new Point(154, 3);
+            btnPrimero.MaximumSize = new Size(94, 79);
+            btnPrimero.MinimumSize = new Size(94, 79);
             btnPrimero.Name = "btnPrimero";
-            btnPrimero.Size = new Size(75, 41);
-            btnPrimero.TabIndex = 0;
+            btnPrimero.Size = new Size(94, 79);
+            btnPrimero.TabIndex = 4;
             btnPrimero.Text = "Primero";
+            btnPrimero.TextImageRelation = TextImageRelation.ImageAboveText;
             btnPrimero.UseVisualStyleBackColor = true;
             btnPrimero.Click += btnPrimero_Click;
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(718, 27);
+            btnSalir.Image = Properties.Resources.Logout_45px;
+            btnSalir.Location = new Point(706, 3);
+            btnSalir.MaximumSize = new Size(94, 79);
+            btnSalir.MinimumSize = new Size(94, 79);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(75, 41);
-            btnSalir.TabIndex = 0;
+            btnSalir.Size = new Size(94, 79);
+            btnSalir.TabIndex = 5;
             btnSalir.Text = "SALIR";
+            btnSalir.TextImageRelation = TextImageRelation.ImageAboveText;
             btnSalir.UseVisualStyleBackColor = true;
             btnSalir.Click += btnSalir_Click;
             // 

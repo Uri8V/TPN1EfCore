@@ -75,7 +75,6 @@ namespace TPN1EfCore.Windows
             {
                 filtroCombinado = filtro.CombineFilters();
                 recordCount = _servicio.GetCantidad(filtroCombinado);
-     
                 pageCount = FormHelper.CalcularPaginas(recordCount, pageSize);
                 // Obtener la lista paginada ordenada y filtrada por defecto (sin orden ni filtro)
                 lista = _servicio.GetListaPaginadaOrdenadaFiltrada(pageNum, pageSize, orden, brandFiltro, sportFiltro, genreFiltro, colourFiltro, maximo, minimo, sizeSeleccionad, sizeMaximo);
@@ -187,7 +186,7 @@ namespace TPN1EfCore.Windows
             var ShoeSizeService = _serviceProvider.GetService<IShoeSizeService>();
             listaSize = new List<Size>();
             listaSize = SizeService?.GetSizes();
-            frmShoeAE frm = new frmShoeAE(_serviceProvider, SizeService, listaSize);
+            frmShoeAE frm = new frmShoeAE(_serviceProvider, SizeService, listaSize, false);
             DialogResult df = frm.ShowDialog(this);
             if (df == DialogResult.Cancel) { return; }
             try
@@ -310,6 +309,7 @@ namespace TPN1EfCore.Windows
 
         private void tsbEditar_Click(object sender, EventArgs e)
         {
+            bool editar = true;
             var SizeService = _serviceProvider.GetService<ISizeService>();
             var listaSizeDeShoe = new List<Size>();
             var listaSizeFiltrada = new List<Size>();
@@ -328,7 +328,7 @@ namespace TPN1EfCore.Windows
             {
                 stocked = shoeList.Stock[i];
             }
-            frmShoeAE frm = new frmShoeAE(_serviceProvider, SizeService, listaSizeFiltrada)
+            frmShoeAE frm = new frmShoeAE(_serviceProvider, SizeService, listaSizeFiltrada, editar)
             { Text = "Editar shoe" };
             frm.SetShoe(shoe);
             DialogResult dr = frm.ShowDialog(this);
@@ -341,6 +341,7 @@ namespace TPN1EfCore.Windows
                 {
                     _servicio.Guardar(shoe, stock, listaSize);// Arreglar lo de los Talles y el Stock
                     ActualizarListaPaginada();
+                    editar = false;
                 }
                 else
                 {
